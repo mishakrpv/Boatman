@@ -6,6 +6,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{9C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.Entities", "src\Entities\Boatman.Entities\Boatman.Entities.csproj", "{D33E25C6-A9D6-4B82-AB01-BDE831574648}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAE861CF-284B-4099-A9BD-75C87ED5303A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.UnitTests", "tests\Boatman.UnitTests\Boatman.UnitTests.csproj", "{DAD238DD-A787-4DB0-B4DE-576E92705ABD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,11 +18,16 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9C2075C4-BAC3-4C34-9483-79A79532C7F9} = {7A3103E2-DF79-4BFA-A764-25804B1BFFFE}
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648} = {9C2075C4-BAC3-4C34-9483-79A79532C7F9}
+		{DAD238DD-A787-4DB0-B4DE-576E92705ABD} = {FAE861CF-284B-4099-A9BD-75C87ED5303A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD238DD-A787-4DB0-B4DE-576E92705ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD238DD-A787-4DB0-B4DE-576E92705ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD238DD-A787-4DB0-B4DE-576E92705ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD238DD-A787-4DB0-B4DE-576E92705ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
