@@ -1,6 +1,7 @@
 using System.Text;
 using Boatman.AuthApi.JwtBearer.Controllers;
-using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
+using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
+using Boatman.AuthApi.UseCases.Dtos;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.Entities.Models.CustomerAggregate;
@@ -49,7 +50,7 @@ builder.Services.AddHealthChecks()
     //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(AuthController).Assembly);
+    .AddApplicationPart(typeof(AccountController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -91,9 +92,10 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-// builder.Services.AddMediatR(config =>
-// {
-// });
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly);
+});
 
 builder.Services.AddInterfaceAdapters();
 builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));

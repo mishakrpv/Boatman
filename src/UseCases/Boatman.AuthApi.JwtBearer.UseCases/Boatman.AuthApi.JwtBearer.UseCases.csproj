@@ -7,4 +7,13 @@
         <RootNamespace>Boatman.AuthApi.UseCases</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.2.0" />
+      <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Interfaces\Boatman.TokenService.Interfaces\Boatman.TokenService.Interfaces.csproj" />
+    </ItemGroup>
+
 </Project>
