@@ -13,7 +13,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj" />
       <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Domain.Interfaces\Boatman.DataAccess.Domain.Interfaces.csproj" />
-      <ProjectReference Include="..\Interfaces\Boatman.DataAccess.Domain.Interfaces\Boatman.DataAccess.Domain.Interfaces.csproj" />
     </ItemGroup>
 
 </Project>
