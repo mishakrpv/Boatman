@@ -36,6 +36,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthApi.JwtBearer.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthApi.JwtBearer.Controllers", "src\Controllers\Boatman.AuthApi.JwtBearer.Controllers\Boatman.AuthApi.JwtBearer.Controllers.csproj", "{3240323D-F982-49FB-AD61-A6C573778FD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.TokenService.Interfaces", "src\Interfaces\Boatman.TokenService.Interfaces\Boatman.TokenService.Interfaces.csproj", "{96D870E4-63A9-4751-A9D9-7321B4A62792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.TokenService.Implementations", "src\Implementations\Boatman.TokenService.Implementations\Boatman.TokenService.Implementations.csproj", "{AF8C9BC9-3D65-4936-B393-F384527EC1C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,8 @@ Global
 		{6434765C-B719-4C39-AF59-C66EE5774B8B} = {89ECFAA6-34E1-4D70-B6CD-A8F5C6321C17}
 		{A3CFF6F7-6EC3-4B3C-B981-F791B4210336} = {B082BB2A-AAF6-4983-B09C-22FA947B4262}
 		{3240323D-F982-49FB-AD61-A6C573778FD9} = {8D6CDAD4-80E8-47C0-AFBC-8878E0442D8A}
+		{96D870E4-63A9-4751-A9D9-7321B4A62792} = {89ECFAA6-34E1-4D70-B6CD-A8F5C6321C17}
+		{AF8C9BC9-3D65-4936-B393-F384527EC1C0} = {53D04F98-5ADB-4692-AA9C-7DAE60DD66D1}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -104,5 +110,13 @@ Global
 		{3240323D-F982-49FB-AD61-A6C573778FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3240323D-F982-49FB-AD61-A6C573778FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3240323D-F982-49FB-AD61-A6C573778FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D870E4-63A9-4751-A9D9-7321B4A62792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D870E4-63A9-4751-A9D9-7321B4A62792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D870E4-63A9-4751-A9D9-7321B4A62792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D870E4-63A9-4751-A9D9-7321B4A62792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF8C9BC9-3D65-4936-B393-F384527EC1C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF8C9BC9-3D65-4936-B393-F384527EC1C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF8C9BC9-3D65-4936-B393-F384527EC1C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF8C9BC9-3D65-4936-B393-F384527EC1C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,9 +1,11 @@
 using System.Text;
 using Boatman.AuthApi.JwtBearer.Controllers;
+using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
+using Boatman.TokenService.Implementations;
 using Boatman.WebHost.Configurations;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -94,6 +96,7 @@ builder.Services.AddAuthorization(options =>
 // });
 
 builder.Services.AddInterfaceAdapters();
+builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
 var app = builder.Build();
 
