@@ -19,8 +19,8 @@ builder.Logging.AddConsole();
 builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddHealthChecks()
-    .AddSqlServer(config.GetConnectionString("DomainConnection") ?? "")
-    .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "");
+    .AddSqlServer(config.GetConnectionString("DomainConnection") ?? "", name: "domainCheck")
+    .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
     //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddDbContext<DomainContext>(options =>
@@ -76,9 +76,9 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-builder.Services.AddMediatR(config =>
-{
-});
+// builder.Services.AddMediatR(config =>
+// {
+// });
 
 builder.Services.AddInterfaceAdapters();
 

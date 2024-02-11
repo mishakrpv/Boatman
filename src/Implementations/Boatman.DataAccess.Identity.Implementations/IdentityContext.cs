@@ -12,5 +12,8 @@ public class IdentityContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<ApplicationUser>()
+            .Property(au => au.Salt)
+            .HasMaxLength(32);
     }
 }
