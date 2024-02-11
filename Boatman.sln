@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.WebHost", "src\Boat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.DataAccess.Identity.Implementations", "src\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj", "{941559C9-B28E-4566-B5A4-39F7B57570F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.OwnerApi.UseCases", "src\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj", "{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,7 @@ Global
 		{B082BB2A-AAF6-4983-B09C-22FA947B4262} = {7A3103E2-DF79-4BFA-A764-25804B1BFFFE}
 		{3C9A4F35-8078-49F0-BC36-B22C2D9B3BE9} = {7A3103E2-DF79-4BFA-A764-25804B1BFFFE}
 		{941559C9-B28E-4566-B5A4-39F7B57570F5} = {53D04F98-5ADB-4692-AA9C-7DAE60DD66D1}
+		{490CBFE6-9B88-45D5-87A2-E8E39C1E6254} = {B082BB2A-AAF6-4983-B09C-22FA947B4262}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -66,5 +69,9 @@ Global
 		{941559C9-B28E-4566-B5A4-39F7B57570F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{941559C9-B28E-4566-B5A4-39F7B57570F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{941559C9-B28E-4566-B5A4-39F7B57570F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
