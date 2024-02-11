@@ -18,21 +18,32 @@ builder.Logging.AddConsole();
 
 builder.Configuration.AddEnvironmentVariables();
 
+if ((builder.Environment.IsDevelopment() || builder.Environment.EnvironmentName == "Docker")
+    && bool.Parse(config["UseInMemoryDb"] ?? "false"))
+{
+    builder.Services.AddDbContext<DomainContext>(o =>
+        o.UseInMemoryDatabase("DomainDb"));
+    builder.Services.AddDbContext<IdentityContext>(o =>
+        o.UseInMemoryDatabase("IdentityDb"));
+}
+else
+{
+    builder.Services.AddDbContext<DomainContext>(options =>
+    {
+        var connectionString = config.GetConnectionString("DomainConnection");
+        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
+    });
+    builder.Services.AddDbContext<IdentityContext>(options =>
+    {
+        var connectionString = config.GetConnectionString("IdentityConnection");
+        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
+    });
+}
+
 builder.Services.AddHealthChecks()
     .AddSqlServer(config.GetConnectionString("DomainConnection") ?? "", name: "domainCheck")
     .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
     //.AddRedis(config["RedisCS"] ?? "");
-
-builder.Services.AddDbContext<DomainContext>(options =>
-{
-    var connectionString = config.GetConnectionString("DomainConnection");
-    options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
-});
-builder.Services.AddDbContext<IdentityContext>(options =>
-{
-    var connectionString = config.GetConnectionString("IdentityConnection");
-    options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
-});
 
 builder.Services.AddControllers();
 
