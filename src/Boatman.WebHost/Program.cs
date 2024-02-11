@@ -1,4 +1,5 @@
 using System.Text;
+using Boatman.AuthApi.JwtBearer.Controllers;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.Entities.Models.CustomerAggregate;
@@ -45,7 +46,8 @@ builder.Services.AddHealthChecks()
     .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
     //.AddRedis(config["RedisCS"] ?? "");
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(AuthController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {

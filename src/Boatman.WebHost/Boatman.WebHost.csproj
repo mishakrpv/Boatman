@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>63fb6d63-083a-4828-8ef8-092fdeb672e5</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,6 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Controllers\Boatman.AuthApi.JwtBearer.Controllers\Boatman.AuthApi.JwtBearer.Controllers.csproj" />
       <ProjectReference Include="..\Implementations\Boatman.DataAccess.Domain.Implementations\Boatman.DataAccess.Domain.Implementations.csproj" />
       <ProjectReference Include="..\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj" />
     </ItemGroup>
