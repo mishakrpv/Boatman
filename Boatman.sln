@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.WebHost", "src\Boat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.DataAccess.Identity.Implementations", "src\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj", "{941559C9-B28E-4566-B5A4-39F7B57570F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.OwnerApi.UseCases", "src\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj", "{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.OwnerApi.UseCases", "src\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj", "{490CBFE6-9B88-45D5-87A2-E8E39C1E6254}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
