@@ -6,11 +6,23 @@ public class Viewing : BaseEntity<int>
 {
     public string CustomerId { get; private set; }
 
-    public Viewing(string customerId, DateTimeOffset startTime, DateTimeOffset endTime)
+    public Viewing()
+    {
+        
+    }
+    
+    public Viewing(string customerId, ViewingDateTime st, ViewingDateTime et)
     {
         CustomerId = customerId;
-        StartTime = startTime;
-        EndTime = endTime;
+        StartTime = new DateTimeOffset(st.Year, st.Month, st.Day, st.Hour, st.Minute, 0, TimeSpan.Zero);
+        EndTime = new DateTimeOffset(et.Year, et.Month, et.Day, et.Hour, et.Minute, 0, TimeSpan.Zero);
+    }
+
+    public Viewing(string customerId, DateTimeOffset st, DateTimeOffset et)
+    {
+        CustomerId = customerId;
+        StartTime = st;
+        EndTime = et;
     }
 
     public DateTimeOffset StartTime { get; private set; }
@@ -18,11 +30,11 @@ public class Viewing : BaseEntity<int>
 
     public ViewingStatus GetCurrentStatus()
     {
-        if (DateTimeOffset.Now < StartTime)
+        if (DateTimeOffset.UtcNow < StartTime)
         {
             return ViewingStatus.Pending;
         }
-        else if (DateTimeOffset.Now < EndTime)
+        else if (DateTimeOffset.UtcNow < EndTime)
         {
             return ViewingStatus.InProcess;
         }

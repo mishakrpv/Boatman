@@ -11,10 +11,10 @@ public class PlanViewingTests
     {
         // Arrange
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
-        var startOne = new DateTimeOffset(2000, 12, 5, 0, 0, 0, TimeSpan.Zero);
-        var endOne = new DateTimeOffset(2000, 12, 5, 2, 0, 0, TimeSpan.Zero);
-        var startTwo = new DateTimeOffset(2000, 12, 5, 3, 0, 0, TimeSpan.Zero);
-        var endTwo = new DateTimeOffset(2000, 12, 5, 4, 0, 0, TimeSpan.Zero);
+        var startOne = new ViewingDateTime(2000, 12, 5, 0, 0);
+        var endOne = new ViewingDateTime(2000, 12, 5, 2, 0);
+        var startTwo = new ViewingDateTime(2000, 12, 5, 3, 0);
+        var endTwo = new ViewingDateTime(2000, 12, 5, 4, 0);
         apartment.TryPlanViewing(It.IsAny<string>(), startOne, endOne);
 
         // Act
@@ -30,10 +30,10 @@ public class PlanViewingTests
     {
         // Arrange
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
-        var startOne = new DateTimeOffset(2000, 12, 5, 0, 0, 0, TimeSpan.Zero);
-        var endOne = new DateTimeOffset(2000, 12, 5, 2, 0, 0, TimeSpan.Zero);
-        var startTwo = new DateTimeOffset(2000, 12, 5, 1, 0, 0, TimeSpan.Zero);
-        var endTwo = new DateTimeOffset(2000, 12, 5, 4, 0, 0, TimeSpan.Zero);
+        var startOne = new ViewingDateTime(2000, 12, 5, 0, 0);
+        var endOne = new ViewingDateTime(2000, 12, 5, 2, 0);
+        var startTwo = new ViewingDateTime(2000, 12, 5, 1, 0);
+        var endTwo = new ViewingDateTime(2000, 12, 5, 4, 0);
         apartment.TryPlanViewing(It.IsAny<string>(), startOne, endOne);
 
         // Act

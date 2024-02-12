@@ -5,7 +5,7 @@ namespace Boatman.DataAccess.Domain.Interfaces.Specifications;
 
 public sealed class ApartmentWithScheduleSpecification : Specification<Apartment>
 {
-    ApartmentWithScheduleSpecification(int apartmentId)
+    public ApartmentWithScheduleSpecification(int apartmentId)
     {
         Query
             .Where(a => a.Id == apartmentId)

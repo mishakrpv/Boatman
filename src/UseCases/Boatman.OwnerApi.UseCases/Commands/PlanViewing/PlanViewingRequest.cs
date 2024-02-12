@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.PlanViewing;
 
-public class PlanViewingRequest : IRequest
+public class PlanViewingRequest : IRequest<bool>
 {
     public PlanViewingDto Dto { get; private set; }
 
