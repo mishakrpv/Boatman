@@ -19,7 +19,7 @@ public class PlanViewingRequestHandler : IRequestHandler<PlanViewingRequest>
         var dto = request.Dto;
         var apartment = await _apartmentRepo.GetByIdAsync(dto.ApartmentId, cancellationToken);
         Guard.Against.Null(apartment);
-        apartment.PlanViewing(dto.CustomerId, dto.StartTime, dto.EndTime);
+        apartment.TryPlanViewing(dto.CustomerId, dto.StartTime, dto.EndTime);
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
     }
 }

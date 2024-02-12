@@ -16,12 +16,16 @@ public class Apartment : BaseApartment, IAggregateRoot
     public IEnumerable<Request> Requests => _requests.AsReadOnly();
     public DateTimeOffset PublicationDate { get; private set; } = DateTimeOffset.Now;
 
-    public void PlanViewing(string customerId, DateTimeOffset startTime, DateTimeOffset endTime)
+    public bool TryPlanViewing(string customerId, DateTimeOffset startTime, DateTimeOffset endTime)
     {
         if (!(Schedule.Any() && Schedule.Last().EndTime > startTime))
         {
             _schedule.Add(new Viewing(customerId, startTime, endTime));
+
+            return true;
         }
+
+        return false;
     }
     
     public void DoRequest(string customerId)
