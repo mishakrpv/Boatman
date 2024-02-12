@@ -25,7 +25,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj" />
       <ProjectReference Include="..\..\src\Entities\Boatman.Entities\Boatman.Entities.csproj" />
       <ProjectReference Include="..\..\src\Interfaces\Boatman.DataAccess.Domain.Interfaces\Boatman.DataAccess.Domain.Interfaces.csproj" />
       <ProjectReference Include="..\..\src\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj" />

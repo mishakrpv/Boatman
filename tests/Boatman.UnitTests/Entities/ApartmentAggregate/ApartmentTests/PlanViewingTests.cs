@@ -15,13 +15,14 @@ public class PlanViewingTests
         var endOne = new DateTimeOffset(2000, 12, 5, 2, 0, 0, TimeSpan.Zero);
         var startTwo = new DateTimeOffset(2000, 12, 5, 3, 0, 0, TimeSpan.Zero);
         var endTwo = new DateTimeOffset(2000, 12, 5, 4, 0, 0, TimeSpan.Zero);
-        apartment.PlanViewing(It.IsAny<string>(), startOne, endOne);
+        apartment.TryPlanViewing(It.IsAny<string>(), startOne, endOne);
 
         // Act
-        apartment.PlanViewing(It.IsAny<string>(), startTwo, endTwo);
+        bool isSuccess = apartment.TryPlanViewing(It.IsAny<string>(), startTwo, endTwo);
 
         // Assert
         apartment.Schedule.Should().HaveCount(2);
+        isSuccess.Should().Be(true);
     }
     
     [Fact]
@@ -33,12 +34,13 @@ public class PlanViewingTests
         var endOne = new DateTimeOffset(2000, 12, 5, 2, 0, 0, TimeSpan.Zero);
         var startTwo = new DateTimeOffset(2000, 12, 5, 1, 0, 0, TimeSpan.Zero);
         var endTwo = new DateTimeOffset(2000, 12, 5, 4, 0, 0, TimeSpan.Zero);
-        apartment.PlanViewing(It.IsAny<string>(), startOne, endOne);
+        apartment.TryPlanViewing(It.IsAny<string>(), startOne, endOne);
 
         // Act
-        apartment.PlanViewing(It.IsAny<string>(), startTwo, endTwo);
+        bool isSuccess = apartment.TryPlanViewing(It.IsAny<string>(), startTwo, endTwo);
 
         // Assert
         apartment.Schedule.Should().HaveCount(1);
+        isSuccess.Should().Be(false);
     }
 }
