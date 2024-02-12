@@ -18,11 +18,14 @@ public class AccountController : ControllerBase
     }
     
     [HttpPost]
-    [Route("/[controller]/Signup/Owner")]
-    public async Task<TokenPair> RegisterAsOwner([FromBody] SignUpAsOwnerDto dto)
+    [Route("/[controller]/SignUp/Owner")]
+    public async Task<IActionResult> RegisterAsOwner([FromBody] SignUpAsOwnerDto dto)
     {
-        var tokenPair = await _mediator.Send(new SignUpAsOwnerRequest(dto));
+        bool isSuccess = await _mediator.Send(new SignUpAsOwnerRequest(dto));
 
-        return tokenPair;
+        if (isSuccess)
+            return Ok();
+        else
+            return BadRequest("User creation failed! Please check user details and try again.");
     }
 }
