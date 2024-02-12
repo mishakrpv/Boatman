@@ -4,6 +4,7 @@ using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
 using Boatman.AuthApi.UseCases.Dtos;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
+using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.TokenService.Implementations;

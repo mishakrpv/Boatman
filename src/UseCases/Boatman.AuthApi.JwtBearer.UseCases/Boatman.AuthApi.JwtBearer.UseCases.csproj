@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Identity.Interfaces\Boatman.DataAccess.Identity.Interfaces.csproj" />
       <ProjectReference Include="..\..\Interfaces\Boatman.TokenService.Interfaces\Boatman.TokenService.Interfaces.csproj" />
     </ItemGroup>
 

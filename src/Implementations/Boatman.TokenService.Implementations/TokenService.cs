@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Ardalis.GuardClauses;
 using Boatman.DataAccess.Identity.Implementations;
+using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.TokenService.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -42,7 +43,7 @@ public class TokenService : ITokenService
             Issuer = _settings.Issuer,
             Audience = _settings.Audience,
             Subject = new ClaimsIdentity(claims.ToArray()),
-            Expires = DateTime.UtcNow.AddMinutes(10),
+            Expires = DateTime.UtcNow.AddDays(_settings.ExpiresInDays).AddMinutes(_settings.ExpiresInMinutes),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes),
                 SecurityAlgorithms.HmacSha256Signature)
         };
