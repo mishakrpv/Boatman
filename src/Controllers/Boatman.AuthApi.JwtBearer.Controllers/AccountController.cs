@@ -1,6 +1,5 @@
 ﻿using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
 using Boatman.AuthApi.UseCases.Dtos;
-using Boatman.TokenService.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +24,7 @@ public class AccountController : ControllerBase
 
         if (isSuccess)
             return Ok();
-        else
-            return BadRequest("User creation failed! Please check user details and try again.");
+        
+        return BadRequest("User creation failed! Please check user details and try again.");
     }
 }
