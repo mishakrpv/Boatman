@@ -3,6 +3,8 @@ using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
+using Boatman.OwnerApi.Controllers;
+using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -45,7 +47,8 @@ builder.Services.AddHealthChecks()
     .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
     //.AddRedis(config["RedisCS"] ?? "");
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(ApartmentController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -87,9 +90,10 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-// builder.Services.AddMediatR(config =>
-// {
-// });
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblies(typeof(AddApartmentRequestHandler).Assembly);
+});
 
 builder.Services.AddInterfaceAdapters();
 

@@ -27,8 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Controllers\Boatman.OwnerApi.Controllers\Boatman.OwnerApi.Controllers.csproj" />
       <ProjectReference Include="..\Implementations\Boatman.DataAccess.Domain.Implementations\Boatman.DataAccess.Domain.Implementations.csproj" />
       <ProjectReference Include="..\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj" />
+      <ProjectReference Include="..\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj" />
     </ItemGroup>
 
 </Project>
