@@ -31,12 +31,12 @@ else
     builder.Services.AddDbContext<DomainContext>(options =>
     {
         var connectionString = config.GetConnectionString("DomainConnection");
-        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
+        options.UseSqlServer(connectionString);
     });
     builder.Services.AddDbContext<IdentityContext>(options =>
     {
         var connectionString = config.GetConnectionString("IdentityConnection");
-        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
+        options.UseSqlServer(connectionString);
     });
 }
 
