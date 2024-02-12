@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.OwnerApi.Controllers", "src\Controllers\Boatman.OwnerApi.Controllers\Boatman.OwnerApi.Controllers.csproj", "{BB551193-BDF0-424A-B2FC-95C37456D102}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.IntegrationTests", "tests\Boatman.IntegrationTests\Boatman.IntegrationTests.csproj", "{26ED1DDC-50F3-4CFF-811A-9FB5B2F52F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,7 @@ Global
 		{490CBFE6-9B88-45D5-87A2-E8E39C1E6254} = {B082BB2A-AAF6-4983-B09C-22FA947B4262}
 		{8D6CDAD4-80E8-47C0-AFBC-8878E0442D8A} = {7A3103E2-DF79-4BFA-A764-25804B1BFFFE}
 		{BB551193-BDF0-424A-B2FC-95C37456D102} = {8D6CDAD4-80E8-47C0-AFBC-8878E0442D8A}
+		{26ED1DDC-50F3-4CFF-811A-9FB5B2F52F27} = {FAE861CF-284B-4099-A9BD-75C87ED5303A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D33E25C6-A9D6-4B82-AB01-BDE831574648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -83,5 +86,9 @@ Global
 		{BB551193-BDF0-424A-B2FC-95C37456D102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB551193-BDF0-424A-B2FC-95C37456D102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB551193-BDF0-424A-B2FC-95C37456D102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26ED1DDC-50F3-4CFF-811A-9FB5B2F52F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26ED1DDC-50F3-4CFF-811A-9FB5B2F52F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26ED1DDC-50F3-4CFF-811A-9FB5B2F52F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26ED1DDC-50F3-4CFF-811A-9FB5B2F52F27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
