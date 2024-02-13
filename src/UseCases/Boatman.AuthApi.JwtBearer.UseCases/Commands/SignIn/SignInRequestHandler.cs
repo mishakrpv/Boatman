@@ -28,6 +28,9 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, TokenPair?>
         if (user.PasswordHash != dto.PasswordHash)
             return null;
 
-        return await _tokenService.GetTokenPairAsync(dto.Email);
+        var tokenPair = await _tokenService.GetTokenPairAsync(dto.Email);
+        user.RefreshToken = tokenPair.RefreshToken;
+
+        return tokenPair;
     }
 }
