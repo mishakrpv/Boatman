@@ -1,6 +1,9 @@
 using System.Text;
+using Boatman.AuthApi.JwtBearer.Controllers;
+using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
+using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.TokenService.Implementations;
@@ -96,7 +99,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly,
-        typeof(AddApartmentRequestHandler).Assembly)
+        typeof(AddApartmentRequestHandler).Assembly);
 });
 
 builder.Services.AddInterfaceAdapters();
