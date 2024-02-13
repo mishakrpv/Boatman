@@ -1,4 +1,5 @@
-﻿using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
+﻿using Boatman.AuthApi.UseCases.Commands.Salt;
+using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
 using Boatman.AuthApi.UseCases.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,18 @@ public class AccountController : ControllerBase
     public AccountController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+
+    [HttpGet]
+    [Route("{email}")]
+    public async Task<IActionResult> Salt(string email)
+    {
+        var salt = await _mediator.Send(new SaltRequest(email));
+
+        if (salt != null)
+            return Ok(salt);
+
+        return BadRequest($"User {email} not found");
     }
     
     [HttpPost]

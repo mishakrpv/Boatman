@@ -73,6 +73,8 @@ public class TokenService : ITokenService
     {
         var tokenValidationParameters = new TokenValidationParameters
         {
+            ValidIssuer = _settings.Issuer,
+            ValidAudience = _settings.Audience,
             ValidateAudience = true,
             ValidateIssuer = true,
             ValidateIssuerSigningKey = true,
