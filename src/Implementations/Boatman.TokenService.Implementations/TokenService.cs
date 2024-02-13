@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Ardalis.GuardClauses;
-using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.TokenService.Interfaces;
 using Microsoft.AspNetCore.Identity;

@@ -60,7 +60,7 @@ public class SignUpAsOwnerRequestHandler : IRequestHandler<SignUpAsOwnerRequest,
         await _ownerRepo.AddAsync(new Owner(user.Id)
         {
             FirstName = request.Dto.FirstName,
-            MiddleName = request.Dto.LastName,
+            MiddleName = request.Dto.MiddleName,
             LastName = request.Dto.LastName,
             Bio = request.Dto.Bio
         });

@@ -7,6 +7,7 @@ using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
+using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.TokenService.Implementations;
 using Boatman.WebHost.Configurations;
 using HealthChecks.UI.Client;
@@ -95,7 +96,8 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly);
+    config.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly,
+        typeof(AddApartmentRequestHandler).Assembly);
 });
 
 builder.Services.AddInterfaceAdapters();
