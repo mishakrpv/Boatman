@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Identity.Interfaces\Boatman.DataAccess.Identity.Interfaces.csproj" />
+      <ProjectReference Include="..\..\Interfaces\Boatman.TokenService.Interfaces\Boatman.TokenService.Interfaces.csproj" />
+      <ProjectReference Include="..\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ardalis.GuardClauses" Version="4.4.0" />
+      <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
+    </ItemGroup>
+
+</Project>

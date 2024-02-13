@@ -3,6 +3,7 @@ using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
+using Boatman.TokenService.Implementations;
 using Boatman.OwnerApi.Controllers;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
@@ -33,12 +34,12 @@ else
     builder.Services.AddDbContext<DomainContext>(options =>
     {
         var connectionString = config.GetConnectionString("DomainConnection");
-        options.UseSqlServer(connectionString);
+        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
     });
     builder.Services.AddDbContext<IdentityContext>(options =>
     {
         var connectionString = config.GetConnectionString("IdentityConnection");
-        options.UseSqlServer(connectionString);
+        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
     });
 }
 
@@ -48,7 +49,9 @@ builder.Services.AddHealthChecks()
     //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(ApartmentController).Assembly);
+    .AddApplicationPart(typeof(ApartmentController).Assembly)
+    .AddApplicationPart(typeof(AccountController).Assembly)
+    .AddApplicationPart(typeof(AuthController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -92,7 +95,8 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssemblies(typeof(AddApartmentRequestHandler).Assembly);
+    config.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly,
+        typeof(AddApartmentRequestHandler).Assembly)
 });
 
 builder.Services.AddInterfaceAdapters();
