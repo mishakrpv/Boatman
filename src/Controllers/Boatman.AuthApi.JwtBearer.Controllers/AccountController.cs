@@ -1,4 +1,5 @@
 ﻿using Boatman.AuthApi.UseCases.Commands.Salt;
+using Boatman.AuthApi.UseCases.Commands.SignIn;
 using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
 using Boatman.AuthApi.UseCases.Dtos;
 using MediatR;
@@ -27,6 +28,17 @@ public class AccountController : ControllerBase
             return Ok(salt);
 
         return BadRequest($"User {email} not found");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> SignIn([FromBody] SignInDto dto)
+    {
+        var tokenPair = await _mediator.Send(new SignInRequest(dto));
+
+        if (tokenPair != null)
+            return Ok(tokenPair);
+
+        return BadRequest("Sign in failed!");
     }
     
     [HttpPost]
