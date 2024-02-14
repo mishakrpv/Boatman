@@ -52,8 +52,7 @@ builder.Services.AddHealthChecks()
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(ApartmentController).Assembly)
-    .AddApplicationPart(typeof(AccountController).Assembly)
-    .AddApplicationPart(typeof(AuthController).Assembly);
+    .AddApplicationPart(typeof(AccountController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -86,9 +85,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
 });
 
-builder.Services.AddMediatR(config =>
+builder.Services.AddMediatR(configuration =>
 {
-    config.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly,
+    configuration.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly,
         typeof(AddApartmentRequestHandler).Assembly);
 });
 
