@@ -2,10 +2,10 @@
 
 public class WishlistItem : BaseEntity<int>
 {
-    public string ApartmentId { get; private set; }
-
     public WishlistItem(string apartmentId)
     {
         ApartmentId = apartmentId;
     }
+
+    public string ApartmentId { get; private set; }
 }

@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ardalis.Specification" Version="8.0.0" />
+        <PackageReference Include="Ardalis.Specification" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj" />
+        <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj"/>
     </ItemGroup>
 
 </Project>

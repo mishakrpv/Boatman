@@ -16,7 +16,7 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.Property(o => o.LastName)
             .HasMaxLength(50);
-        
+
         builder.Property(o => o.Bio)
             .HasMaxLength(250);
     }

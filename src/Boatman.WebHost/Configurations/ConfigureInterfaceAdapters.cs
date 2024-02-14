@@ -3,7 +3,6 @@ using Boatman.DataAccess.Domain.Interfaces;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.TokenService.Interfaces;
-using Boatman.TokenService.Implementations;
 
 namespace Boatman.WebHost.Configurations;
 

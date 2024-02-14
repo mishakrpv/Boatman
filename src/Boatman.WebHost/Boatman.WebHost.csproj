@@ -8,31 +8,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.0" />
-      <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0" />
-      <PackageReference Include="MediatR" Version="12.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
+        <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.0"/>
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0"/>
+        <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Controllers\Boatman.OwnerApi.Controllers\Boatman.OwnerApi.Controllers.csproj" />
-      <ProjectReference Include="..\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj" />
-      <ProjectReference Include="..\Implementations\Boatman.DataAccess.Domain.Implementations\Boatman.DataAccess.Domain.Implementations.csproj" />
-      <ProjectReference Include="..\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj" />
-      <ProjectReference Include="..\Controllers\Boatman.AuthApi.JwtBearer.Controllers\Boatman.AuthApi.JwtBearer.Controllers.csproj" />
-      <ProjectReference Include="..\Implementations\Boatman.TokenService.Implementations\Boatman.TokenService.Implementations.csproj" />
+        <ProjectReference Include="..\Controllers\Boatman.OwnerApi.Controllers\Boatman.OwnerApi.Controllers.csproj"/>
+        <ProjectReference Include="..\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj"/>
+        <ProjectReference Include="..\Implementations\Boatman.DataAccess.Domain.Implementations\Boatman.DataAccess.Domain.Implementations.csproj"/>
+        <ProjectReference Include="..\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj"/>
+        <ProjectReference Include="..\Controllers\Boatman.AuthApi.JwtBearer.Controllers\Boatman.AuthApi.JwtBearer.Controllers.csproj"/>
+        <ProjectReference Include="..\Implementations\Boatman.TokenService.Implementations\Boatman.TokenService.Implementations.csproj"/>
     </ItemGroup>
 
 </Project>

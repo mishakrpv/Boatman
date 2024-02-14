@@ -6,10 +6,10 @@ namespace Boatman.AuthApi.UseCases.Commands.SignIn;
 
 public class SignInRequest : IRequest<TokenPair?>
 {
-    public SignInDto Dto { get; private set; }
-
     public SignInRequest(SignInDto dto)
     {
         Dto = dto;
     }
+
+    public SignInDto Dto { get; private set; }
 }

@@ -1,11 +1,12 @@
 ﻿using Boatman.DataAccess.Domain.Interfaces;
 using Boatman.DataAccess.Domain.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Utils;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.MyApartments;
 
-public class MyApartmentsRequestHandler : IRequestHandler<MyApartmentsRequest, IEnumerable<Apartment>>
+public class MyApartmentsRequestHandler : IRequestHandler<MyApartmentsRequest, Response<IEnumerable<Apartment>>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
@@ -13,12 +14,13 @@ public class MyApartmentsRequestHandler : IRequestHandler<MyApartmentsRequest, I
     {
         _apartmentRepo = apartmentRepo;
     }
-    
-    public async Task<IEnumerable<Apartment>> Handle(MyApartmentsRequest request, CancellationToken cancellationToken)
+
+    public async Task<Response<IEnumerable<Apartment>>> Handle(MyApartmentsRequest request,
+        CancellationToken cancellationToken)
     {
         var spec = new OwnersApartmentSpecification(request.OwnerId);
         var apartments = await _apartmentRepo.ListAsync(spec, cancellationToken);
 
-        return apartments.OrderBy(a => a.PublicationDate);
+        return new Response<IEnumerable<Apartment>>(apartments.OrderBy(a => a.PublicationDate));
     }
 }

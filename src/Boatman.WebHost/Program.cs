@@ -6,7 +6,6 @@ using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
-using Boatman.TokenService.Implementations;
 using Boatman.OwnerApi.Controllers;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
@@ -49,7 +48,7 @@ else
 builder.Services.AddHealthChecks()
     .AddSqlServer(config.GetConnectionString("DomainConnection") ?? "", name: "domainCheck")
     .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
-    //.AddRedis(config["RedisCS"] ?? "");
+//.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(ApartmentController).Assembly)
@@ -63,7 +62,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-    options.TokenValidationParameters = new TokenValidationParameters()
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidIssuer = config["JwtSettings:Issuer"],
         ValidAudience = config["JwtSettings:Audience"],
@@ -72,7 +71,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
+        ValidateIssuerSigningKey = true
     };
 });
 //.AddOAuth();
@@ -82,18 +81,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(nameof(Owner), policy =>
-    {
-        policy.RequireRole(nameof(Owner));
-    });
-    options.AddPolicy(nameof(Customer), policy =>
-    {
-        policy.RequireRole(nameof(Customer));
-    });
-    options.AddPolicy("Admin", policy =>
-    {
-        policy.RequireRole("Admin");
-    });
+    options.AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); });
+    options.AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); });
+    options.AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
 });
 
 builder.Services.AddMediatR(config =>
@@ -106,7 +96,7 @@ builder.Services.AddInterfaceAdapters();
 
 var app = builder.Build();
 
-app.MapHealthChecks("/_health", new HealthCheckOptions()
+app.MapHealthChecks("/_health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });

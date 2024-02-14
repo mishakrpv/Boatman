@@ -1,8 +1,8 @@
-﻿using Boatman.Entities.Models.ApartmentAggregate;
+﻿using System.Net;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetSchedule;
-using Boatman.OwnerApi.UseCases.Commands.PlanViewing;
+using Boatman.OwnerApi.UseCases.Commands.ScheduleViewing;
 using Boatman.OwnerApi.UseCases.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,38 +23,47 @@ public class ApartmentController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] AddApartmentDto dto)
     {
-        var id = await _mediator.Send(new AddApartmentRequest(dto));
+        var response = await _mediator.Send(new AddApartmentRequest(dto));
 
-        return Ok(new { id = id });
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { id = response.Value });
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
     }
 
     [HttpGet]
     [Route("{id:int}")]
-    public async Task<Apartment> Get(int id)
+    public async Task<IActionResult> Get(int id)
     {
-        var apartment = await _mediator.Send(new GetApartmentRequest(id));
+        var response = await _mediator.Send(new GetApartmentRequest(id));
 
-        return apartment;
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(response.Value);
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
     }
-    
-    [HttpGet]
-    [Route("/[controller]/Schedule/{id:int}")]
-    public async Task<IEnumerable<Viewing>> GetSchedule(int id)
-    {
-        var schedule = await _mediator.Send(new GetScheduleRequest(id));
 
-        return schedule;
+    [HttpGet]
+    [Route("/[controller]/schedule/{id:int}")]
+    public async Task<IActionResult> GetSchedule(int id)
+    {
+        var response = await _mediator.Send(new GetScheduleRequest(id));
+
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(response.Value);
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
     }
 
     [HttpPost]
-    [Route("/[controller]/Schedule/Plan")]
+    [Route("/[controller]/plan-viewing")]
     public async Task<IActionResult> PlanViewing([FromBody] PlanViewingDto dto)
     {
-        var isSuccess = await _mediator.Send(new PlanViewingRequest(dto));
+        var response = await _mediator.Send(new ScheduleViewingRequest(dto));
 
-        if (isSuccess)
+        if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok();
 
-        return BadRequest("Failed to plan viewing");
+        return StatusCode(response.StatusCode, new { problem = response.Message });
     }
 }

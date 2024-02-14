@@ -2,40 +2,34 @@
 
 public class Apartment : BaseApartment, IAggregateRoot
 {
-    public string OwnerId { get; private set; }
+    private readonly List<Request> _requests = [];
+
+    private readonly List<Viewing> _schedule = [];
 
     public Apartment(string ownerId, decimal rent, int downPaymentInMonths = 1) : base(rent, downPaymentInMonths)
     {
         OwnerId = ownerId;
     }
 
-    private readonly List<Viewing> _schedule = [];
-    private readonly List<Request> _requests = [];
+    public string OwnerId { get; private set; }
 
     public IEnumerable<Viewing> Schedule => _schedule.AsReadOnly();
     public IEnumerable<Request> Requests => _requests.AsReadOnly();
-    public DateTimeOffset PublicationDate { get; private set; } = DateTimeOffset.Now;
+    public DateTime PublicationDate { get; private set; } = DateTime.Now;
 
-    public bool TryPlanViewing(string customerId, ViewingDateTime st, ViewingDateTime et)
+    public bool TryScheduleViewing(string customerId, DateTime start, DateTime end)
     {
-        if (new DateTimeOffset(st.Year, st.Month, st.Day, st.Hour, st.Minute, 0, TimeSpan.Zero)
-            >= new DateTimeOffset(et.Year, et.Month, et.Day, et.Hour, et.Minute, 0, TimeSpan.Zero))
-        {
-            return false;
-        }
+        if (start >= end) return false;
 
-        if (Schedule.Any() && Schedule.Last().EndTime >
-            new DateTimeOffset(st.Year, st.Month, st.Day, st.Hour, st.Minute, 0, TimeSpan.Zero)) return false;
-        _schedule.Add(new Viewing(customerId, st, et));
+        if (Schedule.Any() && start < Schedule.Last().EndTime) return false;
+
+        _schedule.Add(new Viewing(customerId, start, end));
 
         return true;
     }
-    
+
     public void DoRequest(string customerId)
     {
-        if (Requests.All(r => r.CustomerId != customerId))
-        {
-            _requests.Add(new Request(customerId));
-        }
+        if (Requests.All(r => r.CustomerId != customerId)) _requests.Add(new Request(customerId));
     }
 }

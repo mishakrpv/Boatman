@@ -19,7 +19,7 @@ public class DoRequestTests
         // Assert
         apartment.Requests.Should().Contain(r => r.CustomerId == customerId);
     }
-    
+
     [Fact]
     public void DoRequest_ShouldNotCreateRequest_WhenThereIsRequestFromTheSameCustomer()
     {
@@ -27,7 +27,7 @@ public class DoRequestTests
         const string customerId = "123";
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
         apartment.DoRequest(customerId);
-        
+
         // Act
         apartment.DoRequest(customerId);
 

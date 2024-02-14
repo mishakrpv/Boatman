@@ -22,7 +22,7 @@ public class TokenService : ITokenService
         _settings = options.Value;
         _userManager = userManager;
     }
-    
+
     public async Task<string> GetAccessTokenAsync(string email)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -30,13 +30,10 @@ public class TokenService : ITokenService
         var keyBytes = Encoding.UTF8.GetBytes(Guard.Against.NullOrEmpty(keyString));
         var user = await _userManager.FindByEmailAsync(email);
         var roles = await _userManager.GetRolesAsync(Guard.Against.Null(user));
-        
-        var claims = new List<Claim> { new Claim(ClaimTypes.Email, email) };
-        
-        foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
-        }
+
+        var claims = new List<Claim> { new(ClaimTypes.Email, email) };
+
+        foreach (var role in roles) claims.Add(new Claim(ClaimTypes.Role, role));
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Issuer = _settings.Issuer,
@@ -46,7 +43,7 @@ public class TokenService : ITokenService
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes),
                 SecurityAlgorithms.HmacSha256Signature)
         };
-        
+
         return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
     }
 
@@ -55,13 +52,13 @@ public class TokenService : ITokenService
         var bytes = new byte[64];
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(bytes);
-        
+
         return Convert.ToBase64String(bytes);
     }
 
     public async Task<TokenPair> GetTokenPairAsync(string email)
     {
-        return new TokenPair()
+        return new TokenPair
         {
             AccessToken = await GetAccessTokenAsync(email),
             RefreshToken = GetRefreshToken()
@@ -82,8 +79,10 @@ public class TokenService : ITokenService
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-        if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
+        if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+            !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                StringComparison.InvariantCultureIgnoreCase))
             throw new SecurityTokenException("Invalid token");
 
         return principal;

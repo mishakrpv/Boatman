@@ -19,32 +19,26 @@ public class RefreshTokenRequestHandler : IRequestHandler<RefreshTokenRequest, T
 
     public async Task<TokenPair?> Handle(RefreshTokenRequest request, CancellationToken cancellationToken)
     {
-        string? accessToken = request.TokenPair.AccessToken;
-        string? refreshToken = request.TokenPair.RefreshToken;
-        
-        var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
-        
-        if (principal == null)
-        {
-            return null;
-        }
+        var accessToken = request.TokenPair.AccessToken;
+        var refreshToken = request.TokenPair.RefreshToken;
 
-        string username = principal!.Identity!.Name!;
-        
+        var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
+
+        if (principal == null) return null;
+
+        var username = principal!.Identity!.Name!;
+
         var user = await _userManager.FindByNameAsync(username);
-        
-        if (user == null || user.RefreshToken != refreshToken)
-        {
-            return null;
-        }
-        
+
+        if (user == null || user.RefreshToken != refreshToken) return null;
+
         var newAccessToken = await _tokenService.GetAccessTokenAsync(user.Email!);
         var newRefreshToken = _tokenService.GetRefreshToken();
 
         user.RefreshToken = newRefreshToken;
         await _userManager.UpdateAsync(user);
 
-        return new TokenPair()
+        return new TokenPair
         {
             AccessToken = newAccessToken,
             RefreshToken = newRefreshToken

@@ -2,10 +2,10 @@
 
 public class Owner : BaseUser, IAggregateRoot
 {
-    public string ExternalId { get; private set; }
-
     public Owner(string externalId)
     {
         ExternalId = externalId;
     }
+
+    public string ExternalId { get; private set; }
 }

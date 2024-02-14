@@ -7,18 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
+        <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj" />
-      <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Domain.Interfaces\Boatman.DataAccess.Domain.Interfaces.csproj" />
+        <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj"/>
+        <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Domain.Interfaces\Boatman.DataAccess.Domain.Interfaces.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Configurations\" />
+        <Folder Include="Configurations\"/>
     </ItemGroup>
 
 </Project>

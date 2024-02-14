@@ -16,7 +16,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.Property(c => c.LastName)
             .HasMaxLength(50);
-        
+
         builder.Property(c => c.Bio)
             .HasMaxLength(250);
     }

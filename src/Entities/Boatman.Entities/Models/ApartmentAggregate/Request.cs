@@ -8,5 +8,5 @@ public class Request : BaseEntity<int>
     }
 
     public string CustomerId { get; private set; }
-    public DateTimeOffset RequestDate { get; private set; } = DateTimeOffset.Now;
+    public DateTime RequestDate { get; private set; } = DateTime.Now;
 }

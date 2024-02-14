@@ -22,10 +22,7 @@ public class AuthController : ControllerBase
     {
         var newTokenPair = await _mediator.Send(new RefreshTokenRequest(tokenPair));
 
-        if (newTokenPair != null)
-        {
-            return Ok(newTokenPair);
-        }
+        if (newTokenPair != null) return Ok(newTokenPair);
 
         return BadRequest();
     }

@@ -1,11 +1,11 @@
-﻿using Ardalis.GuardClauses;
-using Boatman.DataAccess.Domain.Interfaces;
+﻿using Boatman.DataAccess.Domain.Interfaces;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Utils;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.GetApartment;
 
-public class GetApartmentRequestHandler : IRequestHandler<GetApartmentRequest, Apartment>
+public class GetApartmentRequestHandler : IRequestHandler<GetApartmentRequest, Response<Apartment>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
@@ -13,12 +13,18 @@ public class GetApartmentRequestHandler : IRequestHandler<GetApartmentRequest, A
     {
         _apartmentRepo = apartmentRepo;
     }
-    
-    public async Task<Apartment> Handle(GetApartmentRequest request, CancellationToken cancellationToken)
+
+    public async Task<Response<Apartment>> Handle(GetApartmentRequest request, CancellationToken cancellationToken)
     {
         var apartment = await _apartmentRepo.GetByIdAsync(request.ApartmentId, cancellationToken);
-        Guard.Against.Null(apartment);
 
-        return apartment;
+        if (apartment == null)
+            return new Response<Apartment>
+            {
+                StatusCode = 404,
+                Message = "Apartment not found."
+            };
+
+        return new Response<Apartment>(apartment);
     }
 }

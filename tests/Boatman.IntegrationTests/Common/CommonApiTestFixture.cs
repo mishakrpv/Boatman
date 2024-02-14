@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Boatman.DataAccess.Domain.Implementations;
+﻿using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.WebHost;
 using Microsoft.AspNetCore.Mvc.Testing;

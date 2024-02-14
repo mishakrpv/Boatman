@@ -1,12 +1,12 @@
-﻿using Ardalis.GuardClauses;
-using Boatman.DataAccess.Domain.Interfaces;
+﻿using Boatman.DataAccess.Domain.Interfaces;
 using Boatman.DataAccess.Domain.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Utils;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.GetSchedule;
 
-public class GetScheduleRequestHandler : IRequestHandler<GetScheduleRequest, IEnumerable<Viewing>>
+public class GetScheduleRequestHandler : IRequestHandler<GetScheduleRequest, Response<IEnumerable<Viewing>>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
@@ -14,14 +14,20 @@ public class GetScheduleRequestHandler : IRequestHandler<GetScheduleRequest, IEn
     {
         _apartmentRepo = apartmentRepo;
     }
-    
-    public async Task<IEnumerable<Viewing>> Handle(GetScheduleRequest request, CancellationToken cancellationToken)
+
+    public async Task<Response<IEnumerable<Viewing>>> Handle(GetScheduleRequest request,
+        CancellationToken cancellationToken)
     {
         var spec = new ApartmentWithScheduleSpecification(request.ApartmentId);
         var apartment = await _apartmentRepo.FirstOrDefaultAsync(spec, cancellationToken);
-        Guard.Against.Null(apartment);
-        Guard.Against.Null(apartment.Schedule);
 
-        return apartment.Schedule;
+        if (apartment == null)
+            return new Response<IEnumerable<Viewing>>
+            {
+                StatusCode = 404,
+                Message = "Apartment not found."
+            };
+
+        return new Response<IEnumerable<Viewing>>(apartment.Schedule);
     }
 }

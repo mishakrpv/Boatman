@@ -2,10 +2,10 @@
 
 public class Customer : BaseUser, IAggregateRoot
 {
-    public string ExternalId { get; private set; }
-
     public Customer(string externalId)
     {
         ExternalId = externalId;
     }
+
+    public string ExternalId { get; private set; }
 }

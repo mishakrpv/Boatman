@@ -7,8 +7,8 @@ namespace Boatman.AuthApi.UseCases.Commands.SignIn;
 
 public class SignInRequestHandler : IRequestHandler<SignInRequest, TokenPair?>
 {
-    private readonly UserManager<ApplicationUser> _userManager;
     private readonly ITokenService _tokenService;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     public SignInRequestHandler(UserManager<ApplicationUser> userManager,
         ITokenService tokenService)
@@ -16,12 +16,12 @@ public class SignInRequestHandler : IRequestHandler<SignInRequest, TokenPair?>
         _userManager = userManager;
         _tokenService = tokenService;
     }
-    
+
     public async Task<TokenPair?> Handle(SignInRequest request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
         var user = await _userManager.FindByEmailAsync(dto.Email);
-        
+
         if (user == null)
             return null;
 

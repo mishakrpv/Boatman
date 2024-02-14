@@ -10,7 +10,7 @@ namespace Boatman.UnitTests.UseCases.OwnerApi;
 public class AddApartmentTests
 {
     private readonly Mock<IRepository<Apartment>> _mockApartmentRepo = new();
-    
+
     [Fact]
     public async Task Handle_ShouldReturnSameId_WhenRequestIsFine()
     {
@@ -18,8 +18,8 @@ public class AddApartmentTests
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
         _mockApartmentRepo.Setup(ar => ar.AddAsync(It.IsAny<Apartment>(), default))
             .ReturnsAsync(apartment);
-            
-        var request = new AddApartmentRequest(new AddApartmentDto()
+
+        var request = new AddApartmentRequest(new AddApartmentDto
         {
             OwnerId = It.IsAny<string>(),
             Rent = It.IsAny<decimal>(),
@@ -31,9 +31,9 @@ public class AddApartmentTests
         var handler = new AddApartmentRequestHandler(_mockApartmentRepo.Object);
 
         // Act
-        int id = await handler.Handle(request, default);
-        
+        var response = await handler.Handle(request, default);
+
         // Assert
-        id.Should().Be(apartment.Id);
+        response.Value.Should().Be(apartment.Id);
     }
 }

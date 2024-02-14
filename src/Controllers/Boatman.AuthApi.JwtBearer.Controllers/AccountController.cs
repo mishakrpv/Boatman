@@ -40,16 +40,16 @@ public class AccountController : ControllerBase
 
         return BadRequest("Sign in failed!");
     }
-    
+
     [HttpPost]
     [Route("/[controller]/SignUp/Owner")]
     public async Task<IActionResult> RegisterAsOwner([FromBody] SignUpAsOwnerDto dto)
     {
-        bool isSuccess = await _mediator.Send(new SignUpAsOwnerRequest(dto));
+        var isSuccess = await _mediator.Send(new SignUpAsOwnerRequest(dto));
 
         if (isSuccess)
             return Ok();
-        
+
         return BadRequest("User creation failed! Please check user details and try again.");
     }
 }

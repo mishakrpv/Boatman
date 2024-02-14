@@ -15,11 +15,11 @@ public class AddItemTests
 
         // Act
         wishlist.AddItem(apartmentId);
-        
+
         // Assert
         wishlist.Items.Should().Contain(i => i.ApartmentId == apartmentId);
     }
-    
+
     [Fact]
     public void AddItem_ShouldNotCreateItem_WhenThereIsOneWithTheSameApartmentId()
     {
@@ -27,10 +27,10 @@ public class AddItemTests
         const string apartmentId = "123";
         var wishlist = new Wishlist(It.IsAny<string>());
         wishlist.AddItem(apartmentId);
-        
+
         // Act
         wishlist.AddItem(apartmentId);
-        
+
         // Assert
         wishlist.Items.Should().Contain(i => i.ApartmentId == apartmentId);
     }

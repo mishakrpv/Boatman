@@ -17,10 +17,7 @@ public class SaltRequestHandler : IRequestHandler<SaltRequest, string?>
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
 
-        if (user == null)
-        {
-            return null;
-        }
+        if (user == null) return null;
 
         return user.Salt;
     }
