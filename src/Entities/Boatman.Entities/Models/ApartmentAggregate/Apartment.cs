@@ -21,7 +21,7 @@ public class Apartment : BaseApartment, IAggregateRoot
     {
         if (start >= end) return false;
 
-        if (Schedule.Any() && start < Schedule.Last().EndTime) return false;
+        if (Schedule.Any() && start < Schedule.Last().End) return false;
 
         _schedule.Add(new Viewing(customerId, start, end));
 

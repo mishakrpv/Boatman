@@ -1,6 +1,4 @@
 using System.Text;
-using Boatman.AuthApi.JwtBearer.Controllers;
-using Boatman.AuthApi.UseCases.Commands.SignUpAsOwner;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
@@ -51,8 +49,7 @@ builder.Services.AddHealthChecks()
 //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(ApartmentController).Assembly)
-    .AddApplicationPart(typeof(AccountController).Assembly);
+    .AddApplicationPart(typeof(ApartmentController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -76,18 +73,41 @@ builder.Services.AddAuthentication(options =>
 //.AddOAuth();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<IdentityContext>();
+    .AddEntityFrameworkStores<IdentityContext>()
+    .AddDefaultTokenProviders();
 
-builder.Services.AddAuthorization(options =>
+builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); });
-    options.AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); });
-    options.AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
+    // Password settings
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+
+    // SignIn settings
+    options.SignIn.RequireConfirmedEmail = true;
+
+    // Lockout settings
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    // User settings
+    options.User.AllowedUserNameCharacters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+";
+    options.User.RequireUniqueEmail = true;
 });
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); })
+    .AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); })
+    .AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
 
 builder.Services.AddMediatR(configuration =>
 {
-    configuration.RegisterServicesFromAssemblies(typeof(SignUpAsOwnerRequestHandler).Assembly,
+    configuration.RegisterServicesFromAssemblies(
         typeof(AddApartmentRequestHandler).Assembly);
 });
 
