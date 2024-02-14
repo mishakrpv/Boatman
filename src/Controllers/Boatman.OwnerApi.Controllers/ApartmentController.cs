@@ -56,8 +56,8 @@ public class ApartmentController : ControllerBase
     }
 
     [HttpPost]
-    [Route("/[controller]/plan-viewing")]
-    public async Task<IActionResult> PlanViewing([FromBody] PlanViewingDto dto)
+    [Route("/[controller]/schedule-viewing")]
+    public async Task<IActionResult> ScheduleViewing([FromBody] PlanViewingDto dto)
     {
         var response = await _mediator.Send(new ScheduleViewingRequest(dto));
 
