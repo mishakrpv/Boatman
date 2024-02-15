@@ -4,6 +4,8 @@ using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
+using Boatman.Entities.Models.CustomerAggregate;
+using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.OwnerApi.Controllers;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
@@ -86,7 +88,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequiredLength = 5;
-    options.Password.RequiredUniqueChars = 1;
 
     // SignIn settings
     options.SignIn.RequireConfirmedEmail = true;
@@ -97,15 +98,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.AllowedForNewUsers = true;
 
     // User settings
-    options.User.AllowedUserNameCharacters =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.@_+";
     options.User.RequireUniqueEmail = true;
 });
 
-builder.Services.AddAuthorization();
-// .AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); })
-// .AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); })
-// .AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); })
+    .AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); })
+    .AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
 
 builder.Services.AddMediatR(configuration =>
 {
