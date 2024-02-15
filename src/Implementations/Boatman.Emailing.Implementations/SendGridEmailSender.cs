@@ -7,11 +7,11 @@ namespace Boatman.Emailing.Implementations;
 
 public class SendGridEmailSender : IEmailSender
 {
-    private IConfiguration _configuration;
+    private readonly IConfiguration _configuration;
 
     public SendGridEmailSender(IConfiguration configuration)
     {
-        _configuration = configuration; 
+        _configuration = configuration;
     }
 
     public async Task SendEmailAsync(string toEmail, string subject, string content)

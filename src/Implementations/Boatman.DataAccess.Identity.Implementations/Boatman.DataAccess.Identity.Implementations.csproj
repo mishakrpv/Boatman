@@ -8,13 +8,13 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Identity.Interfaces\Boatman.DataAccess.Identity.Interfaces.csproj"/>
-        <ProjectReference Include="..\..\Interfaces\Boatman.Emailing.Interfaces\Boatman.Emailing.Interfaces.csproj" />
+        <ProjectReference Include="..\..\Interfaces\Boatman.Emailing.Interfaces\Boatman.Emailing.Interfaces.csproj"/>
     </ItemGroup>
 
 </Project>

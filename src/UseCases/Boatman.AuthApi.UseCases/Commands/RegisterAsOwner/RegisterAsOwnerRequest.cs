@@ -6,10 +6,10 @@ namespace Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 
 public class RegisterAsOwnerRequest : IRequest<Response>
 {
-    public RegisterAsOwnerDto Dto { get; private set; }
-
     public RegisterAsOwnerRequest(RegisterAsOwnerDto dto)
     {
         Dto = dto;
     }
+
+    public RegisterAsOwnerDto Dto { get; private set; }
 }

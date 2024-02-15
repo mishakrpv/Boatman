@@ -21,7 +21,7 @@ public class RegisterAsOwnerRequestHandler : IRequestHandler<RegisterAsOwnerRequ
     public async Task<Response> Handle(RegisterAsOwnerRequest request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
-        var response = await _userService.RegisterUserAsync(new RegisterDto()
+        var response = await _userService.RegisterUserAsync(new RegisterAsDto(nameof(Owner))
         {
             Email = dto.Email,
             Password = dto.Password,
@@ -29,7 +29,7 @@ public class RegisterAsOwnerRequestHandler : IRequestHandler<RegisterAsOwnerRequ
         });
 
         if (response.StatusCode != 200)
-            return (Response)response;
+            return response;
 
         var owner = await _ownerRepo.AddAsync(new Owner(response.Value!)
         {
@@ -37,7 +37,7 @@ public class RegisterAsOwnerRequestHandler : IRequestHandler<RegisterAsOwnerRequ
             MiddleName = dto.MiddleName,
             LastName = dto.LastName,
             Bio = dto.Bio
-        }, default);
+        });
 
         return response;
     }

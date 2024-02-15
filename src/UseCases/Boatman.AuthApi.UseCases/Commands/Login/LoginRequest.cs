@@ -7,10 +7,10 @@ namespace Boatman.AuthApi.UseCases.Commands.Login;
 
 public class LoginRequest : IRequest<Response<TokenResponse>>
 {
-    public LoginDto Dto { get; private set; }
-    
     public LoginRequest(LoginDto dto)
     {
         Dto = dto;
     }
+
+    public LoginDto Dto { get; private set; }
 }

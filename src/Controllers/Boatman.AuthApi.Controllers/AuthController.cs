@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
         var response = await _mediator.Send(new LoginRequest(dto));
-        
+
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(response.Value);
 

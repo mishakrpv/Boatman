@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetSchedule;
@@ -34,7 +33,6 @@ public class ApartmentController : ControllerBase
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
 
-    [Authorize]
     [HttpGet]
     [Route("/[controller]/{id:int}")]
     public async Task<IActionResult> Get(int id)
@@ -46,8 +44,7 @@ public class ApartmentController : ControllerBase
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
-    
-    [AllowAnonymous]
+
     [HttpGet]
     [Route("/[controller]/schedule/{id:int}")]
     public async Task<IActionResult> GetSchedule(int id)

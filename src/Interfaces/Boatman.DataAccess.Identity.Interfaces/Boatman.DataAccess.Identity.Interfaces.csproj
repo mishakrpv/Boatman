@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
+        <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj"/>
     </ItemGroup>
 
 </Project>

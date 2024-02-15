@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="12.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+        <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\UseCases\Boatman.AuthApi.UseCases\Boatman.AuthApi.UseCases.csproj" />
+        <ProjectReference Include="..\..\UseCases\Boatman.AuthApi.UseCases\Boatman.AuthApi.UseCases.csproj"/>
     </ItemGroup>
 
 </Project>
