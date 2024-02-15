@@ -9,8 +9,8 @@ namespace Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 
 public class RegisterAsOwnerRequestHandler : IRequestHandler<RegisterAsOwnerRequest, Response>
 {
-    private readonly IRepository<Owner> _ownerRepo;
     private readonly IUserService _userService;
+    private readonly IRepository<Owner> _ownerRepo;
 
     public RegisterAsOwnerRequestHandler(IUserService userService, IRepository<Owner> ownerRepo)
     {
@@ -37,7 +37,7 @@ public class RegisterAsOwnerRequestHandler : IRequestHandler<RegisterAsOwnerRequ
             MiddleName = dto.MiddleName,
             LastName = dto.LastName,
             Bio = dto.Bio
-        });
+        }, default);
 
         return response;
     }
