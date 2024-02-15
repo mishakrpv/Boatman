@@ -89,12 +89,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequiredLength = 5;
     options.Password.RequiredUniqueChars = 1;
-
+    
     // SignIn settings
     options.SignIn.RequireConfirmedEmail = true;
 
     // Lockout settings
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
 
@@ -104,10 +104,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
-builder.Services.AddAuthorizationBuilder()
-    .AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); })
-    .AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); })
-    .AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
+builder.Services.AddAuthorization();
+    // .AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); })
+    // .AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); })
+    // .AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
 
 builder.Services.AddMediatR(configuration =>
 {
@@ -117,6 +117,7 @@ builder.Services.AddMediatR(configuration =>
 });
 
 builder.Services.AddInterfaceAdapters();
+builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
 var app = builder.Build();
 

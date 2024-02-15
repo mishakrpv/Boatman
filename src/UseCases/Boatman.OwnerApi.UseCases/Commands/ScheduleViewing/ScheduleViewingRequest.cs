@@ -6,10 +6,10 @@ namespace Boatman.OwnerApi.UseCases.Commands.ScheduleViewing;
 
 public class ScheduleViewingRequest : IRequest<Response>
 {
-    public ScheduleViewingRequest(PlanViewingDto dto)
+    public ScheduleViewingRequest(ScheduleViewingDto dto)
     {
         Dto = dto;
     }
 
-    public PlanViewingDto Dto { get; private set; }
+    public ScheduleViewingDto Dto { get; private set; }
 }

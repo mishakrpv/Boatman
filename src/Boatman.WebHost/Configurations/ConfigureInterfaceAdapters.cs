@@ -15,7 +15,7 @@ public static class ConfigureInterfaceAdapters
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
         services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IEmailSender, EmailSender>();
+        services.AddTransient<IEmailSender, SendGridEmailSender>();
 
         return services;
     }

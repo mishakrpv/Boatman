@@ -1,14 +1,17 @@
 ﻿using System.Net;
+using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetSchedule;
 using Boatman.OwnerApi.UseCases.Commands.ScheduleViewing;
 using Boatman.OwnerApi.UseCases.Dtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Boatman.OwnerApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]/[action]")]
 public class ApartmentController : ControllerBase
@@ -31,8 +34,9 @@ public class ApartmentController : ControllerBase
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
 
+    [Authorize]
     [HttpGet]
-    [Route("{id:int}")]
+    [Route("/[controller]/{id:int}")]
     public async Task<IActionResult> Get(int id)
     {
         var response = await _mediator.Send(new GetApartmentRequest(id));
@@ -42,7 +46,8 @@ public class ApartmentController : ControllerBase
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
-
+    
+    [AllowAnonymous]
     [HttpGet]
     [Route("/[controller]/schedule/{id:int}")]
     public async Task<IActionResult> GetSchedule(int id)
@@ -57,7 +62,7 @@ public class ApartmentController : ControllerBase
 
     [HttpPost]
     [Route("/[controller]/schedule-viewing")]
-    public async Task<IActionResult> ScheduleViewing([FromBody] PlanViewingDto dto)
+    public async Task<IActionResult> ScheduleViewing([FromBody] ScheduleViewingDto dto)
     {
         var response = await _mediator.Send(new ScheduleViewingRequest(dto));
 

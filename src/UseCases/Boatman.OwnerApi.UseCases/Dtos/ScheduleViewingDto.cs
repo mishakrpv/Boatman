@@ -2,7 +2,7 @@
 
 namespace Boatman.OwnerApi.UseCases.Dtos;
 
-public class PlanViewingDto
+public class ScheduleViewingDto
 {
     [Required] public int ApartmentId { get; set; }
 

@@ -85,14 +85,14 @@ public class ApartmentControllerTests
         Guard.Against.Null(addResult);
 
         // Act
-        var planViewingDto1 = new PlanViewingDto
+        var planViewingDto1 = new ScheduleViewingDto
         {
             ApartmentId = addResult.Id,
             CustomerId = "123",
             StartTime = new DateTime(2000, 5, 1, 0, 0, 0),
             EndTime = new DateTime(2000, 5, 1, 2, 0, 0)
         };
-        var planViewingDto2 = new PlanViewingDto
+        var planViewingDto2 = new ScheduleViewingDto
         {
             ApartmentId = addResult.Id,
             CustomerId = "123",
@@ -128,14 +128,14 @@ public class ApartmentControllerTests
         Guard.Against.Null(addResult);
 
         // Act
-        var planViewingDto1 = new PlanViewingDto
+        var planViewingDto1 = new ScheduleViewingDto
         {
             ApartmentId = addResult.Id,
             CustomerId = "123",
             StartTime = new DateTime(2000, 5, 1, 0, 0, 0),
             EndTime = new DateTime(2000, 5, 1, 2, 0, 0)
         };
-        var planViewingDto2 = new PlanViewingDto
+        var planViewingDto2 = new ScheduleViewingDto
         {
             ApartmentId = addResult.Id,
             CustomerId = "123",
