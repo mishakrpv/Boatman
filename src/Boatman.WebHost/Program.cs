@@ -1,4 +1,6 @@
 using System.Text;
+using Boatman.AuthApi.Controllers;
+using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
@@ -49,7 +51,8 @@ builder.Services.AddHealthChecks()
 //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(ApartmentController).Assembly);
+    .AddApplicationPart(typeof(ApartmentController).Assembly)
+    .AddApplicationPart(typeof(AuthController).Assembly);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -84,7 +87,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
+    options.Password.RequiredLength = 5;
     options.Password.RequiredUniqueChars = 1;
 
     // SignIn settings
@@ -97,7 +100,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     // User settings
     options.User.AllowedUserNameCharacters =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+";
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.@_+";
     options.User.RequireUniqueEmail = true;
 });
 
@@ -109,7 +112,8 @@ builder.Services.AddAuthorizationBuilder()
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(
-        typeof(AddApartmentRequestHandler).Assembly);
+        typeof(AddApartmentRequestHandler).Assembly,
+        typeof(RegisterAsOwnerRequestHandler).Assembly);
 });
 
 builder.Services.AddInterfaceAdapters();

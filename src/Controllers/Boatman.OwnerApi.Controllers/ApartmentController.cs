@@ -62,7 +62,7 @@ public class ApartmentController : ControllerBase
         var response = await _mediator.Send(new ScheduleViewingRequest(dto));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
-            return Ok();
+            return Ok(new { message = response.Message });
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }

@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Interfaces\Boatman.Emailing.Interfaces\Boatman.Emailing.Interfaces.csproj" />
+    </ItemGroup>
+
 </Project>

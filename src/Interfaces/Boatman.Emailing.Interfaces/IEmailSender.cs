@@ -1,5 +1,6 @@
 ﻿namespace Boatman.Emailing.Interfaces;
 
-public class Class1
+public interface IEmailSender
 {
+    
 }
