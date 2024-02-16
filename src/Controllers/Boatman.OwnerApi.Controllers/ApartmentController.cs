@@ -47,7 +47,7 @@ public class ApartmentController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/[controller]/schedule/{id:int}")]
+    [Route("/[controller]/{id:int}/schedule")]
     public async Task<IActionResult> GetSchedule(int id)
     {
         var response = await _mediator.Send(new GetScheduleRequest(id));
