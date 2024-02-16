@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetSchedule;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Boatman.OwnerApi.Controllers;
 
-[Authorize]
+[Authorize(Policy = nameof(Owner))]
 [ApiController]
 [Route("[controller]/[action]")]
 public class ApartmentController : ControllerBase

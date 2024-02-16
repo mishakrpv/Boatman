@@ -102,9 +102,21 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddAuthorizationBuilder()
-    .AddPolicy(nameof(Owner), policy => { policy.RequireRole(nameof(Owner)); })
-    .AddPolicy(nameof(Customer), policy => { policy.RequireRole(nameof(Customer)); })
-    .AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
+    .AddPolicy(nameof(Owner), policy =>
+    {
+        policy.RequireRole(nameof(Owner));
+        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+    })
+    .AddPolicy(nameof(Customer), policy =>
+        {
+            policy.RequireRole(nameof(Customer));
+            policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+        })
+    .AddPolicy("Admin", policy =>
+    {
+        policy.RequireRole("Admin");
+        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+    });
 
 builder.Services.AddMediatR(configuration =>
 {

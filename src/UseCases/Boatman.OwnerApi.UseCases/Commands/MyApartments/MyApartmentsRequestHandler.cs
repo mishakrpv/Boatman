@@ -15,8 +15,7 @@ public class MyApartmentsRequestHandler : IRequestHandler<MyApartmentsRequest, R
         _apartmentRepo = apartmentRepo;
     }
 
-    public async Task<Response<IEnumerable<Apartment>>> Handle(MyApartmentsRequest request,
-        CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<Apartment>>> Handle(MyApartmentsRequest request, CancellationToken cancellationToken)
     {
         var spec = new OwnersApartmentSpecification(request.OwnerId);
         var apartments = await _apartmentRepo.ListAsync(spec, cancellationToken);

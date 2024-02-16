@@ -34,6 +34,7 @@ public class ScheduleViewingRequestHandler : IRequestHandler<ScheduleViewingRequ
                 StatusCode = 409,
                 Message = "Viewing time conflicts with the past one."
             };
+        
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
 
         return new Response();

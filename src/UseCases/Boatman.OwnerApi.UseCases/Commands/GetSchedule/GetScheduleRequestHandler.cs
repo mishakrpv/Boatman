@@ -15,8 +15,7 @@ public class GetScheduleRequestHandler : IRequestHandler<GetScheduleRequest, Res
         _apartmentRepo = apartmentRepo;
     }
 
-    public async Task<Response<IEnumerable<Viewing>>> Handle(GetScheduleRequest request,
-        CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<Viewing>>> Handle(GetScheduleRequest request, CancellationToken cancellationToken)
     {
         var spec = new ApartmentWithScheduleSpecification(request.ApartmentId);
         var apartment = await _apartmentRepo.FirstOrDefaultAsync(spec, cancellationToken);
