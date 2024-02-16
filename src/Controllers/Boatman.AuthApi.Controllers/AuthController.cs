@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Boatman.AuthApi.UseCases.Commands.Login;
+using Boatman.AuthApi.UseCases.Commands.RegisterAsCustomer;
 using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 using Boatman.AuthApi.UseCases.Dtos;
 using Boatman.DataAccess.Identity.Interfaces.Dtos;
@@ -24,6 +25,20 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> RegisterAsOwner([FromBody] RegisterAsOwnerDto dto)
     {
         var response = await _mediator.Send(new RegisterAsOwnerRequest(dto));
+
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
+
+        return response.Errors != null
+            ? StatusCode(response.StatusCode, new { problem = response.Message, errors = response.Errors })
+            : StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+    
+    [HttpPost]
+    [Route("customer-register")]
+    public async Task<IActionResult> RegisterAsCustomer([FromBody] RegisterAsCustomerDto dto)
+    {
+        var response = await _mediator.Send(new RegisterAsCustomerRequest(dto));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });

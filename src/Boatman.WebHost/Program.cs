@@ -108,10 +108,10 @@ builder.Services.AddAuthorizationBuilder()
         policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
     })
     .AddPolicy(nameof(Customer), policy =>
-        {
-            policy.RequireRole(nameof(Customer));
-            policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-        })
+    {
+        policy.RequireRole(nameof(Customer));
+        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+    })
     .AddPolicy("Admin", policy =>
     {
         policy.RequireRole("Admin");
