@@ -1,6 +1,7 @@
 using System.Text;
 using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
+using Boatman.CommonApi.Hubs;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
@@ -142,6 +143,8 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddSignalR();
+
 builder.Services.AddInterfaceAdapters();
 builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
@@ -159,5 +162,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chat");
 
 app.Run();
