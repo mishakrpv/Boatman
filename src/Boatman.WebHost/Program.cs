@@ -137,8 +137,8 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Platform for publishing housing for rent from owners",
         License = new OpenApiLicense
         {
-            Name = "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007",
-            Url = new Uri("https://github.com/mishakrpv/Boatman/blob/main/LICENSE")
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/license/mit/")
         }
     });
 });
