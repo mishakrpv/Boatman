@@ -1,5 +1,6 @@
 ﻿using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.ResetPassword;

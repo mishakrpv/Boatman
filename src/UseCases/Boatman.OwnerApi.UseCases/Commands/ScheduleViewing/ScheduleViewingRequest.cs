@@ -1,5 +1,6 @@
 ﻿using Boatman.OwnerApi.UseCases.Dtos;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.ScheduleViewing;

@@ -2,6 +2,7 @@
 using Boatman.DataAccess.Domain.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.MyApartments;

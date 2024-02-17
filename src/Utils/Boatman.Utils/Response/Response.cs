@@ -1,4 +1,4 @@
-﻿namespace Boatman.Utils;
+﻿namespace Boatman.Utils.Response;
 
 public class Response
 {

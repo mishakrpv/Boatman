@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
+using Boatman.OwnerApi.UseCases.Commands.CancelViewing;
 using Boatman.OwnerApi.UseCases.Commands.DeleteApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetSchedule;
@@ -65,6 +66,18 @@ public class ApartmentController : ControllerBase
     {
         var response = await _mediator.Send(new ScheduleViewingRequest(dto));
 
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+
+    [HttpPost]
+    [Route("/[controller]/cancel-viewing")]
+    public async Task<IActionResult> CancelViewing([FromQuery] CancelViewingDto dto)
+    {
+        var response = await _mediator.Send(new CancelViewingRequest(dto));
+        
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
 

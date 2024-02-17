@@ -1,4 +1,5 @@
 ﻿using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.DeleteApartment;

@@ -1,5 +1,6 @@
 ﻿using Boatman.DataAccess.Identity.Interfaces.Dtos;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 
 namespace Boatman.DataAccess.Identity.Interfaces;
 

@@ -1,6 +1,7 @@
 ﻿using Boatman.DataAccess.Domain.Interfaces;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.OwnerApi.UseCases.Commands.DeleteApartment;
@@ -29,7 +30,7 @@ public class DeleteApartmentRequestHandler : IRequestHandler<DeleteApartmentRequ
 
         return new Response
         {
-            Message = "Apartment has been deleted."
+            Message = $"Apartment with id {apartment.Id} has been deleted."
         };
     }
 }

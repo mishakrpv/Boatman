@@ -1,5 +1,6 @@
 ﻿using Boatman.AuthApi.UseCases.Dtos;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;

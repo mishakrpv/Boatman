@@ -1,6 +1,7 @@
 ﻿using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.DataAccess.Identity.Interfaces.Dtos;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.Login;

@@ -14,6 +14,9 @@ public class Wishlist : BaseEntity<int>, IAggregateRoot
 
     public void AddItem(string apartmentId)
     {
-        if (Items.All(i => i.ApartmentId != apartmentId)) _items.Add(new WishlistItem(apartmentId));
+        if (Items.All(i => i.ApartmentId != apartmentId))
+        {
+            _items.Add(new WishlistItem(apartmentId));
+        }
     }
 }

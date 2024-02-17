@@ -4,6 +4,7 @@ using Boatman.DataAccess.Identity.Interfaces.Dtos;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.Utils;
+using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.RegisterAsCustomer;
