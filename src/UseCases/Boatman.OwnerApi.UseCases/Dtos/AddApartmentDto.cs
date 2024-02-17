@@ -8,7 +8,7 @@ public class AddApartmentDto
     public string OwnerId { get; set; } = default!;
     [Required]
     public decimal Rent { get; set; }
-    [Range(1, int.MaxValue)]
+    [Range(1, 36)]
     public int DownPaymentInMonths { get; set; } = 1;
     public double Latitude { get; set; }
     public double Longitude { get; set; }
