@@ -37,6 +37,9 @@ public class ScheduleViewingRequestHandler : IRequestHandler<ScheduleViewingRequ
         
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
 
-        return new Response();
+        return new Response
+        {
+            Message = "Viewing has been scheduled."
+        };
     }
 }
