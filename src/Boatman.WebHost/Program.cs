@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -126,6 +127,21 @@ builder.Services.AddMediatR(configuration =>
         typeof(RegisterAsOwnerRequestHandler).Assembly);
 });
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "0.9.1",
+        Title = "Boatman",
+        Description = "Platform for publishing housing for rent from owners",
+        License = new OpenApiLicense
+        {
+            Name = "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007",
+            Url = new Uri("https://github.com/mishakrpv/Boatman/blob/main/LICENSE")
+        }
+    });
+});
+
 builder.Services.AddInterfaceAdapters();
 builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
@@ -138,6 +154,9 @@ app.MapHealthChecks("/_health", new HealthCheckOptions
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
 
