@@ -10,4 +10,8 @@ public interface IUserService
     Task<Response<TokenResponse>> LoginUserAsync(LoginDto dto);
 
     Task<Response> ConfirmEmailAsync(string userId, string token);
+
+    Task<Response> ForgetPasswordAsync(string email);
+
+    Task<Response> ResetPasswordAsync(ResetPasswordDto dto);
 }

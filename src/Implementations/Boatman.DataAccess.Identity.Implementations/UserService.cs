@@ -70,7 +70,7 @@ public class UserService : IUserService
         var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
         var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
 
-        var callbackUrl = $"{_configuration["AppUrl"]}/auth/confirm-email?userid={user.Id}&token={validEmailToken}";
+        var callbackUrl = $"{_configuration["AppUrl"]}/auth/confirm-email?id={user.Id}&token={validEmailToken}";
         
         await _emailSender.SendEmailAsync(user.Email, "Confirm your email", "<h1>Welcome to Boatman</h1>" +
             $"<p>Please confirm your email by <a href='{callbackUrl}'>clicking here</a></p>");
@@ -161,7 +161,67 @@ public class UserService : IUserService
         return new Response
         {
             StatusCode = 400,
-            Message = "Email not confirmed.",
+            Message = "Email wasn't confirmed.",
+            Errors = result.Errors.Select(e => e.Description)
+        };
+    }
+
+    public async Task<Response> ForgetPasswordAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+
+        if (user == null)
+            return new Response
+            {
+                StatusCode = 404,
+                Message = "There is no user with that Email address."
+            };
+
+        var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+        var encodedResetToken = Encoding.UTF8.GetBytes(resetToken);
+        var validResetToken = WebEncoders.Base64UrlEncode(encodedResetToken);
+
+        var resetUrl = $"{_configuration["AppUrl"]}/auth/reset-password?email={email}&token={validResetToken}";
+
+        await _emailSender.SendEmailAsync(email, "Reset Password", "<h1>Follow the instructions to reset your password</h1>" +
+            $"<p>To reset your password <a href='{resetUrl}'>click here</a></p>");
+
+        return new Response
+        {
+            Message = "Reset password URL has been sent to the email."
+        };
+    }
+
+    public async Task<Response> ResetPasswordAsync(ResetPasswordDto dto)
+    {
+        var user = await _userManager.FindByEmailAsync(dto.Email);
+
+        if (user == null)
+            return new Response
+            {
+                StatusCode = 404,
+                Message = "There is no user with that Email address."
+            };
+        
+        if (dto.Password != dto.ConfirmPassword)
+            return new Response
+            {
+                StatusCode = 400,
+                Message = "Confirm password doesn't match the password."
+            };
+
+        var result = await _userManager.ResetPasswordAsync(user, dto.Token, dto.Password);
+
+        if (result.Succeeded)
+            return new Response
+            {
+                Message = "Password has been reset.",
+            };
+        
+        return new Response
+        {
+            StatusCode = 400,
+            Message = "Password wasn't reset.",
             Errors = result.Errors.Select(e => e.Description)
         };
     }

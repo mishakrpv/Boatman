@@ -15,7 +15,7 @@ public class ConfirmEmailRequestHandler : IRequestHandler<ConfirmEmailRequest, R
     
     public async Task<Response> Handle(ConfirmEmailRequest request, CancellationToken cancellationToken)
     {
-        var response = await _userService.ConfirmEmailAsync(request.Dto.UserId, request.Dto.Token);
+        var response = await _userService.ConfirmEmailAsync(request.Dto.Id, request.Dto.Token);
 
         return response;
     }
