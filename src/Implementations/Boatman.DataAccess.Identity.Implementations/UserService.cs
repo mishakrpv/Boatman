@@ -6,6 +6,7 @@ using Boatman.DataAccess.Identity.Interfaces.Dtos;
 using Boatman.Emailing.Interfaces;
 using Boatman.Utils;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -64,16 +65,15 @@ public class UserService : IUserService
         if (await _roleManager.RoleExistsAsync(dto.Role))
             await _userManager.AddToRoleAsync(user, dto.Role);
 
-        // var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        //
-        // var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
-        // var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
-        //
-        // string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={user.Id}&token={validEmailToken}";
-        //
-        // await _emailSender.SendEmailAsync(user.Email, "Confirm your email", $"<h1>Welcome to Auth Demo</h1>" +
-        //     $"<p>Please confirm your email by <a href='{url}'>Clicking here</a></p>");
+        var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        
+        var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
+        var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
 
+        var callbackUrl = $"{_configuration["AppUrl"]}/auth/confirm-email?userid={user.Id}&token={validEmailToken}";
+        
+        await _emailSender.SendEmailAsync(user.Email, "Confirm your email", "<h1>Welcome to Boatman</h1>" +
+            $"<p>Please confirm your email by <a href='{callbackUrl}'>clicking here</a></p>");
 
         return new Response<string>(user.Id)
         {
@@ -136,8 +136,33 @@ public class UserService : IUserService
         };
     }
 
-    public Task<Response> ConfirmEmailAsync(string userId, string token)
+    public async Task<Response> ConfirmEmailAsync(string userId, string token)
     {
-        throw new NotImplementedException();
+        var user = await _userManager.FindByIdAsync(userId);
+        
+        if (user == null)
+            return new Response
+            {
+                StatusCode = 404,
+                Message = "User not found."
+            };
+
+        var decodedToken = WebEncoders.Base64UrlDecode(token);
+        var confirmEmailToken = Encoding.UTF8.GetString(decodedToken);
+
+        var result = await _userManager.ConfirmEmailAsync(user, confirmEmailToken);
+
+        if (result.Succeeded)
+            return new Response
+            {
+                Message = "Email confirmed successfully."
+            };
+        
+        return new Response
+        {
+            StatusCode = 400,
+            Message = "Email confirmed successfully.",
+            Errors = result.Errors.Select(e => e.Description)
+        };
     }
 }

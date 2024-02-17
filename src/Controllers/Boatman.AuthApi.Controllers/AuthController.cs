@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Boatman.AuthApi.UseCases.Commands.ConfirmEmail;
 using Boatman.AuthApi.UseCases.Commands.Login;
 using Boatman.AuthApi.UseCases.Commands.RegisterAsCustomer;
 using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
@@ -58,5 +59,19 @@ public class AuthController : ControllerBase
             return Ok(response.Value);
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+
+    [HttpGet]
+    [Route("confirm-email")]
+    public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailDto dto)
+    {
+        var response = await _mediator.Send(new ConfirmEmailRequest(dto));
+        
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
+
+        return response.Errors != null
+            ? StatusCode(response.StatusCode, new { problem = response.Message, errors = response.Errors })
+            : StatusCode(response.StatusCode, new { problem = response.Message });
     }
 }
