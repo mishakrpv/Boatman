@@ -2,6 +2,7 @@ using System.Text;
 using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
 using Boatman.CommonApi.Hubs;
+using Boatman.CommonApi.Hubs.Hubs;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
@@ -150,6 +151,12 @@ builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.MapHealthChecks("/_health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
@@ -157,9 +164,6 @@ app.MapHealthChecks("/_health", new HealthCheckOptions
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseSwagger();
-app.UseSwaggerUI();
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chat");
