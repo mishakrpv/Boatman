@@ -161,7 +161,7 @@ public class UserService : IUserService
         return new Response
         {
             StatusCode = 400,
-            Message = "Email confirmed successfully.",
+            Message = "Email not confirmed.",
             Errors = result.Errors.Select(e => e.Description)
         };
     }
