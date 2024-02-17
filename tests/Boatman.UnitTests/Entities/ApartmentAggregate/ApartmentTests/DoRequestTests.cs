@@ -14,7 +14,7 @@ public class DoRequestTests
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
 
         // Act
-        apartment.DoRequest(customerId);
+        apartment.SendRequest(customerId);
 
         // Assert
         apartment.Requests.Should().Contain(r => r.CustomerId == customerId);
@@ -26,10 +26,10 @@ public class DoRequestTests
         // Arrange
         const string customerId = "123";
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
-        apartment.DoRequest(customerId);
+        apartment.SendRequest(customerId);
 
         // Act
-        apartment.DoRequest(customerId);
+        apartment.SendRequest(customerId);
 
         // Assert
         apartment.Requests.Should().HaveCount(1);

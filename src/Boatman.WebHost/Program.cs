@@ -51,7 +51,8 @@ builder.Services.AddHealthChecks()
 //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(ApartmentController).Assembly)
+    .AddApplicationPart(typeof(Boatman.OwnerApi.Controllers.ApartmentController).Assembly)
+    .AddApplicationPart(typeof(Boatman.CustomerApi.Controllers.ApartmentController).Assembly)
     .AddApplicationPart(typeof(AuthController).Assembly);
 
 builder.Services.AddAuthentication(options =>

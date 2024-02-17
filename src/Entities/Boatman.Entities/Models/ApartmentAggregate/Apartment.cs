@@ -41,7 +41,7 @@ public class Apartment : BaseApartment, IAggregateRoot
         }
     }
 
-    public void DoRequest(string customerId)
+    public void SendRequest(string customerId)
     {
         if (Requests.All(r => r.CustomerId != customerId))
         {
