@@ -34,6 +34,7 @@
         <ProjectReference Include="..\Controllers\Boatman.CustomerApi.Controllers\Boatman.CustomerApi.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.OwnerApi.Controllers\Boatman.OwnerApi.Controllers.csproj"/>
         <ProjectReference Include="..\Implementations\Boatman.Emailing.Implementations\Boatman.Emailing.Implementations.csproj"/>
+        <ProjectReference Include="..\Implementations\Boatman.Logging.Implementations\Boatman.Logging.Implementations.csproj" />
         <ProjectReference Include="..\UseCases\Boatman.AuthApi.UseCases\Boatman.AuthApi.UseCases.csproj"/>
         <ProjectReference Include="..\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj"/>
         <ProjectReference Include="..\Implementations\Boatman.DataAccess.Domain.Implementations\Boatman.DataAccess.Domain.Implementations.csproj"/>

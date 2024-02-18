@@ -4,6 +4,8 @@ using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Emailing.Implementations;
 using Boatman.Emailing.Interfaces;
+using Boatman.Logging.Implementations;
+using Boatman.Logging.Interfaces;
 
 namespace Boatman.WebHost.Configurations;
 
@@ -16,6 +18,8 @@ public static class ConfigureInterfaceAdapters
 
         services.AddScoped<IUserService, UserService>();
         services.AddTransient<IEmailSender, SendGridEmailSender>();
+
+        services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
         return services;
     }
