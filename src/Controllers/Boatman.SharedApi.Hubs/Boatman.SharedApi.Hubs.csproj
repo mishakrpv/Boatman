@@ -13,4 +13,8 @@
       <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\UseCases\Boatman.SharedApi.UseCases\Boatman.SharedApi.UseCases.csproj" />
+    </ItemGroup>
+
 </Project>

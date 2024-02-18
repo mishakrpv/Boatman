@@ -1,4 +1,6 @@
 ﻿using Boatman.CommonApi.Hubs.Contracts;
+using Boatman.SharedApi.UseCases.Commands.StartChat;
+using Boatman.SharedApi.UseCases.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +20,14 @@ public class ChatHub : Hub<IHubClient>
 
     public override async Task OnConnectedAsync()
     {
-        await Clients.Caller.ReceiveMessage("You just joined");
+        
+    }
+
+    public async Task StartChat(string userConnectionId, StartChatDto dto)
+    {
+        await Clients.Caller.ReceiveMessage(dto.Message);
+        await Clients.Client(userConnectionId).ReceiveMessage(dto.Message);
+        await _mediator.Send(new StartChatRequest(dto));
     }
     
     public async Task SendMessage(string userConnectionId, string message)
