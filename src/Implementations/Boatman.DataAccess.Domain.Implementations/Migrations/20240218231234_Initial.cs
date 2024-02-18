@@ -121,7 +121,7 @@ namespace Boatman.DataAccess.Domain.Implementations.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApartmentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApartmentId = table.Column<int>(type: "int", nullable: false),
                     WishlistId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

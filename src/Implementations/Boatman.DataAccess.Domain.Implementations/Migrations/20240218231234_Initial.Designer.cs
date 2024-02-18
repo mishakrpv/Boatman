@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boatman.DataAccess.Domain.Implementations.Migrations
 {
     [DbContext(typeof(DomainContext))]
-    [Migration("20240218225322_Initial")]
+    [Migration("20240218231234_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -196,9 +196,8 @@ namespace Boatman.DataAccess.Domain.Implementations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApartmentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ApartmentId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("WishlistId")
                         .HasColumnType("int");

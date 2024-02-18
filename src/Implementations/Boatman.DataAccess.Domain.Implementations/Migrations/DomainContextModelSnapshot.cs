@@ -193,9 +193,8 @@ namespace Boatman.DataAccess.Domain.Implementations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApartmentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ApartmentId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("WishlistId")
                         .HasColumnType("int");

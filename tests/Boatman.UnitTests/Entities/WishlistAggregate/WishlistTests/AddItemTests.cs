@@ -10,7 +10,7 @@ public class AddItemTests
     public void AddItem_ShouldCreateItem_WhenThereIsNoOneWithTheSameApartmentId()
     {
         // Arrange
-        const string apartmentId = "123";
+        const int apartmentId = 1;
         var wishlist = new Wishlist(It.IsAny<string>());
 
         // Act
@@ -24,7 +24,7 @@ public class AddItemTests
     public void AddItem_ShouldNotCreateItem_WhenThereIsOneWithTheSameApartmentId()
     {
         // Arrange
-        const string apartmentId = "123";
+        const int apartmentId = 1;
         var wishlist = new Wishlist(It.IsAny<string>());
         wishlist.AddItem(apartmentId);
 

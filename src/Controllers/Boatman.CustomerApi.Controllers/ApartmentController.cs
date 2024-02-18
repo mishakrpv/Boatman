@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Boatman.CustomerApi.UseCases.Commands.AddToWishlist;
 using Boatman.CustomerApi.UseCases.Commands.SendRequest;
 using Boatman.CustomerApi.UseCases.Dtos;
 using Boatman.Entities.Models.CustomerAggregate;
@@ -25,6 +26,18 @@ public class ApartmentController : ControllerBase
     public async Task<IActionResult> SendRequest([FromQuery] SendRequestDto dto)
     {
         var response = await _mediator.Send(new SendRequestRequest(dto));
+        
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+
+    [HttpPost]
+    [Route("wishlist-add")]
+    public async Task<IActionResult> AddToWishlist([FromBody] AddToWishlistDto dto)
+    {
+        var response = await _mediator.Send(new AddToWishlistRequest(dto));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });

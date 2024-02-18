@@ -12,7 +12,7 @@ public class Wishlist : BaseEntity<int>, IAggregateRoot
     public string CustomerId { get; private set; }
     public IEnumerable<WishlistItem> Items => _items.AsReadOnly();
 
-    public void AddItem(string apartmentId)
+    public void AddItem(int apartmentId)
     {
         if (Items.All(i => i.ApartmentId != apartmentId))
         {
