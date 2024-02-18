@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boatman.DataAccess.Domain.Implementations.Migrations
 {
     [DbContext(typeof(DomainContext))]
-    [Migration("20240218070105_AddChatAggregate")]
-    partial class AddChatAggregate
+    [Migration("20240218225322_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,66 +103,6 @@ namespace Boatman.DataAccess.Domain.Implementations.Migrations
                     b.HasIndex("ApartmentId");
 
                     b.ToTable("Viewings");
-                });
-
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Chat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chats");
-                });
-
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("SendDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ChatId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExternalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.ToTable("ChatUsers");
                 });
 
             modelBuilder.Entity("Boatman.Entities.Models.CustomerAggregate.Customer", b =>
@@ -284,20 +224,6 @@ namespace Boatman.DataAccess.Domain.Implementations.Migrations
                         .HasForeignKey("ApartmentId");
                 });
 
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Message", b =>
-                {
-                    b.HasOne("Boatman.Entities.Models.ChatAggregate.User", null)
-                        .WithMany("Messages")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.User", b =>
-                {
-                    b.HasOne("Boatman.Entities.Models.ChatAggregate.Chat", null)
-                        .WithMany("Users")
-                        .HasForeignKey("ChatId");
-                });
-
             modelBuilder.Entity("Boatman.Entities.Models.WishlistAggregate.WishlistItem", b =>
                 {
                     b.HasOne("Boatman.Entities.Models.WishlistAggregate.Wishlist", null)
@@ -310,16 +236,6 @@ namespace Boatman.DataAccess.Domain.Implementations.Migrations
                     b.Navigation("Requests");
 
                     b.Navigation("Schedule");
-                });
-
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Chat", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.User", b =>
-                {
-                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("Boatman.Entities.Models.WishlistAggregate.Wishlist", b =>
