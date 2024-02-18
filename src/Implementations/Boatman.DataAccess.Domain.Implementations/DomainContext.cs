@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Entities.Models.ChatAggregate;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
 using Boatman.Entities.Models.WishlistAggregate;
@@ -20,6 +21,9 @@ public class DomainContext : DbContext
     public DbSet<Owner> Owners { get; set; }
     public DbSet<Wishlist> Wishlists { get; set; }
     public DbSet<WishlistItem> WishlistItems { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<User> ChatUsers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
