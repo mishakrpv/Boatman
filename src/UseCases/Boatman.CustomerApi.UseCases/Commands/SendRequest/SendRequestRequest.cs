@@ -6,10 +6,10 @@ namespace Boatman.CustomerApi.UseCases.Commands.SendRequest;
 
 public class SendRequestRequest : IRequest<Response>
 {
-    public SendRequestRequest(SendRequestDto dto)
+    public SendRequestRequest(ApartmentCustomerDto dto)
     {
         Dto = dto;
     }
 
-    public SendRequestDto Dto { get; private set; }
+    public ApartmentCustomerDto Dto { get; private set; }
 }

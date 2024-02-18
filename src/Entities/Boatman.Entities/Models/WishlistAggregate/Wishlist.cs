@@ -19,4 +19,14 @@ public class Wishlist : BaseEntity<int>, IAggregateRoot
             _items.Add(new WishlistItem(apartmentId));
         }
     }
+
+    public void RemoveItem(int apartmentId)
+    {
+        var item = Items.FirstOrDefault(i => i.ApartmentId == apartmentId);
+
+        if (item != null)
+        {
+            _items.Remove(item);
+        }
+    }
 }

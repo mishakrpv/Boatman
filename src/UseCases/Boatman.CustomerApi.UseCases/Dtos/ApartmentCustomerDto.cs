@@ -1,6 +1,6 @@
 ﻿namespace Boatman.CustomerApi.UseCases.Dtos;
 
-public class AddToWishlistDto
+public class ApartmentCustomerDto
 {
     public int ApartmentId { get; set; }
     public string CustomerId { get; set; } = default!;

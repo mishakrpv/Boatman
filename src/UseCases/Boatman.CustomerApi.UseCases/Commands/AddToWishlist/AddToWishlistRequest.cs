@@ -6,10 +6,10 @@ namespace Boatman.CustomerApi.UseCases.Commands.AddToWishlist;
 
 public class AddToWishlistRequest : IRequest<Response>
 {
-    public AddToWishlistRequest(AddToWishlistDto dto)
+    public AddToWishlistRequest(ApartmentCustomerDto dto)
     {
         Dto = dto;
     }
 
-    public AddToWishlistDto Dto { get; private set; }
+    public ApartmentCustomerDto Dto { get; private set; }
 }
