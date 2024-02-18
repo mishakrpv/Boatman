@@ -1,14 +1,12 @@
 using System.Text;
 using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
-using Boatman.CommonApi.Hubs;
-using Boatman.CommonApi.Hubs.Hubs;
+using Boatman.SharedApi.Hubs;
 using Boatman.DataAccess.Domain.Implementations;
 using Boatman.DataAccess.Identity.Implementations;
 using Boatman.DataAccess.Identity.Interfaces;
 using Boatman.Entities.Models.CustomerAggregate;
 using Boatman.Entities.Models.OwnerAggregate;
-using Boatman.OwnerApi.Controllers;
 using Boatman.OwnerApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
 using HealthChecks.UI.Client;
