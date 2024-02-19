@@ -1,11 +1,11 @@
 ﻿using Boatman.Utils.Response;
 using MediatR;
 
-namespace Boatman.CustomerApi.UseCases.Commands.AddToWishlist;
+namespace Boatman.CustomerApi.UseCases.Commands.SubmitAnApplication;
 
-public class AddToWishlistRequest : IRequest<Response>
+public class SubmitAnApplicationRequest : IRequest<Response>
 {
-    public AddToWishlistRequest(int apartmentId, string customerId)
+    public SubmitAnApplicationRequest(int apartmentId, string customerId)
     {
         ApartmentId = apartmentId;
         CustomerId = customerId;

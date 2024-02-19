@@ -3,21 +3,20 @@ using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Utils.Response;
 using MediatR;
 
-namespace Boatman.CustomerApi.UseCases.Commands.SendRequest;
+namespace Boatman.CustomerApi.UseCases.Commands.SubmitAnApplication;
 
-public class SendRequestRequestHandler : IRequestHandler<SendRequestRequest, Response>
+public class SubmitAnApplicationRequestHandler : IRequestHandler<SubmitAnApplicationRequest, Response>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
-    public SendRequestRequestHandler(IRepository<Apartment> apartmentRepo)
+    public SubmitAnApplicationRequestHandler(IRepository<Apartment> apartmentRepo)
     {
         _apartmentRepo = apartmentRepo;
     }
     
-    public async Task<Response> Handle(SendRequestRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(SubmitAnApplicationRequest request, CancellationToken cancellationToken)
     {
-        var dto = request.Dto;
-        var apartment = await _apartmentRepo.GetByIdAsync(dto.ApartmentId, cancellationToken);
+        var apartment = await _apartmentRepo.GetByIdAsync(request.ApartmentId, cancellationToken);
 
         if (apartment == null)
             return new Response
@@ -26,7 +25,7 @@ public class SendRequestRequestHandler : IRequestHandler<SendRequestRequest, Res
                 Message = "Apartment not found."
             };
         
-        apartment.SendRequest(dto.CustomerId);
+        apartment.SubmitAnApplication(request.CustomerId);
 
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
 

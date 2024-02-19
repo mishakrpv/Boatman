@@ -1,8 +1,5 @@
 ﻿using System.Net;
-using Boatman.CustomerApi.UseCases.Commands.AddToWishlist;
-using Boatman.CustomerApi.UseCases.Commands.RemoveFromWishlist;
-using Boatman.CustomerApi.UseCases.Commands.SendRequest;
-using Boatman.CustomerApi.UseCases.Dtos;
+using Boatman.CustomerApi.UseCases.Commands.SubmitAnApplication;
 using Boatman.Entities.Models.CustomerAggregate;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +9,7 @@ namespace Boatman.CustomerApi.Controllers;
 
 [Authorize(Policy = nameof(Customer))]
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("[controller]")]
 public class ApartmentController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -23,34 +20,10 @@ public class ApartmentController : ControllerBase
     }
 
     [HttpPost]
-    [Route("send-request")]
-    public async Task<IActionResult> SendRequest([FromQuery] ApartmentCustomerDto dto)
+    [Route("submit-an-application")]
+    public async Task<IActionResult> SubmitAnApplication([FromQuery] int apartmentId, [FromQuery] string customerId)
     {
-        var response = await _mediator.Send(new SendRequestRequest(dto));
-        
-        if (response.StatusCode == (int)HttpStatusCode.OK)
-            return Ok(new { message = response.Message });
-
-        return StatusCode(response.StatusCode, new { problem = response.Message });
-    }
-
-    [HttpPost]
-    [Route("wishlist-add")]
-    public async Task<IActionResult> AddToWishlist([FromQuery] ApartmentCustomerDto dto)
-    {
-        var response = await _mediator.Send(new AddToWishlistRequest(dto));
-        
-        if (response.StatusCode == (int)HttpStatusCode.OK)
-            return Ok(new { message = response.Message });
-
-        return StatusCode(response.StatusCode, new { problem = response.Message });
-    }
-
-    [HttpPost]
-    [Route("wishlist-remove")]
-    public async Task<IActionResult> RemoveFromWishlist([FromQuery] ApartmentCustomerDto dto)
-    {
-        var response = await _mediator.Send(new RemoveFromWishlistRequest(dto));
+        var response = await _mediator.Send(new SubmitAnApplicationRequest(apartmentId, customerId));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });

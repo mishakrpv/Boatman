@@ -33,7 +33,7 @@ public class RegisterAsCustomerRequestHandler : IRequestHandler<RegisterAsCustom
         if (response.StatusCode != 200)
             return response;
 
-        var owner = await _customerRepo.AddAsync(new Customer(response.Value!)
+        var customer = await _customerRepo.AddAsync(new Customer(response.Value!)
         {
             FirstName = dto.FirstName,
             MiddleName = dto.MiddleName,

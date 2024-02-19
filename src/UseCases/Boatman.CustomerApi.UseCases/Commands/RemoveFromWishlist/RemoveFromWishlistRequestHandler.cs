@@ -17,12 +17,17 @@ public class RemoveFromWishlistRequestHandler : IRequestHandler<RemoveFromWishli
 
     public async Task<Response> Handle(RemoveFromWishlistRequest request, CancellationToken cancellationToken)
     {
-        var dto = request.Dto;
-        var spec = new CustomersWishlistSpecification(dto.CustomerId);
-        var wishlist = await _wishlistRepo.FirstOrDefaultAsync(spec, cancellationToken)
-                       ?? await _wishlistRepo.AddAsync(new Wishlist(dto.CustomerId), cancellationToken);
+        var spec = new CustomersWishlistSpecification(request.CustomerId);
+        var wishlist = await _wishlistRepo.FirstOrDefaultAsync(spec, cancellationToken);
+
+        if (wishlist == null)
+            return new Response
+            {
+                StatusCode = 404,
+                Message = "User has no wishlist."
+            };
         
-        wishlist.RemoveItem(dto.ApartmentId);
+        wishlist.RemoveItem(request.ApartmentId);
 
         await _wishlistRepo.UpdateAsync(wishlist, cancellationToken);
         

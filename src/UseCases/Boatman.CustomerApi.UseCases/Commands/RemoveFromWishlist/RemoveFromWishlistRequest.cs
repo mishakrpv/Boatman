@@ -1,15 +1,16 @@
-﻿using Boatman.CustomerApi.UseCases.Dtos;
-using Boatman.Utils.Response;
+﻿using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.CustomerApi.UseCases.Commands.RemoveFromWishlist;
 
 public class RemoveFromWishlistRequest : IRequest<Response>
 {
-    public RemoveFromWishlistRequest(ApartmentCustomerDto dto)
+    public RemoveFromWishlistRequest(int apartmentId, string customerId)
     {
-        Dto = dto;
+        ApartmentId = apartmentId;
+        CustomerId = customerId;
     }
     
-    public ApartmentCustomerDto Dto { get; private set; }
+    public int ApartmentId { get; private set; }
+    public string CustomerId { get; private set; }
 }
