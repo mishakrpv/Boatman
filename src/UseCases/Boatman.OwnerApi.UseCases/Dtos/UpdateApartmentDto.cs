@@ -2,10 +2,10 @@
 
 namespace Boatman.OwnerApi.UseCases.Dtos;
 
-public class AddApartmentDto
+public class UpdateApartmentDto
 {
     [Required]
-    public string OwnerId { get; set; } = default!;
+    public int ApartmentId { get; set; } = default!;
     [Required]
     public decimal Rent { get; set; }
     [Range(1, 36)]

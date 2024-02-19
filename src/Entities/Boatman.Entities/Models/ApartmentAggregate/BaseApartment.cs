@@ -13,6 +13,12 @@ public abstract class BaseApartment : BaseEntity<int>
 
     public double Latitude { get; protected set; }
     public double Longitude { get; protected set; }
+    
+    public void Update(decimal rent, int downPaymentInMonths = 1)
+    {
+        Rent = rent;
+        DownPaymentInMonths = downPaymentInMonths;
+    }
 
     public void SetCoordinates(double latitude, double longitude)
     {

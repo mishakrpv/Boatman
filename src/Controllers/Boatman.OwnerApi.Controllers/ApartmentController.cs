@@ -6,6 +6,7 @@ using Boatman.OwnerApi.UseCases.Commands.DeleteApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetApartment;
 using Boatman.OwnerApi.UseCases.Commands.GetSchedule;
 using Boatman.OwnerApi.UseCases.Commands.ScheduleViewing;
+using Boatman.OwnerApi.UseCases.Commands.UpdateApartment;
 using Boatman.OwnerApi.UseCases.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,17 @@ public class ApartmentController : ControllerBase
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { id = response.Value });
 
+        return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateApartmentDto dto)
+    {
+        var response = await _mediator.Send(new UpdateApartmentRequest(dto));
+        
+        if (response.StatusCode != (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
+        
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
 
