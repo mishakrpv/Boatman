@@ -26,7 +26,7 @@ public class UpdateApartmentRequestHandler : IRequestHandler<UpdateApartmentRequ
                 Message = "Apartment not found."
             };
         
-        apartment.Update(dto.Rent, dto.DownPaymentInMonths);
+        apartment.Update(dto.Rent, dto.Description, dto.DownPaymentInMonths);
         apartment.SetCoordinates(dto.Latitude, dto.Longitude);
 
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);

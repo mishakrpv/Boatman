@@ -10,7 +10,8 @@ public class ScheduleViewingTests
     public void ScheduleViewing_ShouldCreateViewing_WhenItDoesNotConflictWithThePastOne()
     {
         // Arrange
-        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
+        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(),
+            It.IsAny<string>(), It.IsAny<int>());
         var startOne = new DateTime(2000, 12, 5, 0, 0, 0);
         var endOne = new DateTime(2000, 12, 5, 2, 0, 0);
         var startTwo = new DateTime(2000, 12, 5, 3, 0, 0);
@@ -29,7 +30,8 @@ public class ScheduleViewingTests
     public void ScheduleViewing_ShouldNotCreateViewing_WhenItConflictWithThePastOne()
     {
         // Arrange
-        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
+        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(),
+            It.IsAny<string>(), It.IsAny<int>());
         var startOne = new DateTime(2000, 12, 5, 0, 0, 0);
         var endOne = new DateTime(2000, 12, 5, 2, 0, 0);
         var startTwo = new DateTime(2000, 12, 5, 1, 0, 0);

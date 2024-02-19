@@ -11,7 +11,8 @@ public class SubmitAnApplicationTests
     {
         // Arrange
         const string customerId = "123";
-        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
+        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(),
+            It.IsAny<string>(), It.IsAny<int>());
 
         // Act
         apartment.SubmitAnApplication(customerId);
@@ -25,7 +26,8 @@ public class SubmitAnApplicationTests
     {
         // Arrange
         const string customerId = "123";
-        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
+        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(),
+            It.IsAny<string>(), It.IsAny<int>());
 
         // Act
         apartment.SubmitAnApplication(customerId);

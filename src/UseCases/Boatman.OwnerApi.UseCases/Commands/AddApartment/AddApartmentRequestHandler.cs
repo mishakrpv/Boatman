@@ -18,7 +18,7 @@ public class AddApartmentRequestHandler : IRequestHandler<AddApartmentRequest, R
     public async Task<Response<int>> Handle(AddApartmentRequest request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
-        var entity = new Apartment(dto.OwnerId, dto.Rent, dto.DownPaymentInMonths);
+        var entity = new Apartment(dto.OwnerId, dto.Rent, dto.Description, dto.DownPaymentInMonths);
         entity.SetCoordinates(dto.Latitude, dto.Longitude);
         var apartment = await _apartmentRepo.AddAsync(entity, cancellationToken);
 

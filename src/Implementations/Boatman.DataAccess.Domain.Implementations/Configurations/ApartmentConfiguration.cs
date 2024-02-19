@@ -10,5 +10,8 @@ public class ApartmentConfiguration : IEntityTypeConfiguration<Apartment>
     {
         builder.Property(a => a.Rent)
             .HasPrecision(19, 4);
+
+        builder.Property(a => a.Description)
+            .HasMaxLength(300);
     }
 }

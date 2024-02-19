@@ -36,18 +36,18 @@ else
     builder.Services.AddDbContext<DomainContext>(options =>
     {
         var connectionString = config.GetConnectionString("DomainConnection");
-        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
+        options.UseNpgsql(connectionString, o => o.EnableRetryOnFailure());
     });
     builder.Services.AddDbContext<IdentityContext>(options =>
     {
         var connectionString = config.GetConnectionString("IdentityConnection");
-        options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure());
+        options.UseNpgsql(connectionString, o => o.EnableRetryOnFailure());
     });
 }
 
 builder.Services.AddHealthChecks()
-    .AddSqlServer(config.GetConnectionString("DomainConnection") ?? "", name: "domainCheck")
-    .AddSqlServer(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
+    .AddNpgSql(config.GetConnectionString("DomainConnection") ?? "", name: "domainCheck")
+    .AddNpgSql(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
 //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()

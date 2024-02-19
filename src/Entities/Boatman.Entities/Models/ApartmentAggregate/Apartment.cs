@@ -6,7 +6,7 @@ public class Apartment : BaseApartment, IAggregateRoot
 
     private readonly List<Viewing> _schedule = [];
 
-    public Apartment(string ownerId, decimal rent, int downPaymentInMonths = 1) : base(rent, downPaymentInMonths)
+    public Apartment(string ownerId, decimal rent, string description, int downPaymentInMonths = 1) : base(rent, description, downPaymentInMonths)
     {
         OwnerId = ownerId;
     }

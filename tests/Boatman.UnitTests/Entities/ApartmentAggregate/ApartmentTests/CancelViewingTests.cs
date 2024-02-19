@@ -10,7 +10,8 @@ public class CancelViewingTests
     public void CancelViewing_ShouldRemoveViewingFromSchedule()
     {
         // Arrange
-        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
+        var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(),
+            It.IsAny<string>(), It.IsAny<int>());
 
         var startTime = new DateTime(100);
         var endTime = new DateTime(1000);
