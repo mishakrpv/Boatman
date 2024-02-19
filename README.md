@@ -10,6 +10,8 @@ Boatman is a platform for publishing housing for rent from owners.
 
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
+<br />
+
 </div>
 
 ## Running the instance using Docker
