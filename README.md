@@ -14,7 +14,7 @@
 
 ## Running the sample using Docker
 
-You can run the API intance by running these commands from the root folder (where the .sln file is located):
+You can run the API instance by running these commands from the root folder (where the .sln file is located):
 
 ```
 docker-compose build
