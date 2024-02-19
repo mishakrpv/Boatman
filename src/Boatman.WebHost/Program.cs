@@ -146,11 +146,17 @@ builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
 
 app.MapHealthChecks("/_health", new HealthCheckOptions
 {

@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  boatmanapi:
+    image: ${DOCKER_REGISTRY-}boatmanapi
+    build:
+      context: .
+      dockerfile: src/Boatman.WebHost/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Docker
+    ports:
+    - "5000:8080"
+    depends_on:
+      - "postgresql"
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=@Super(!)StrongPwd

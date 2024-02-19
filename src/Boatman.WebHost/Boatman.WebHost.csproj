@@ -9,12 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="..\..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.0" />
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0"/>
         <PackageReference Include="MediatR" Version="12.2.0"/>
@@ -38,6 +32,12 @@
         <ProjectReference Include="..\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj"/>
         <ProjectReference Include="..\Implementations\Boatman.DataAccess.Domain.Implementations\Boatman.DataAccess.Domain.Implementations.csproj"/>
         <ProjectReference Include="..\Implementations\Boatman.DataAccess.Identity.Implementations\Boatman.DataAccess.Identity.Implementations.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
