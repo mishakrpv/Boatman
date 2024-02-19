@@ -10,4 +10,13 @@
 
 </div>
 
-## Running the instance using Docker
+## Running the sample using Docker
+
+You can run the API intance by running these commands from the root folder (where the .sln file is located):
+
+```
+docker-compose build
+docker-compose up
+```
+
+You should be able to make requests to localhost:5120 for the API project.
