@@ -7,7 +7,7 @@ namespace Boatman.UnitTests.Entities.ApartmentAggregate.ApartmentTests;
 public class CancelViewingTests
 {
     [Fact]
-    public void CancelViewing_ShouldRemoveViewingFromSchedule_WhenThereIsSuitableOne()
+    public void CancelViewing_ShouldRemoveViewingFromSchedule()
     {
         // Arrange
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());

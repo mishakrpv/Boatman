@@ -7,7 +7,7 @@ namespace Boatman.UnitTests.Entities.ApartmentAggregate.ApartmentTests;
 public class ScheduleViewingTests
 {
     [Fact]
-    public void PlanViewing_ShouldCreateViewing_WhenItDoesNotConflictWithThePastOne()
+    public void ScheduleViewing_ShouldCreateViewing_WhenItDoesNotConflictWithThePastOne()
     {
         // Arrange
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());
@@ -26,7 +26,7 @@ public class ScheduleViewingTests
     }
 
     [Fact]
-    public void PlanViewing_ShouldNotCreateViewing_WhenItConflictWithThePastOne()
+    public void ScheduleViewing_ShouldNotCreateViewing_WhenItConflictWithThePastOne()
     {
         // Arrange
         var apartment = new Apartment(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<int>());

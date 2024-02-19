@@ -28,6 +28,7 @@ public class Viewing : BaseEntity<int>
             return ViewingStatus.Pending;
         if (DateTime.Now < End)
             return ViewingStatus.InProcess;
+        
         return ViewingStatus.Completed;
     }
 }
