@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Moq;
 
-namespace Boatman.UnitTests.Entities.ApartmentAggregate.ApartmentTests;
+namespace Boatman.Entities.UnitTests.ApartmentAggregateTests;
 
 public class SubmitAnApplicationTests
 {

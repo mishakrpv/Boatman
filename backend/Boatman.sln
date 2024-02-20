@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boatman.Entities", "src\Ent
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAE861CF-284B-4099-A9BD-75C87ED5303A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boatman.UnitTests", "tests\Boatman.UnitTests\Boatman.UnitTests.csproj", "{DAD238DD-A787-4DB0-B4DE-576E92705ABD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boatman.Entities.UnitTests", "tests\Boatman.Entities.UnitTests\Boatman.Entities.UnitTests.csproj", "{DAD238DD-A787-4DB0-B4DE-576E92705ABD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{89ECFAA6-34E1-4D70-B6CD-A8F5C6321C17}"
 EndProject

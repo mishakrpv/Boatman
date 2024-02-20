@@ -7,6 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <RootNamespace>Boatman.Entities.UnitTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,10 +29,6 @@
         <ProjectReference Include="..\..\src\Entities\Boatman.Entities\Boatman.Entities.csproj"/>
         <ProjectReference Include="..\..\src\Interfaces\Boatman.DataAccess.Domain.Interfaces\Boatman.DataAccess.Domain.Interfaces.csproj"/>
         <ProjectReference Include="..\..\src\UseCases\Boatman.OwnerApi.UseCases\Boatman.OwnerApi.UseCases.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Entities\ApartmentAggregate\"/>
     </ItemGroup>
 
 </Project>

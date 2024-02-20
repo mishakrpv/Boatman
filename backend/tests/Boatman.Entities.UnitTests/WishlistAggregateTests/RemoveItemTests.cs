@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Moq;
 
-namespace Boatman.UnitTests.Entities.WishlistAggregate.WishlistTests;
+namespace Boatman.Entities.UnitTests.WishlistAggregateTests;
 
 public class RemoveItemTests
 {

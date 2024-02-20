@@ -8,8 +8,8 @@ services:
       dockerfile: src/Boatman.WebHost/Dockerfile
     environment:
      - ASPNETCORE_ENVIRONMENT=Docker
-     - ConnectionStrings:DomainConnection=Host=localhost;Port=5432;Database=Boatman.DomainDb;Password=@Super(!)StrongPwd
-     - ConnectionStrings:IdentityConnection=Host=localhost;Port=5432;Database=Boatman.IdentityConnectionDb;Password=@Super(!)StrongPwd
+     - ConnectionStrings:DomainConnection=Host=postgresql;Port=5430;Database=Boatman.DomainDb;Password=@Super(!)StrongPwd
+     - ConnectionStrings:IdentityConnection=Host=postgresql;Port=5430;Database=Boatman.IdentityDb;Password=@Super(!)StrongPwd
     ports:
     - "5120:8080"
     depends_on:
@@ -18,7 +18,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - "5432:5432"
+      - "5430:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=@Super(!)StrongPwd
