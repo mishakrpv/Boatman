@@ -146,7 +146,26 @@ builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
+{
+    var scopedProvider = scope.ServiceProvider;
+    try
+    {
+        var domainContext = scopedProvider.GetRequiredService<DomainContext>();
+        await DomainContextSeed.SeedAsync(domainContext);
+
+        var userManager = scopedProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = scopedProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var identityContext = scopedProvider.GetRequiredService<IdentityContext>();
+        await IdentityContextSeed.SeedAsync(identityContext, userManager, roleManager, config);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred seeding the DB.");
+    }
+}
+
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

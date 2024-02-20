@@ -9,7 +9,7 @@ services:
     environment:
      - ASPNETCORE_ENVIRONMENT=Docker
     ports:
-    - "5000:8080"
+    - "5120:8080"
     depends_on:
       - "postgresql"
   postgresql:

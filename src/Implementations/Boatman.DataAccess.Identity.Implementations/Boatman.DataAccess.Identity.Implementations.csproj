@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj" />
         <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Identity.Interfaces\Boatman.DataAccess.Identity.Interfaces.csproj"/>
         <ProjectReference Include="..\..\Interfaces\Boatman.Emailing.Interfaces\Boatman.Emailing.Interfaces.csproj"/>
     </ItemGroup>
