@@ -14,7 +14,7 @@
 
 ## API documentation
 
-Documentation is provided by [Swagger](https://swagger.io/) and is available at `/swagger`.
+Documentation is provided by [Swagger](https://swagger.io/) and is available at `/swagger` in non-production environment.
 
 <br />
 
