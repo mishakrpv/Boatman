@@ -1,28 +1,24 @@
 <div align="center">
 
-# Boatman
+<img src="https://github.com/mishakrpv/Boatman/blob/development/logo.svg" alt="Boatman logo" title="Boatman" align="center" height="150"/>
 
-Boatman is a platform for publishing housing for rent from owners.
+# Boatman
 
 <br />
 
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
+<br />
+
 </div>
 
-## Running the instance
+## Running the sample using Docker
 
-### Configuring secrets template
+You can run the API instance by running these commands from the root folder (where the .sln file is located):
 
 ```
-{
-  "JwtSettings": {
-    "Issuer": "Issuer URL",
-    "Audience": "Audience URL",
-    "Key": "JwtSecretKey",
-    "ExpiresInDays": 0,
-    "ExpiresInMinutes": 5
-  },
-  "SendGridKey": "YourSendGridKey"
-}
+docker-compose build
+docker-compose up
 ```
+
+You should be able to make requests to localhost:5120 for the API project.
