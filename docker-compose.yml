@@ -8,6 +8,8 @@ services:
       dockerfile: backend/src/Boatman.WebHost/Dockerfile
     environment:
      - ASPNETCORE_ENVIRONMENT=Docker
+     - ConnectionStrings:DomainConnection=Host=localhost;Port=5432;Database=Boatman.DomainDb;Password=@Super(!)StrongPwd
+     - ConnectionStrings:IdentityConnection=Host=localhost;Port=5432;Database=Boatman.IdentityConnectionDb;Password=@Super(!)StrongPwd
     ports:
     - "5120:8080"
     depends_on:
