@@ -14,13 +14,13 @@
 
 ## API documentation
 
-Documentation is provided by [Swagger](https://swagger.io/) and is available at `/swagger`.
+Documentation is provided by [Swagger](https://swagger.io/) and is available at `/swagger` in non-production environment.
 
 <br />
 
 ## Running the sample using Docker
 
-You can run the API instance by running these commands from the root folder (where the .sln file is located):
+You can run the API instance by running these commands from the root folder:
 
 ```
 docker-compose build
