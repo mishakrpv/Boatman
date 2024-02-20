@@ -161,7 +161,7 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        app.Logger.LogError(ex, "An error occurred seeding the DB.");
+        app.Logger.LogError(ex.Message);
     }
 }
 

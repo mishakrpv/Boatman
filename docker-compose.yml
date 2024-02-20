@@ -4,8 +4,8 @@ services:
   boatmanapi:
     image: ${DOCKER_REGISTRY-}boatmanapi
     build:
-      context: .
-      dockerfile: backend/src/Boatman.WebHost/Dockerfile
+      context: ./backend
+      dockerfile: src/Boatman.WebHost/Dockerfile
     environment:
      - ASPNETCORE_ENVIRONMENT=Docker
      - ConnectionStrings:DomainConnection=Host=localhost;Port=5432;Database=Boatman.DomainDb;Password=@Super(!)StrongPwd
@@ -20,4 +20,5 @@ services:
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=@Super(!)StrongPwd
