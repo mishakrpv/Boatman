@@ -2,12 +2,13 @@
 using Boatman.FrontendApi.UseCases.Commands.AddToFavorites;
 using Boatman.FrontendApi.UseCases.Commands.RemoveFromFavorites;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Boatman.FrontendApi.Controllers;
 
-[Authorize]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("[controller]/[action]")]
 public class FavoritesController : ControllerBase

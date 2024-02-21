@@ -9,12 +9,14 @@ using Boatman.FrontendApi.UseCases.Commands.SubmitRequest;
 using Boatman.FrontendApi.UseCases.Dtos;
 using Boatman.OwnerApi.UseCases.Commands.UpdateApartment;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Boatman.FrontendApi.Controllers;
 
-[Authorize]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("[controller]")]
 public class ApartmentController : ControllerBase
