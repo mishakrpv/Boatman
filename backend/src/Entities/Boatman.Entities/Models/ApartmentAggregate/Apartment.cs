@@ -4,6 +4,7 @@ public class Apartment : BaseApartment, IAggregateRoot
 {
     private readonly List<Request> _requests = [];
     private readonly List<Viewing> _schedule = [];
+    private readonly List<Photo> _photos = [];
 
     public Apartment(string ownerId, decimal rent, string description, int downPaymentInMonths = 1)
         : base(rent, description, downPaymentInMonths)
@@ -15,6 +16,7 @@ public class Apartment : BaseApartment, IAggregateRoot
 
     public IEnumerable<Viewing> Schedule => _schedule.AsReadOnly();
     public IEnumerable<Request> Requests => _requests.AsReadOnly();
+    public IEnumerable<Photo> Photos => _photos.AsReadOnly();
     public DateTime PublicationDate { get; private set; } = DateTime.Now;
 
     public bool TryScheduleViewing(string customerId, DateTime start, DateTime end)
@@ -41,6 +43,31 @@ public class Apartment : BaseApartment, IAggregateRoot
         if (viewing != null)
         {
             _schedule.Remove(viewing);
+        }
+    }
+
+    public void AddPhoto(string url)
+    {
+        _photos.Add(new Photo(url));
+    }
+
+    public void DeletePhoto(string url)
+    {
+        var photo = Photos.FirstOrDefault(p => p.Url == url);
+
+        if (photo != null)
+        {
+            _photos.Remove(photo);
+        }
+    }
+    
+    public void DeletePhoto(int photoId)
+    {
+        var photo = Photos.FirstOrDefault(p => p.Id == photoId);
+
+        if (photo != null)
+        {
+            _photos.Remove(photo);
         }
     }
 
