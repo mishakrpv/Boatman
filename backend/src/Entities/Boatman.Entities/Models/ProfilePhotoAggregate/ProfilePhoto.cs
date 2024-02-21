@@ -2,9 +2,9 @@
 
 namespace Boatman.Entities.Models.ProfilePictureAggregate;
 
-public class ProfilePicture : IAggregateRoot
+public class ProfilePhoto : IAggregateRoot
 {
-    public ProfilePicture(string userId, string url)
+    public ProfilePhoto(string userId, string url)
     {
         UserId = userId;
         Url = url;
