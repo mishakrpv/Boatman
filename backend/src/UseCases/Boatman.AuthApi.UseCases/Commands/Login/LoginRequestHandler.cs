@@ -1,22 +1,22 @@
-﻿using Boatman.DataAccess.Identity.Interfaces;
-using Boatman.Utils;
+﻿using Boatman.AuthService.Interfaces;
+using Boatman.AuthService.Interfaces.Dtos;
 using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.Login;
 
-public class LoginRequestHandler : IRequestHandler<LoginRequest, Response<TokenResponse>>
+public class LoginRequestHandler : IRequestHandler<LoginRequest, Response<TokenDto>>
 {
-    private readonly IUserService _userService;
+    private readonly IAuthService _authService;
 
-    public LoginRequestHandler(IUserService userService)
+    public LoginRequestHandler(IAuthService authService)
     {
-        _userService = userService;
+        _authService = authService;
     }
 
-    public async Task<Response<TokenResponse>> Handle(LoginRequest request, CancellationToken cancellationToken)
+    public async Task<Response<TokenDto>> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
-        var response = await _userService.LoginUserAsync(request.Dto);
+        var response = await _authService.LoginUserAsync(request.Dto);
 
         return response;
     }

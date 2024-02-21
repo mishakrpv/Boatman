@@ -1,12 +1,10 @@
 using System.Text;
 using Boatman.AuthApi.Controllers;
-using Boatman.AuthApi.UseCases.Commands.RegisterAsOwner;
-using Boatman.DataAccess.Domain.Implementations;
-using Boatman.DataAccess.Identity.Implementations;
-using Boatman.DataAccess.Identity.Interfaces;
-using Boatman.Entities.Models.CustomerAggregate;
-using Boatman.Entities.Models.OwnerAggregate;
-using Boatman.OwnerApi.UseCases.Commands.AddApartment;
+using Boatman.AuthApi.UseCases.Commands.Register;
+using Boatman.AuthService.Implementations;
+using Boatman.DataAccess.Implementations.EntityFramework.Identity;
+using Boatman.FrontendApi.Controllers;
+using Boatman.FrontendApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,33 +24,24 @@ builder.Configuration.AddEnvironmentVariables();
 if ((builder.Environment.IsDevelopment() || builder.Environment.EnvironmentName == "Docker")
     && bool.Parse(config["UseInMemoryDb"] ?? "false"))
 {
-    builder.Services.AddDbContext<DomainContext>(o =>
-        o.UseInMemoryDatabase("DomainDb"));
-    builder.Services.AddDbContext<IdentityContext>(o =>
-        o.UseInMemoryDatabase("IdentityDb"));
+    builder.Services.AddDbContext<ApplicationContext>(o =>
+        o.UseInMemoryDatabase("ApplicationDb"));
 }
 else
 {
-    builder.Services.AddDbContext<DomainContext>(options =>
+    builder.Services.AddDbContext<ApplicationContext>(options =>
     {
-        var connectionString = config.GetConnectionString("DomainConnection");
-        options.UseNpgsql(connectionString, o => o.EnableRetryOnFailure());
-    });
-    builder.Services.AddDbContext<IdentityContext>(options =>
-    {
-        var connectionString = config.GetConnectionString("IdentityConnection");
+        var connectionString = config.GetConnectionString("ApplicationConnection");
         options.UseNpgsql(connectionString, o => o.EnableRetryOnFailure());
     });
 }
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(config.GetConnectionString("DomainConnection") ?? "", name: "domainCheck")
-    .AddNpgSql(config.GetConnectionString("IdentityConnection") ?? "", name: "identityCheck");
+    .AddNpgSql(config.GetConnectionString("ApplicationConnection") ?? "", name: "DbCheck");
 //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(Boatman.OwnerApi.Controllers.ApartmentController).Assembly)
-    .AddApplicationPart(typeof(Boatman.CustomerApi.Controllers.ApartmentController).Assembly)
+    .AddApplicationPart(typeof(ApartmentController).Assembly)
     .AddApplicationPart(typeof(AuthController).Assembly);
 
 builder.Services.AddAuthentication(options =>
@@ -78,7 +67,7 @@ builder.Services.AddAuthentication(options =>
 //.AddOAuth();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<IdentityContext>()
+    .AddEntityFrameworkStores<ApplicationContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -103,16 +92,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddAuthorizationBuilder()
-    .AddPolicy(nameof(Owner), policy =>
-    {
-        policy.RequireRole(nameof(Owner));
-        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-    })
-    .AddPolicy(nameof(Customer), policy =>
-    {
-        policy.RequireRole(nameof(Customer));
-        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-    })
     .AddPolicy("Admin", policy =>
     {
         policy.RequireRole("Admin");
@@ -123,7 +102,7 @@ builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(
         typeof(AddApartmentRequestHandler).Assembly,
-        typeof(RegisterAsOwnerRequestHandler).Assembly);
+        typeof(RegisterRequestHandler).Assembly);
 });
 
 builder.Services.AddSwaggerGen(options =>
@@ -151,13 +130,10 @@ using (var scope = app.Services.CreateScope())
     var scopedProvider = scope.ServiceProvider;
     try
     {
-        var domainContext = scopedProvider.GetRequiredService<DomainContext>();
-        await DomainContextSeed.SeedAsync(domainContext);
-
         var userManager = scopedProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = scopedProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var identityContext = scopedProvider.GetRequiredService<IdentityContext>();
-        await IdentityContextSeed.SeedAsync(identityContext, userManager, roleManager, config);
+        var applicationContext = scopedProvider.GetRequiredService<ApplicationContext>();
+        await ApplicationContextSeed.SeedAsync(applicationContext, userManager, roleManager, config);
     }
     catch (Exception ex)
     {

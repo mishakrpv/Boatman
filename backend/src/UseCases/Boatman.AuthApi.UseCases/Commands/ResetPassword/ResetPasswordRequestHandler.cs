@@ -1,5 +1,4 @@
-﻿using Boatman.DataAccess.Identity.Interfaces;
-using Boatman.Utils;
+﻿using Boatman.AuthService.Interfaces;
 using Boatman.Utils.Response;
 using MediatR;
 
@@ -7,16 +6,16 @@ namespace Boatman.AuthApi.UseCases.Commands.ResetPassword;
 
 public class ResetPasswordRequestHandler : IRequestHandler<ResetPasswordRequest, Response>
 {
-    private readonly IUserService _userService;
+    private readonly IAuthService _authService;
 
-    public ResetPasswordRequestHandler(IUserService userService)
+    public ResetPasswordRequestHandler(IAuthService authService)
     {
-        _userService = userService;
+        _authService = authService;
     }
     
     public async Task<Response> Handle(ResetPasswordRequest request, CancellationToken cancellationToken)
     {
-        var response = await _userService.ResetPasswordAsync(request.Dto);
+        var response = await _authService.ResetPasswordAsync(request.Dto);
 
         return response;
     }

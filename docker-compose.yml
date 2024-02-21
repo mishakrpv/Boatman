@@ -8,11 +8,10 @@ services:
       dockerfile: src/Boatman.WebHost/Dockerfile
     environment:
      - ASPNETCORE_ENVIRONMENT=Docker
-     - ConnectionStrings:DomainConnection=Host=domaindb;Port=5432;Database=Boatman.DomainDb;User Id=postgres;Password=@Super(!)StrongPwd
-     - ConnectionStrings:IdentityConnection=Host=identitydb;Port=5432;Database=Boatman.IdentityDb;User Id=postgres;Password=@Super(!)StrongPwd
+     - ConnectionStrings:DomainConnection=Host=postgresql;Port=5432;Database=Boatman.ApplicationDb;User Id=postgres;Password=@Super(!)StrongPwd
      - JwtSettings:Issuer=http://localhost:5180
      - JwtSettings:Audience=http://localhost:5180
-     - JwtSettings:Key=YourSecret{PaSsWoRd}AndYourFavoriteNumberMineIs17
+     - JwtSettings:Key=YourSecret{Key}AndYourFavoriteNumberMineIs17!
      - JwtSettings:ExpiresInDays=0
      - JwtSettings:ExpiresInMinutes=5
      - SendGridKey=YourSendGridKey
@@ -22,23 +21,13 @@ services:
     ports:
     - "5120:8080"
     depends_on:
-      - "domaindb"
-      - "identitydb"
-  domaindb:
+      - "postgresql"
+  postgresql:
     image: postgres
     restart: always
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_DB=Boatman.DomainDb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=@Super(!)StrongPwd
-  identitydb:
-    image: postgres
-    restart: always
-    ports:
-      - "5434:5432"
-    environment:
-      - POSTGRES_DB=Boatman.IdentityDb
+      - POSTGRES_DB=Boatman.ApplicationDb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=@Super(!)StrongPwd

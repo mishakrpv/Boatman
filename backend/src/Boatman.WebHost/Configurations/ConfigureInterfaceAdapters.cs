@@ -1,7 +1,7 @@
-﻿using Boatman.DataAccess.Domain.Implementations;
-using Boatman.DataAccess.Domain.Interfaces;
-using Boatman.DataAccess.Identity.Implementations;
-using Boatman.DataAccess.Identity.Interfaces;
+﻿using Boatman.AuthService.Implementations;
+using Boatman.AuthService.Interfaces;
+using Boatman.DataAccess.Implementations.EntityFramework.Identity;
+using Boatman.DataAccess.Interfaces;
 using Boatman.Emailing.Implementations;
 using Boatman.Emailing.Interfaces;
 using Boatman.Logging.Implementations;
@@ -16,7 +16,7 @@ public static class ConfigureInterfaceAdapters
         services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
-        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthService, AuthService.Implementations.AuthService>();
         services.AddTransient<IEmailSender, SendGridEmailSender>();
 
         services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));

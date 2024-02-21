@@ -1,4 +1,4 @@
-﻿using Boatman.AuthApi.UseCases.Dtos;
+﻿using Boatman.AuthService.Interfaces.Dtos;
 using Boatman.Utils;
 using Boatman.Utils.Response;
 using MediatR;

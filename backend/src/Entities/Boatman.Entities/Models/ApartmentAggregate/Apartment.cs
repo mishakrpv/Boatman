@@ -3,10 +3,10 @@
 public class Apartment : BaseApartment, IAggregateRoot
 {
     private readonly List<Request> _requests = [];
-
     private readonly List<Viewing> _schedule = [];
 
-    public Apartment(string ownerId, decimal rent, string description, int downPaymentInMonths = 1) : base(rent, description, downPaymentInMonths)
+    public Apartment(string ownerId, decimal rent, string description, int downPaymentInMonths = 1)
+        : base(rent, description, downPaymentInMonths)
     {
         OwnerId = ownerId;
     }
@@ -19,7 +19,10 @@ public class Apartment : BaseApartment, IAggregateRoot
 
     public bool TryScheduleViewing(string customerId, DateTime start, DateTime end)
     {
-        if (start >= end) return false;
+        if (start >= end)
+        {
+            return false;
+        }
 
         if (Schedule.Any() && start < Schedule.Last().End)
         {
@@ -41,7 +44,7 @@ public class Apartment : BaseApartment, IAggregateRoot
         }
     }
 
-    public void SubmitAnApplication(string customerId)
+    public void SubmitRequest(string customerId)
     {
         if (Requests.All(r => r.CustomerId != customerId))
         {

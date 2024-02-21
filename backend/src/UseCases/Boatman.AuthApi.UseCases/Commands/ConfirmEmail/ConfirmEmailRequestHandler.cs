@@ -1,5 +1,4 @@
-﻿using Boatman.DataAccess.Identity.Interfaces;
-using Boatman.Utils;
+﻿using Boatman.AuthService.Interfaces;
 using Boatman.Utils.Response;
 using MediatR;
 
@@ -7,16 +6,16 @@ namespace Boatman.AuthApi.UseCases.Commands.ConfirmEmail;
 
 public class ConfirmEmailRequestHandler : IRequestHandler<ConfirmEmailRequest, Response>
 {
-    private readonly IUserService _userService;
+    private readonly IAuthService _authService;
 
-    public ConfirmEmailRequestHandler(IUserService userService)
+    public ConfirmEmailRequestHandler(IAuthService authService)
     {
-        _userService = userService;
+        _authService = authService;
     }
-    
+
     public async Task<Response> Handle(ConfirmEmailRequest request, CancellationToken cancellationToken)
     {
-        var response = await _userService.ConfirmEmailAsync(request.Dto.Id, request.Dto.Token);
+        var response = await _authService.ConfirmEmailAsync(request.Dto);
 
         return response;
     }

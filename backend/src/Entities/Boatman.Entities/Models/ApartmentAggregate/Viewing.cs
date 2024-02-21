@@ -25,10 +25,15 @@ public class Viewing : BaseEntity<int>
     public ViewingStatus GetCurrentStatus()
     {
         if (DateTime.Now < Start)
+        {
             return ViewingStatus.Pending;
+        }
+
         if (DateTime.Now < End)
+        {
             return ViewingStatus.InProcess;
-        
+        }
+
         return ViewingStatus.Completed;
     }
 }

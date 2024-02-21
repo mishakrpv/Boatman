@@ -1,5 +1,4 @@
-﻿using Boatman.DataAccess.Identity.Interfaces;
-using Boatman.Utils;
+﻿using Boatman.AuthService.Interfaces;
 using Boatman.Utils.Response;
 using MediatR;
 
@@ -7,16 +6,16 @@ namespace Boatman.AuthApi.UseCases.Commands.ForgetPassword;
 
 public class ForgetPasswordRequestHandler : IRequestHandler<ForgetPasswordRequest, Response>
 {
-    private readonly IUserService _userService;
+    private readonly IAuthService _authService;
 
-    public ForgetPasswordRequestHandler(IUserService userService)
+    public ForgetPasswordRequestHandler(IAuthService authService)
     {
-        _userService = userService;
+        _authService = authService;
     }
-    
+
     public async Task<Response> Handle(ForgetPasswordRequest request, CancellationToken cancellationToken)
     {
-        var response = await _userService.ForgetPasswordAsync(request.Email);
+        var response = await _authService.ForgetPasswordAsync(request.Email);
 
         return response;
     }

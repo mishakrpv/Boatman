@@ -1,12 +1,10 @@
-﻿using Boatman.DataAccess.Identity.Interfaces;
-using Boatman.DataAccess.Identity.Interfaces.Dtos;
-using Boatman.Utils;
+﻿using Boatman.AuthService.Interfaces.Dtos;
 using Boatman.Utils.Response;
 using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.Login;
 
-public class LoginRequest : IRequest<Response<TokenResponse>>
+public class LoginRequest : IRequest<Response<TokenDto>>
 {
     public LoginRequest(LoginDto dto)
     {

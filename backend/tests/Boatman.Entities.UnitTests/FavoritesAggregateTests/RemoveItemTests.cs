@@ -1,0 +1,23 @@
+﻿using Boatman.Entities.Models.FavoritesAggregate;
+using FluentAssertions;
+using Moq;
+
+namespace Boatman.Entities.UnitTests.WishlistAggregateTests;
+
+public class RemoveItemTests
+{
+    [Fact]
+    public void RemoveItem_ShouldRemoveItemFromTheWishlist()
+    {
+        // Arrange
+        const int apartmentId = 1;
+        var wishlist = new Favorites(It.IsAny<string>());
+
+        // Act
+        wishlist.AddItem(apartmentId);
+        wishlist.RemoveItem(apartmentId);
+
+        // Assert
+        wishlist.Items.Should().HaveCount(0);
+    }
+}
