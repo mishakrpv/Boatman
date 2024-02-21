@@ -27,6 +27,7 @@ public class ApartmentController : ControllerBase
     }
     
     [HttpPost]
+    [Route("[action]")]
     public async Task<IActionResult> Add([FromBody] AddApartmentDto dto)
     {
         var response = await _mediator.Send(new AddApartmentRequest(dto));
@@ -38,6 +39,7 @@ public class ApartmentController : ControllerBase
     }
 
     [HttpPut]
+    [Route("[action]")]
     public async Task<IActionResult> Update([FromBody] UpdateApartmentDto dto)
     {
         var response = await _mediator.Send(new UpdateApartmentRequest(dto));
