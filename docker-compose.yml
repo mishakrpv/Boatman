@@ -10,6 +10,15 @@ services:
      - ASPNETCORE_ENVIRONMENT=Docker
      - ConnectionStrings:DomainConnection=Host=domaindb;Port=5432;Database=Boatman.DomainDb;User Id=postgres;Password=@Super(!)StrongPwd
      - ConnectionStrings:IdentityConnection=Host=identitydb;Port=5432;Database=Boatman.IdentityDb;User Id=postgres;Password=@Super(!)StrongPwd
+     - JwtSettings:Issuer=http://localhost:5180
+     - JwtSettings:Audience=http://localhost:5180
+     - JwtSettings:Key=YourSecret{PaSsWoRd}AndYourFavoriteNumberMineIs17
+     - JwtSettings:ExpiresInDays=0
+     - JwtSettings:ExpiresInMinutes=5
+     - SendGridKey=YourSendGridKey
+     - UseInMemoryDb=false
+     - AdminEmail=
+     - AdminPwd=
     ports:
     - "5120:8080"
     depends_on:
