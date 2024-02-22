@@ -3,6 +3,7 @@ using Boatman.AuthService.Interfaces;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.DataAccess.Interfaces;
 using Boatman.Emailing.Implementations;
+using Boatman.Emailing.Implementations.SendGrid;
 using Boatman.Emailing.Interfaces;
 using Boatman.Logging.Implementations;
 using Boatman.Logging.Interfaces;

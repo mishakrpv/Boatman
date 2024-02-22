@@ -2,10 +2,10 @@
 
 public class Photo : BaseEntity<int>
 {
-    public Photo(string url)
+    public Photo(string uri)
     {
-        Url = url;
+        Uri = uri;
     }
 
-    public string @Url { get; private set; }
+    public string @Uri { get; private set; }
 }

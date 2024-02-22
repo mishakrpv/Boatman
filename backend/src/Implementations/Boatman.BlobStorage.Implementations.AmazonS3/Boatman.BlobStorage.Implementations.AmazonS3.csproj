@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Boatman.BlobStorage.Implementations.AmazonS3</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AWSSDK.S3" Version="3.7.305.28" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Interfaces\Boatman.BlobStorage.Interfaces\Boatman.BlobStorage.Interfaces.csproj" />
+      <ProjectReference Include="..\..\Interfaces\Boatman.Logging.Interfaces\Boatman.Logging.Interfaces.csproj" />
+      <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Features">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.1\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>

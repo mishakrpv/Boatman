@@ -1,17 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Boatman.Entities.Models.ProfilePictureAggregate;
+namespace Boatman.Entities.Models.ProfilePhotoAggregate;
 
 public class ProfilePhoto : IAggregateRoot
 {
-    public ProfilePhoto(string userId, string url)
+    public ProfilePhoto(string userId, string uri)
     {
         UserId = userId;
-        Url = url;
+        Uri = uri;
     }
 
     public string UserId { get; private set; }
     
     [Key]
-    public string @Url { get; private set; }
+    public string @Uri { get; private set; }
 }

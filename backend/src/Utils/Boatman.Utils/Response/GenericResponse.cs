@@ -11,5 +11,5 @@ public class Response<T> : Response
         Value = value;
     }
 
-    public T? Value { get; init; }
+    public T? Value { get; set; }
 }

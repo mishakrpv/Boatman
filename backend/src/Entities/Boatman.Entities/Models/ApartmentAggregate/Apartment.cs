@@ -51,9 +51,9 @@ public class Apartment : BaseApartment, IAggregateRoot
         _photos.Add(new Photo(url));
     }
 
-    public void DeletePhoto(string url)
+    public void DeletePhoto(string uri)
     {
-        var photo = Photos.FirstOrDefault(p => p.Url == url);
+        var photo = Photos.FirstOrDefault(p => p.Uri == uri);
 
         if (photo != null)
         {
