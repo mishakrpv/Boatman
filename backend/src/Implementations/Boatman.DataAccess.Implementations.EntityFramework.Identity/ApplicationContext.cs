@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.Models.FavoritesAggregate;
+using Boatman.Entities.Models.ProfilePhotoAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,10 @@ public class ApplicationContext  : IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<Apartment> Apartments { get; set; }
-    public DbSet<Request> Requests { get; set; }
-    public DbSet<Viewing> Viewings { get; set; }
+    public DbSet<Photo> Photos { get; set; }
     public DbSet<Favorites> Favorites { get; set; }
     public DbSet<FavoriteItem> FavoriteItems { get; set; }
+    public DbSet<ProfilePhoto> ProfilePhotos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

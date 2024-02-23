@@ -5,7 +5,7 @@ using Boatman.AuthService.Interfaces;
 using Boatman.AuthService.Interfaces.Dtos;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.Emailing.Interfaces;
-using Boatman.Utils.Response;
+using Boatman.Utils.Models.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;

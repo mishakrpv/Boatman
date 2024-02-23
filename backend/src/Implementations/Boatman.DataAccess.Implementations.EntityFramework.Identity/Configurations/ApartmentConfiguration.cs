@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Boatman.DataAccess.Domain.Implementations.Configurations;
+namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Configurations;
 
 public class ApartmentConfiguration : IEntityTypeConfiguration<Apartment>
 {

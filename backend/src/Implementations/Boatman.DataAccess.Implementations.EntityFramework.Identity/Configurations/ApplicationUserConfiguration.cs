@@ -1,8 +1,7 @@
-﻿using Boatman.DataAccess.Implementations.EntityFramework.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Boatman.DataAccess.Domain.Implementations.Configurations;
+namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Configurations;
 
 public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {

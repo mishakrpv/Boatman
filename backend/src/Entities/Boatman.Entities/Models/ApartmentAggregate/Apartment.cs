@@ -2,8 +2,6 @@
 
 public class Apartment : BaseApartment, IAggregateRoot
 {
-    private readonly List<Request> _requests = [];
-    private readonly List<Viewing> _schedule = [];
     private readonly List<Photo> _photos = [];
 
     public Apartment(string ownerId, decimal rent, string description, int downPaymentInMonths = 1)
@@ -14,41 +12,12 @@ public class Apartment : BaseApartment, IAggregateRoot
 
     public string OwnerId { get; private set; }
 
-    public IEnumerable<Viewing> Schedule => _schedule.AsReadOnly();
-    public IEnumerable<Request> Requests => _requests.AsReadOnly();
     public IEnumerable<Photo> Photos => _photos.AsReadOnly();
     public DateTime PublicationDate { get; private set; } = DateTime.Now;
 
-    public bool TryScheduleViewing(string customerId, DateTime start, DateTime end)
+    public void AddPhoto(string uri)
     {
-        if (start >= end)
-        {
-            return false;
-        }
-
-        if (Schedule.Any() && start < Schedule.Last().End)
-        {
-            return false;
-        }
-
-        _schedule.Add(new Viewing(customerId, start, end));
-
-        return true;
-    }
-
-    public void CancelViewing(int viewingId)
-    {
-        var viewing = Schedule.FirstOrDefault(v => v.Id == viewingId);
-
-        if (viewing != null)
-        {
-            _schedule.Remove(viewing);
-        }
-    }
-
-    public void AddPhoto(string url)
-    {
-        _photos.Add(new Photo(url));
+        _photos.Add(new Photo(uri));
     }
 
     public void DeletePhoto(string uri)
@@ -68,14 +37,6 @@ public class Apartment : BaseApartment, IAggregateRoot
         if (photo != null)
         {
             _photos.Remove(photo);
-        }
-    }
-
-    public void SubmitRequest(string customerId)
-    {
-        if (Requests.All(r => r.CustomerId != customerId))
-        {
-            _requests.Add(new Request(customerId));
         }
     }
 }

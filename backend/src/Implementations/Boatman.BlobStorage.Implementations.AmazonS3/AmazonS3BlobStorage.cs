@@ -3,7 +3,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Boatman.BlobStorage.Interfaces;
 using Boatman.Logging.Interfaces;
-using Boatman.Utils.Response;
+using Boatman.Utils.Models.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -11,7 +11,7 @@ namespace Boatman.BlobStorage.Implementations.AmazonS3;
 
 public class AmazonS3BlobStorage : IBlobStorage
 {
-    private const string BucketName = "pastebinapi";
+    private const string BucketName = "boatman";
 
     private readonly AWSCredentials _credentials;
     private readonly AmazonS3Config _configsS3 = new AmazonS3Config()
@@ -67,7 +67,7 @@ public class AmazonS3BlobStorage : IBlobStorage
             {
                 await s3Client.PutObjectAsync(putRequest);
 
-                response.Value = key;
+                response.Value = $"https://storage.yandexcloud.net/{BucketName}/{key}";
                 response.StatusCode = 200;
                 response.Message = $"{key} object has been uploaded successfully";
             }

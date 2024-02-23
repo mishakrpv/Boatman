@@ -1,5 +1,5 @@
 ﻿using Boatman.AuthService.Interfaces.Dtos;
-using Boatman.Utils.Response;
+using Boatman.Utils.Models.Response;
 
 namespace Boatman.AuthService.Interfaces;
 

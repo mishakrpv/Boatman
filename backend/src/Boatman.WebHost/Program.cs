@@ -3,9 +3,8 @@ using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.Register;
 using Boatman.AuthService.Implementations;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
-using Boatman.FrontendApi.Customer.UseCases.Commands.SubmitRequest;
-using Boatman.FrontendApi.Owner.Controllers;
-using Boatman.FrontendApi.Owner.UseCases.Commands.AddApartment;
+using Boatman.FrontendApi.Controllers;
+using Boatman.FrontendApi.UseCases.Commands.AddApartment;
 using Boatman.WebHost.Configurations;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -42,8 +41,7 @@ builder.Services.AddHealthChecks()
 //.AddRedis(config["RedisCS"] ?? "");
 
 builder.Services.AddControllers()
-    .AddApplicationPart(typeof(Boatman.FrontendApi.Owner.Controllers.ApartmentController).Assembly)
-    .AddApplicationPart(typeof(Boatman.FrontendApi.Customer.Controllers.ApartmentController).Assembly)
+    .AddApplicationPart(typeof(ApartmentController).Assembly)
     .AddApplicationPart(typeof(AuthController).Assembly);
 
 builder.Services.AddAuthentication(options =>
@@ -104,7 +102,6 @@ builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(
         typeof(AddApartmentRequestHandler).Assembly,
-        typeof(SubmitRequestRequestHandler).Assembly,
         typeof(RegisterRequestHandler).Assembly);
 });
 
