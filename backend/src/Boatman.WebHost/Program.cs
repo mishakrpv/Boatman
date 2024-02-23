@@ -92,6 +92,11 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddAuthorizationBuilder()
+    .AddDefaultPolicy("Default", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+    })
     .AddPolicy("Admin", policy =>
     {
         policy.RequireRole("Admin");

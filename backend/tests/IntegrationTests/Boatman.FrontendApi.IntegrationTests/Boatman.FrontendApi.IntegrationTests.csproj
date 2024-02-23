@@ -28,6 +28,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\src\Boatman.WebHost\Boatman.WebHost.csproj" />
       <ProjectReference Include="..\..\..\src\Implementations\Boatman.DataAccess.Implementations.EntityFramework.Identity\Boatman.DataAccess.Implementations.EntityFramework.Identity.csproj" />
+      <ProjectReference Include="..\..\UnitTests\Boatman.Entities.UnitTests\Boatman.Entities.UnitTests.csproj" />
     </ItemGroup>
 
 </Project>

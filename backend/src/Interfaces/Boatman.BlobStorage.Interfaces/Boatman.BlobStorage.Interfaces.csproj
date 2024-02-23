@@ -7,13 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Microsoft.AspNetCore.Http.Features">
-        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.1\Microsoft.AspNetCore.Http.Features.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
     </ItemGroup>
 
 </Project>
