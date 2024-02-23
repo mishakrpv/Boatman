@@ -1,5 +1,4 @@
-﻿using Boatman.DataAccess.Implementations.EntityFramework.Identity;
-using Boatman.DataAccess.Interfaces;
+﻿using Boatman.DataAccess.Interfaces;
 using Boatman.DataAccess.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.Models.FavoritesAggregate;
