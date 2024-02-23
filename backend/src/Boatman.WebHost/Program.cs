@@ -102,7 +102,7 @@ builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(
         typeof(AddApartmentRequestHandler).Assembly,
-        typeof(RegisterRequestHandler).Assembly);
+        typeof(RegisterHandler).Assembly);
 });
 
 builder.Services.AddSwaggerGen(options =>

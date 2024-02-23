@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
     [Route("[action]")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
-        var response = await _mediator.Send(new RegisterRequest(dto));
+        var response = await _mediator.Send(new Register(dto));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
     [Route("[action]")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        var response = await _mediator.Send(new LoginRequest(dto));
+        var response = await _mediator.Send(new Login(dto));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(response.Value);
@@ -51,7 +51,7 @@ public class AuthController : ControllerBase
     [Route("confirm-email")]
     public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailDto dto)
     {
-        var response = await _mediator.Send(new ConfirmEmailRequest(dto));
+        var response = await _mediator.Send(new ConfirmEmail(dto));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
@@ -65,7 +65,7 @@ public class AuthController : ControllerBase
     [Route("forget-password")]
     public async Task<IActionResult> ForgetPassword(string email)
     {
-        var response = await _mediator.Send(new ForgetPasswordRequest(email));
+        var response = await _mediator.Send(new ForgetPassword(email));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
@@ -77,7 +77,7 @@ public class AuthController : ControllerBase
     [Route("reset-password")]
     public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
     {
-        var response = await _mediator.Send(new ResetPasswordRequest(dto));
+        var response = await _mediator.Send(new ResetPassword(dto));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });

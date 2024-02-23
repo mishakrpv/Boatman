@@ -4,16 +4,16 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.ConfirmEmail;
 
-public class ConfirmEmailRequestHandler : IRequestHandler<ConfirmEmailRequest, Response>
+public class ConfirmEmailHandler : IRequestHandler<ConfirmEmail, Response>
 {
     private readonly IAuthService _authService;
 
-    public ConfirmEmailRequestHandler(IAuthService authService)
+    public ConfirmEmailHandler(IAuthService authService)
     {
         _authService = authService;
     }
 
-    public async Task<Response> Handle(ConfirmEmailRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(ConfirmEmail request, CancellationToken cancellationToken)
     {
         var response = await _authService.ConfirmEmailAsync(request.Dto);
 

@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.ForgetPassword;
 
-public class ForgetPasswordRequest : IRequest<Response>
+public class ForgetPassword : IRequest<Response>
 {
-    public ForgetPasswordRequest(string email)
+    public ForgetPassword(string email)
     {
         Email = email;
     }

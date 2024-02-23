@@ -16,8 +16,8 @@ services:
      - JwtSettings:ExpiresInMinutes=5
      - SendGridKey=YourSendGridKey
      - UseInMemoryDb=false
-     - AdminEmail=
-     - AdminPwd=
+     - AdminEmail=admin@example.com
+     - AdminPwd=123456
     ports:
     - "5120:8080"
     depends_on:

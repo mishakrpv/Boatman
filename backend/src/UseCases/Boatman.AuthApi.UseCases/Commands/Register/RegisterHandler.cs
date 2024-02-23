@@ -4,16 +4,16 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.Register;
 
-public class RegisterRequestHandler : IRequestHandler<RegisterRequest, Response>
+public class RegisterHandler : IRequestHandler<Register, Response>
 {
     private readonly IAuthService _authService;
 
-    public RegisterRequestHandler(IAuthService authService)
+    public RegisterHandler(IAuthService authService)
     {
         _authService = authService;
     }
 
-    public async Task<Response> Handle(RegisterRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(Register request, CancellationToken cancellationToken)
     {
         var response = await _authService.RegisterUserAsync(request.Dto);
         

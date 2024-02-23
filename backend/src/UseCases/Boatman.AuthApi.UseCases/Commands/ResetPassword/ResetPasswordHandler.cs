@@ -4,16 +4,16 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.ResetPassword;
 
-public class ResetPasswordRequestHandler : IRequestHandler<ResetPasswordRequest, Response>
+public class ResetPasswordHandler : IRequestHandler<ResetPassword, Response>
 {
     private readonly IAuthService _authService;
 
-    public ResetPasswordRequestHandler(IAuthService authService)
+    public ResetPasswordHandler(IAuthService authService)
     {
         _authService = authService;
     }
     
-    public async Task<Response> Handle(ResetPasswordRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(ResetPassword request, CancellationToken cancellationToken)
     {
         var response = await _authService.ResetPasswordAsync(request.Dto);
 

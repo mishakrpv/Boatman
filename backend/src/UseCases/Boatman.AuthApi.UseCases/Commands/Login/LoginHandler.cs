@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.Login;
 
-public class LoginRequestHandler : IRequestHandler<LoginRequest, Response<TokenDto>>
+public class LoginHandler : IRequestHandler<Login, Response<TokenDto>>
 {
     private readonly IAuthService _authService;
 
-    public LoginRequestHandler(IAuthService authService)
+    public LoginHandler(IAuthService authService)
     {
         _authService = authService;
     }
 
-    public async Task<Response<TokenDto>> Handle(LoginRequest request, CancellationToken cancellationToken)
+    public async Task<Response<TokenDto>> Handle(Login request, CancellationToken cancellationToken)
     {
         var response = await _authService.LoginUserAsync(request.Dto);
 

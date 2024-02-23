@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.Login;
 
-public class LoginRequest : IRequest<Response<TokenDto>>
+public class Login : IRequest<Response<TokenDto>>
 {
-    public LoginRequest(LoginDto dto)
+    public Login(LoginDto dto)
     {
         Dto = dto;
     }

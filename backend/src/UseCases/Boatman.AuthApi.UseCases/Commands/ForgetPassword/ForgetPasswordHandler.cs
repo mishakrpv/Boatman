@@ -4,16 +4,16 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.ForgetPassword;
 
-public class ForgetPasswordRequestHandler : IRequestHandler<ForgetPasswordRequest, Response>
+public class ForgetPasswordHandler : IRequestHandler<ForgetPassword, Response>
 {
     private readonly IAuthService _authService;
 
-    public ForgetPasswordRequestHandler(IAuthService authService)
+    public ForgetPasswordHandler(IAuthService authService)
     {
         _authService = authService;
     }
 
-    public async Task<Response> Handle(ForgetPasswordRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(ForgetPassword request, CancellationToken cancellationToken)
     {
         var response = await _authService.ForgetPasswordAsync(request.Email);
 

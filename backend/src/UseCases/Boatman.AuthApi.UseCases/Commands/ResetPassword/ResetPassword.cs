@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Boatman.AuthApi.UseCases.Commands.ResetPassword;
 
-public class ResetPasswordRequest : IRequest<Response>
+public class ResetPassword : IRequest<Response>
 {
-    public ResetPasswordRequest(ResetPasswordDto dto)
+    public ResetPassword(ResetPasswordDto dto)
     {
         Dto = dto;
     }
