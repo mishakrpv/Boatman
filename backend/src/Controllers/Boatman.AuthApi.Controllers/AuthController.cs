@@ -63,7 +63,7 @@ public class AuthController : ControllerBase
 
     [HttpGet]
     [Route("forget-password")]
-    public async Task<IActionResult> ForgetPassword(string email)
+    public async Task<IActionResult> ForgetPassword([FromQuery] string email)
     {
         var response = await _mediator.Send(new ForgetPassword(email));
 
