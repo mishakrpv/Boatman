@@ -145,7 +145,7 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
     {
         // Arrange
         var apartment = new ApartmentBuilder().Build();
-
+    
         using (var scope = _factory.Services.CreateScope())
         {
             var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
@@ -155,34 +155,24 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
         
         var content = new MultipartFormDataContent();
         content.Add(new StreamContent(await GetTestImage()), "photo", "test.jpg");
-
+    
         // Act
         var postResponse = await Client.PostAsync($"apartment/{apartment.Id}/add-photo", content);
-
+    
         // Assert
         postResponse.EnsureSuccessStatusCode();
         var response = await postResponse.Content.ReadFromJsonAsync<AddPhotoResponse>();
         response.Should().NotBeNull();
-
+    
         using (var scope = _factory.Services.CreateScope())
         {
             var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
-
+    
             var spec = new ApartmentWithPhotosSpecification(apartment.Id);
             apartment = await apartmentRepo.FirstOrDefaultAsync(spec);
             apartment.Should().NotBeNull();
             apartment!.Photos.Should().Contain(p => p.Uri == response!.Uri);
         }
-    }
-    
-    [Fact]
-    public async Task AddPhoto_ReturnsBadRequest_WhenImageIsNotValid()
-    {
-        // Arrange
-        
-        // Act
-        
-        // Assert
     }
 
     private UpdateApartmentDto GetUpdateApartmentDto(int apartmentId)

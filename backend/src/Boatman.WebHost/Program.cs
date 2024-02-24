@@ -117,7 +117,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "0.9.1",
         Title = "Boatman",
-        Description = "Platform for publishing housing for rent from owners",
+        Description = "Platform for publishing apartments for rent from owners",
         License = new OpenApiLicense
         {
             Name = "MIT License",
