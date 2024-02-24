@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using Boatman.DataAccess.Interfaces;
 using Boatman.DataAccess.Interfaces.Specifications;
-using Boatman.Entities.Models;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.Models.FavoritesAggregate;
 using Boatman.Entities.UnitTests.Builders;
@@ -13,45 +12,36 @@ namespace Boatman.FrontendApi.IntegrationTests.Controllers;
 
 public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
 {
-    private readonly IRepository<Apartment> _apartmentRepo;
-    private readonly IRepository<Favorites> _favRepo;
-
     private HttpClient Client { get; }
-    private TestWebApplicationFactory _factory;
+    private readonly TestWebApplicationFactory _factory;
 
     public FavoritesControllerTests(TestWebApplicationFactory factory)
     {
         _factory = factory;
         Client = factory.CreateClient();
-        var scope = factory.Services.CreateScope();
-        _apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
-        _favRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
-    }
-
-    private IRepository<T> NewRepository<T>() where T : class, IAggregateRoot
-    {
-        var scope = _factory.Services.CreateScope();
-
-        return scope.ServiceProvider.GetRequiredService<IRepository<T>>();
     }
 
     [Fact]
     public async Task Add_AddsExistingApartment()
     {
         // Arrange
+        const string customerId = "testId";
         var apartment = new ApartmentBuilder().Build();
-        apartment = await _apartmentRepo.AddAsync(apartment);
 
-        var customerId = "testId";
-        
+        using var scope = _factory.Services.CreateScope();
+        var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
+        var fevRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
+            
+        apartment = await apartmentRepo.AddAsync(apartment);
+            
         // Act
         var postResponse = await Client.PostAsync(
             $"favorites/add?apartmentId={apartment.Id}&customerId={customerId}", null);
-        
+            
         // Assert
         postResponse.EnsureSuccessStatusCode();
         var spec = new CustomersFavoritesSpecification(customerId);
-        var favorites = await _favRepo.FirstOrDefaultAsync(spec);
+        var favorites = await fevRepo.FirstOrDefaultAsync(spec);
         favorites.Should().NotBeNull();
         favorites!.Items.Should().Contain(fi => fi.ApartmentId == apartment.Id);
     }
@@ -71,10 +61,15 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
     public async Task Remove_RemovesItem_WhenCustomerHasFavorites()
     {
         // Arrange
-        var apartmentId = 123;
+        const int apartmentId = 123;
         var favorites = new FavoritesBuilder().WithOneItem(apartmentId);
+
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var fevRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
         
-        await _favRepo.AddAsync(favorites);
+            await fevRepo.AddAsync(favorites);
+        }
         
         // Act
         var postResponse = await Client.PostAsync(
@@ -82,11 +77,16 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         
         // Assert
         postResponse.EnsureSuccessStatusCode();
-        var newFavRepo = NewRepository<Favorites>();
-        var spec = new CustomersFavoritesSpecification(favorites.CustomerId);
-        var newFavorites = await newFavRepo.FirstOrDefaultAsync(spec);
-        newFavorites.Should().NotBeNull();
-        newFavorites!.Items.Should().BeEmpty();
+        
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var fevRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
+            
+            var spec = new CustomersFavoritesSpecification(favorites.CustomerId);
+            var newFavorites = await fevRepo.FirstOrDefaultAsync(spec);
+            newFavorites.Should().NotBeNull();
+            newFavorites!.Items.Should().BeEmpty();
+        }
     }
     
     [Fact]
@@ -104,15 +104,20 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
     public async Task MyFavorites_ReturnsFavorites()
     {
         // Arrange
-        var apartmentId = 123;
+        const int apartmentId = 123;
         var favorites = new FavoritesBuilder().WithOneItem(apartmentId);
+
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var fevRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
         
-        await _favRepo.AddAsync(favorites);
+            await fevRepo.AddAsync(favorites);
+        }
         
         // Act
         var getResponse = await Client.GetAsync($"favorites/{favorites.CustomerId}");
         
-        // Asset
+        // Assert
         getResponse.EnsureSuccessStatusCode();
         var newFavoritesAsString = await getResponse.Content.ReadAsStringAsync();
         newFavoritesAsString.Should().Contain($"{apartmentId}");
