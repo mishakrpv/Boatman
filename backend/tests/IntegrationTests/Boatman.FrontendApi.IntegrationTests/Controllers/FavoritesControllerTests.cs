@@ -1,12 +1,11 @@
 ﻿using System.Net;
-using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.DataAccess.Interfaces;
 using Boatman.DataAccess.Interfaces.Specifications;
+using Boatman.Entities.Models;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.Models.FavoritesAggregate;
 using Boatman.Entities.UnitTests.Builders;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -16,17 +15,24 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
     private readonly IRepository<Favorites> _favRepo;
-    private readonly ApplicationContext _context;
-    
+
     private HttpClient Client { get; }
+    private TestWebApplicationFactory _factory;
 
     public FavoritesControllerTests(TestWebApplicationFactory factory)
     {
+        _factory = factory;
         Client = factory.CreateClient();
         var scope = factory.Services.CreateScope();
         _apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
         _favRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
-        _context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+    }
+
+    private IRepository<T> NewRepository<T>() where T : class, IAggregateRoot
+    {
+        var scope = _factory.Services.CreateScope();
+
+        return scope.ServiceProvider.GetRequiredService<IRepository<T>>();
     }
 
     [Fact]
@@ -68,7 +74,7 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         var apartmentId = 123;
         var favorites = new FavoritesBuilder().WithOneItem(apartmentId);
         
-        favorites = await _favRepo.AddAsync(favorites);
+        await _favRepo.AddAsync(favorites);
         
         // Act
         var postResponse = await Client.PostAsync(
@@ -76,11 +82,11 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         
         // Assert
         postResponse.EnsureSuccessStatusCode();
-
-        var getResponse = await Client.GetAsync($"favorites/{favorites.CustomerId}");
-        getResponse.EnsureSuccessStatusCode();
-        var newFavoritesAsString = await getResponse.Content.ReadAsStringAsync();
-        newFavoritesAsString.Should().NotContain($"{apartmentId}");
+        var newFavRepo = NewRepository<Favorites>();
+        var spec = new CustomersFavoritesSpecification(favorites.CustomerId);
+        var newFavorites = await newFavRepo.FirstOrDefaultAsync(spec);
+        newFavorites.Should().NotBeNull();
+        newFavorites!.Items.Should().BeEmpty();
     }
     
     [Fact]
@@ -92,5 +98,21 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         
         // Assert
         postResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task MyFavorites_ReturnsFavorites()
+    {
+        // Arrange
+        var apartmentId = 123;
+        var favorites = new FavoritesBuilder().WithOneItem(apartmentId);
+        
+        // Act
+        var getResponse = await Client.GetAsync($"favorites/{favorites.CustomerId}");
+        
+        // Asset
+        getResponse.EnsureSuccessStatusCode();
+        var newFavoritesAsString = await getResponse.Content.ReadAsStringAsync();
+        newFavoritesAsString.Should().Contain($"{apartmentId}");
     }
 }

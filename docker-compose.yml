@@ -18,6 +18,8 @@ services:
      - UseInMemoryDb=false
      - AdminEmail=admin@example.com
      - AdminPwd=123456
+     - AwsCredentials:AwsKey=YourAwsKey
+     - AwsCredentials:AwsKey=YourSecretAwsKey
     ports:
     - "5120:8080"
     depends_on:

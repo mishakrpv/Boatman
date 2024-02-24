@@ -2,6 +2,7 @@ using System.Text;
 using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.Register;
 using Boatman.AuthService.Implementations;
+using Boatman.BlobStorage.Implementations.AmazonS3;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.FrontendApi.Controllers;
 using Boatman.FrontendApi.UseCases.Commands.AddApartment;
@@ -127,6 +128,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddInterfaceAdapters();
 builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
+builder.Services.Configure<AwsCredentials>(config.GetSection("AwsCredentials"));
 
 var app = builder.Build();
 
