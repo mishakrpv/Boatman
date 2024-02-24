@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       env:
-          AwsCredentials:AwsKey: ${{ secrets.AWSCREDENTIALS__AWSKEY }}
-          AwsCredentials:AwsSecretKey: ${{ secrets.AWSCREDENTIALS__AWSSECRETKEY }}
+          AwsCredentials__AwsKey: ${{ secrets.AWSCREDENTIALS__AWSKEY }}
+          AwsCredentials__AwsSecretKey: ${{ secrets.AWSCREDENTIALS__AWSSECRETKEY }}
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
