@@ -107,6 +107,8 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         var apartmentId = 123;
         var favorites = new FavoritesBuilder().WithOneItem(apartmentId);
         
+        await _favRepo.AddAsync(favorites);
+        
         // Act
         var getResponse = await Client.GetAsync($"favorites/{favorites.CustomerId}");
         
