@@ -4,12 +4,18 @@ namespace Boatman.Entities.UnitTests.Builders;
 
 public class ApartmentBuilder
 {
-    private const string OwnerId = "123";
-    private const decimal Rent = 50.00M;
-    private const string Description = "Very Good Apartment";
-    private readonly Apartment _apartment = WithDefaultValues();
+    private Apartment _apartment;
+    
+    public string OwnerId { get; set; } = "123";
+    public decimal Rent { get; set; } = 50.00M;
+    public string Description { get; set; } = "Very Good Apartment";
 
-    public static Apartment WithDefaultValues()
+    public ApartmentBuilder()
+    {
+        _apartment = WithDefaultValues();
+    }
+
+    public Apartment WithDefaultValues()
     {
         return new Apartment(OwnerId, Rent, Description);
     }

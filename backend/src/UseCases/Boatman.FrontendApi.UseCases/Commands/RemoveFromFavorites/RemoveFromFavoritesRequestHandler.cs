@@ -18,18 +18,18 @@ public class RemoveFromFavoritesRequestHandler : IRequestHandler<RemoveFromFavor
     public async Task<Response> Handle(RemoveFromFavoritesRequest request, CancellationToken cancellationToken)
     {
         var spec = new CustomersFavoritesSpecification(request.CustomerId);
-        var wishlist = await _favoritesRepo.FirstOrDefaultAsync(spec, cancellationToken);
+        var favorites = await _favoritesRepo.FirstOrDefaultAsync(spec, cancellationToken);
 
-        if (wishlist == null)
+        if (favorites == null)
             return new Response
             {
                 StatusCode = 404,
                 Message = "User has no favorites."
             };
         
-        wishlist.RemoveItem(request.ApartmentId);
+        favorites.RemoveItem(request.ApartmentId);
 
-        await _favoritesRepo.UpdateAsync(wishlist, cancellationToken);
+        await _favoritesRepo.UpdateAsync(favorites, cancellationToken);
         
         return new Response
         {

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Boatman.FrontendApi.UseCases.Commands.AddToFavorites;
+using Boatman.FrontendApi.UseCases.Commands.GetFavorites;
 using Boatman.FrontendApi.UseCases.Commands.RemoveFromFavorites;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +38,18 @@ public class FavoritesController : ControllerBase
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+
+    [HttpGet]
+    [Route("/[Controller]/{customerId}")]
+    public async Task<IActionResult> MyFavorites([FromRoute] string customerId)
+    {
+        var response = await _mediator.Send(new MyFavorites(customerId));
+        
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(response.Value);
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }

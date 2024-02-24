@@ -1,3 +1,3 @@
 ﻿namespace Boatman.WebHost;
 
-public class EntryPoint {}
+public sealed class EntryPoint {}

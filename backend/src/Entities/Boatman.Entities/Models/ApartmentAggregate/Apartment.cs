@@ -13,7 +13,7 @@ public class Apartment : BaseApartment, IAggregateRoot
     public string OwnerId { get; private set; }
 
     public IEnumerable<Photo> Photos => _photos.AsReadOnly();
-    public bool IsVisible { get; private set; } = false;
+    public bool IsVisible { get; private set; } = true;
     public DateTime PublicationDate { get; private set; } = DateTime.Now;
 
     public void SetStatus(bool isVisible)

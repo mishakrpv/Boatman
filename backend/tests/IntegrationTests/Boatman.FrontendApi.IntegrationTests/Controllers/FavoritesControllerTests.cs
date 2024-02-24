@@ -1,4 +1,5 @@
-﻿using Boatman.DataAccess.Interfaces;
+﻿using System.Net;
+using Boatman.DataAccess.Interfaces;
 using Boatman.DataAccess.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.Models.FavoritesAggregate;
@@ -31,7 +32,7 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         var apartment = new ApartmentBuilder().Build();
         apartment = await _apartmentRepo.AddAsync(apartment);
 
-        var customerId = "312";
+        var customerId = "testId";
         
         // Act
         var postResponse = await Client.PostAsync(
@@ -41,21 +42,50 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         postResponse.EnsureSuccessStatusCode();
         var spec = new CustomersFavoritesSpecification(customerId);
         var favorites = await _favRepo.FirstOrDefaultAsync(spec);
-        favorites?.Should().NotBeNull();
+        favorites.Should().NotBeNull();
         favorites!.Items.Should().Contain(fi => fi.ApartmentId == apartment.Id);
     }
 
     [Fact]
     public async Task Add_ReturnsNotFound_WhenApartmentDoesNotExist()
     {
-        // // Arrange
-        // var keyValues = new { apartmentId = 1, customerId = "123" };
-        // var content = new StringContent(keyValues.ToString()!);
-        //
-        // // Act
-        // var postResponse = await Client.PostAsync("favorites/add", content);
-        //
-        // // Assert
-        // postResponse.EnsureSuccessStatusCode();
+        // Act
+        var postResponse = await Client.PostAsync(
+            "favorites/add?apartmentId=0&customerId=notExisting", null);
+        
+        // Assert
+        postResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    // [Fact]
+    // public async Task Remove_RemovesItem_WhenCustomerHasFavorites()
+    // {
+    //     // Arrange
+    //     var apartmentId = 123;
+    //     var favorites = new FavoritesBuilder().WithOneItem(apartmentId);
+    //     
+    //     await _favRepo.AddAsync(favorites);
+    //     
+    //     // Act
+    //     var postResponse = await Client.PostAsync(
+    //         $"favorites/remove?apartmentId={apartmentId}&customerId={favorites.CustomerId}", null);
+    //     
+    //     // Assert
+    //     postResponse.EnsureSuccessStatusCode();
+    //     var spec = new CustomersFavoritesSpecification(favorites.CustomerId);
+    //     var newFavorites = await _favRepo.FirstOrDefaultAsync(spec);
+    //     newFavorites.Should().NotBeNull();
+    //     newFavorites!.Items.Should().BeEmpty();
+    // }
+    
+    [Fact]
+    public async Task Remove_ReturnsNotFound_WhenCustomerHasNoFavorites()
+    {
+        // Act
+        var postResponse = await Client.PostAsync(
+            "favorites/remove?apartmentId=0&customerId=notExisting", null);
+        
+        // Assert
+        postResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 }
