@@ -229,19 +229,19 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 name: "FavoriteItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    FavoritesId = table.Column<int>(type: "integer", nullable: false),
-                    ApartmentId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ApartmentId = table.Column<int>(type: "integer", nullable: false),
+                    FavoritesId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FavoriteItems", x => new { x.FavoritesId, x.Id });
+                    table.PrimaryKey("PK_FavoriteItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_FavoriteItems_Favorites_FavoritesId",
                         column: x => x.FavoritesId,
                         principalTable: "Favorites",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -280,6 +280,11 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoriteItems_FavoritesId",
+                table: "FavoriteItems",
+                column: "FavoritesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_ApartmentId",
