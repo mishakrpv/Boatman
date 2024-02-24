@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
+using System.Text.Json;
 using Boatman.DataAccess.Interfaces;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.UnitTests.Builders;
@@ -60,21 +62,8 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
             
             apartment = await apartmentRepo.AddAsync(apartment);
         }
-
-        var updatedRent = 100.00M;
-        var updatedDescription = "This is awesome";
-        var updatedDownPaymentInMonths = 2;
-        var updatedLatitude = 50.00;
-        var updatedLongitude = 20.00;
-        var updateApartmentDto = new UpdateApartmentDto
-        {
-            ApartmentId = apartment.Id,
-            Rent = updatedRent,
-            Description = updatedDescription,
-            DownPaymentInMonths = updatedDownPaymentInMonths,
-            Latitude = updatedLatitude,
-            Longitude = updatedLongitude
-        };
+        
+        var updateApartmentDto = GetUpdateApartmentDto(apartment.Id);
         var content = JsonContent.Create(updateApartmentDto);
         
         // Act
@@ -96,5 +85,72 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
             updatedApartment.Latitude.Should().Be(updateApartmentDto.Latitude);
             updatedApartment.Longitude.Should().Be(updateApartmentDto.Longitude);
         }
+    }
+
+    [Fact]
+    public async Task Update_ReturnsNotFound_WhenApartmentDoesNotExist()
+    {
+        // Arrange
+        var updateApartmentDto = GetUpdateApartmentDto(0);
+        var content = JsonContent.Create(updateApartmentDto);
+        
+        // Act
+        var putResponse = await Client.PutAsync("apartment/update", content);
+        
+        // Assert
+        putResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task Get_GetsExistingApartment()
+    {
+        // Arrange
+        var apartment = new ApartmentBuilder().Build();
+
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
+            
+            await apartmentRepo.AddAsync(apartment);
+        }
+        
+        // Act
+        var getResponse = await Client.GetAsync($"apartment/{apartment.Id}");
+        
+        // Assert
+        getResponse.EnsureSuccessStatusCode();
+        var apartmentAsString = await getResponse.Content.ReadAsStringAsync();
+        apartmentAsString.Should().NotBeNull();
+        apartmentAsString.Should().BeEquivalentTo(JsonSerializer.Serialize(apartment));
+    }
+    
+    [Fact]
+    public async Task Get_ReturnsNotFound_WhenApartmentDoesNotExist()
+    {
+        // Act
+        var getResponse = await Client.GetAsync($"apartment/0");
+        
+        // Assert
+        getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    private UpdateApartmentDto GetUpdateApartmentDto(int apartmentId)
+    {
+        var updatedRent = 100.00M;
+        var updatedDescription = "This is awesome";
+        var updatedDownPaymentInMonths = 2;
+        var updatedLatitude = 50.00;
+        var updatedLongitude = 20.00;
+        var updateApartmentDto = new UpdateApartmentDto
+        {
+            ApartmentId = apartmentId,
+            Rent = updatedRent,
+            Description = updatedDescription,
+            DownPaymentInMonths = updatedDownPaymentInMonths,
+            Latitude = updatedLatitude,
+            Longitude = updatedLongitude
+        };
+
+        return updateApartmentDto;
     }
 }

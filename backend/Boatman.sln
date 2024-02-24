@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.MobileApi.UseCases"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.IntegrationTests", "tests\IntegrationTests\Boatman.FrontendApi.IntegrationTests\Boatman.FrontendApi.IntegrationTests.csproj", "{10DD883F-33EA-4928-9566-BCB0137843BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthApi.IntegrationTests", "tests\IntegrationTests\Boatman.AuthApi.IntegrationTests\Boatman.AuthApi.IntegrationTests.csproj", "{7571EC8B-5AF0-4FE5-9780-251A224C8974}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,10 @@ Global
 		{10DD883F-33EA-4928-9566-BCB0137843BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10DD883F-33EA-4928-9566-BCB0137843BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10DD883F-33EA-4928-9566-BCB0137843BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7571EC8B-5AF0-4FE5-9780-251A224C8974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7571EC8B-5AF0-4FE5-9780-251A224C8974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7571EC8B-5AF0-4FE5-9780-251A224C8974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7571EC8B-5AF0-4FE5-9780-251A224C8974}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -217,5 +223,6 @@ Global
 		{49AE80CF-9FEF-4B61-AD7B-3E75D2D7A2B2} = {8D6CDAD4-80E8-47C0-AFBC-8878E0442D8A}
 		{63075A29-B30F-4370-9832-7A11A5AFA89C} = {B082BB2A-AAF6-4983-B09C-22FA947B4262}
 		{10DD883F-33EA-4928-9566-BCB0137843BD} = {2DFB1C02-13F3-4479-A87E-C16D70D52B5F}
+		{7571EC8B-5AF0-4FE5-9780-251A224C8974} = {2DFB1C02-13F3-4479-A87E-C16D70D52B5F}
 	EndGlobalSection
 EndGlobal

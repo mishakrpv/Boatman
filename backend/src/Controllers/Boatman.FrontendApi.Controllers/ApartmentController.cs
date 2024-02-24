@@ -43,7 +43,7 @@ public class ApartmentController : ControllerBase
     {
         var response = await _mediator.Send(new UpdateApartmentRequest(dto));
         
-        if (response.StatusCode != (int)HttpStatusCode.OK)
+        if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
         
         return StatusCode(response.StatusCode, new { problem = response.Message });

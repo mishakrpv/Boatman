@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.Json;
 using Boatman.DataAccess.Interfaces;
 using Boatman.DataAccess.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
@@ -32,7 +33,7 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
         var fevRepo = scope.ServiceProvider.GetRequiredService<IRepository<Favorites>>();
             
-        apartment = await apartmentRepo.AddAsync(apartment);
+        await apartmentRepo.AddAsync(apartment);
             
         // Act
         var postResponse = await Client.PostAsync(
@@ -119,7 +120,7 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
         
         // Assert
         getResponse.EnsureSuccessStatusCode();
-        var newFavoritesAsString = await getResponse.Content.ReadAsStringAsync();
-        newFavoritesAsString.Should().Contain($"{apartmentId}");
+        var favoritesAsString = await getResponse.Content.ReadAsStringAsync();
+        favoritesAsString.Should().BeEquivalentTo(JsonSerializer.Serialize(favorites));
     }
 }
