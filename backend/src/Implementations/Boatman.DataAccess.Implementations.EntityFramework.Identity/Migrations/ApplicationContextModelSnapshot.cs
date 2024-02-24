@@ -167,16 +167,21 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
 
             modelBuilder.Entity("Boatman.Entities.Models.FavoritesAggregate.FavoriteItem", b =>
                 {
-                    b.Property<int>("FavoritesId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ApartmentId")
                         .HasColumnType("integer");
 
-                    b.HasKey("FavoritesId", "Id");
+                    b.Property<int?>("FavoritesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FavoritesId");
 
                     b.ToTable("FavoriteItems");
                 });
@@ -355,9 +360,7 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 {
                     b.HasOne("Boatman.Entities.Models.FavoritesAggregate.Favorites", null)
                         .WithMany("Items")
-                        .HasForeignKey("FavoritesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FavoritesId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
