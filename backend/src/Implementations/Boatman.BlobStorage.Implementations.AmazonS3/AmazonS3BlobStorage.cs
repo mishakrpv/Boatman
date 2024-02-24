@@ -31,7 +31,7 @@ public class AmazonS3BlobStorage : IBlobStorage
 
     public async Task<Response<string>> UploadAsync(IFormFile file)
     {
-        var key = $"{new Guid().ToString()}{file.FileName}";
+        var key = $"{Guid.NewGuid().ToString()}{file.FileName}";
         
         var response = await UploadToS3Async(file, key);
 

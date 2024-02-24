@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Boatman.DataAccess.Interfaces;
+using Boatman.DataAccess.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
 using Boatman.Entities.UnitTests.Builders;
 using Boatman.FrontendApi.UseCases.Dtos;
@@ -25,6 +26,11 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
     private class AddApartmentResponse
     {
         public int Id { get; set; }
+    }
+    
+    private class AddPhotoResponse
+    {
+        public string Uri { get; set; } = default!;
     }
 
     [Fact]
@@ -134,6 +140,51 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
         getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
+    [Fact]
+    public async Task AddPhoto_AddsPhoto_WhenImageIsValid()
+    {
+        // Arrange
+        var apartment = new ApartmentBuilder().Build();
+
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
+            
+            await apartmentRepo.AddAsync(apartment);
+        }
+        
+        var content = new MultipartFormDataContent();
+        content.Add(new StreamContent(await GetTestImage()), "photo", "test.jpg");
+
+        // Act
+        var postResponse = await Client.PostAsync($"apartment/{apartment.Id}/add-photo", content);
+
+        // Assert
+        postResponse.EnsureSuccessStatusCode();
+        var response = await postResponse.Content.ReadFromJsonAsync<AddPhotoResponse>();
+        response.Should().NotBeNull();
+
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var apartmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Apartment>>();
+
+            var spec = new ApartmentWithPhotosSpecification(apartment.Id);
+            apartment = await apartmentRepo.FirstOrDefaultAsync(spec);
+            apartment.Should().NotBeNull();
+            apartment!.Photos.Should().Contain(p => p.Uri == response!.Uri);
+        }
+    }
+    
+    [Fact]
+    public async Task AddPhoto_ReturnsBadRequest_WhenImageIsNotValid()
+    {
+        // Arrange
+        
+        // Act
+        
+        // Assert
+    }
+
     private UpdateApartmentDto GetUpdateApartmentDto(int apartmentId)
     {
         var updatedRent = 100.00M;
@@ -152,5 +203,16 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
         };
 
         return updateApartmentDto;
+    }
+
+    private async Task<Stream> GetTestImage()
+    {
+        var memoryStream = new MemoryStream();
+        using (var fileStream = File.OpenRead("assets/test.jpg"))
+        {
+            await fileStream.CopyToAsync(memoryStream);
+        }
+
+        return memoryStream;
     }
 }

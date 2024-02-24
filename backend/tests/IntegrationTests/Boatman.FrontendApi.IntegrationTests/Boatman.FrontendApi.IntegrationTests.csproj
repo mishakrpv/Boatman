@@ -31,4 +31,10 @@
       <ProjectReference Include="..\..\UnitTests\Boatman.Entities.UnitTests\Boatman.Entities.UnitTests.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="assets\test.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

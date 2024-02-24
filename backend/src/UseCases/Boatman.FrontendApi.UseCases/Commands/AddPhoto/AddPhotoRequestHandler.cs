@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Boatman.FrontendApi.UseCases.Commands.AddPhoto;
 
-public class AddPhotoRequestHandler : IRequestHandler<AddPhotoRequest, Response>
+public class AddPhotoRequestHandler : IRequestHandler<AddPhotoRequest, Response<string>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
     private readonly IBlobStorage _blobStorage;
@@ -18,12 +18,12 @@ public class AddPhotoRequestHandler : IRequestHandler<AddPhotoRequest, Response>
         _blobStorage = blobStorage;
     }
 
-    public async Task<Response> Handle(AddPhotoRequest request, CancellationToken cancellationToken)
+    public async Task<Response<string>> Handle(AddPhotoRequest request, CancellationToken cancellationToken)
     {
         var apartment = await _apartmentRepo.GetByIdAsync(request.ApartmentId, cancellationToken);
 
         if (apartment == null)
-            return new Response
+            return new Response<string>
             {
                 StatusCode = 404,
                 Message = "Apartment not found."
@@ -38,9 +38,6 @@ public class AddPhotoRequestHandler : IRequestHandler<AddPhotoRequest, Response>
 
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
 
-        return new Response
-        {
-            Message = "Photo has been added."
-        };
+        return response;
     }
 }

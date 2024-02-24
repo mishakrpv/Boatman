@@ -75,12 +75,12 @@ public class ApartmentController : ControllerBase
 
     [HttpPost]
     [Route("{id:int}/add-photo")]
-    public async Task<IActionResult> AddPhoto([FromRoute] int id, [Image] IFormFile photo)
+    public async Task<IActionResult> AddPhoto([FromRoute] int id, [FromForm] [Image] IFormFile photo)
     {
         var response = await _mediator.Send(new AddPhotoRequest(id, photo));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
-            return Ok(new { message = response.Message });
+            return Ok(new { uri = response.Value });
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
