@@ -112,8 +112,8 @@ builder.Services.AddAuthorizationBuilder()
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(
-        typeof(AddApartmentRequestHandler).Assembly,
-        typeof(AddToFavoritesRequestHandler).Assembly,
+        typeof(AddApartmentHandler).Assembly,
+        typeof(AddToFavoritesHandler).Assembly,
         typeof(RegisterHandler).Assembly);
 });
 

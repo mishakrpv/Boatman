@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Customer.UseCases.Commands.RemoveFromFavorites;
 
-public class RemoveFromFavoritesRequest : IRequest<Response>
+public class RemoveFromFavorites : IRequest<Response>
 {
-    public RemoveFromFavoritesRequest(int apartmentId, string customerId)
+    public RemoveFromFavorites(int apartmentId, string customerId)
     {
         ApartmentId = apartmentId;
         CustomerId = customerId;

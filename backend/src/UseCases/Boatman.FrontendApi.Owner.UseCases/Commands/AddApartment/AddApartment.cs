@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.AddApartment;
 
-public class AddApartmentRequest : IRequest<Response<int>>
+public class AddApartment : IRequest<Response<int>>
 {
-    public AddApartmentRequest(AddApartmentDto dto)
+    public AddApartment(AddApartmentDto dto)
     {
         Dto = dto;
     }

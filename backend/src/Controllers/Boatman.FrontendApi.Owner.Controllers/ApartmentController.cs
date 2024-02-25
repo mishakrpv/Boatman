@@ -29,7 +29,7 @@ public class ApartmentController : ControllerBase
     [Route("[action]")]
     public async Task<IActionResult> Add([FromBody] AddApartmentDto dto)
     {
-        var response = await _mediator.Send(new AddApartmentRequest(dto));
+        var response = await _mediator.Send(new AddApartment(dto));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { id = response.Value });
@@ -41,7 +41,7 @@ public class ApartmentController : ControllerBase
     [Route("[action]")]
     public async Task<IActionResult> Update([FromBody] UpdateApartmentDto dto)
     {
-        var response = await _mediator.Send(new UpdateApartmentRequest(dto));
+        var response = await _mediator.Send(new UpdateApartment(dto));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
@@ -53,7 +53,7 @@ public class ApartmentController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)
     {
-        var response = await _mediator.Send(new GetMyApartmentRequest(id));
+        var response = await _mediator.Send(new GetMyApartment(id));
 
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(response.Value);
@@ -65,7 +65,7 @@ public class ApartmentController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var response = await _mediator.Send(new DeleteApartmentRequest(id));
+        var response = await _mediator.Send(new DeleteApartment(id));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
@@ -77,7 +77,7 @@ public class ApartmentController : ControllerBase
     [Route("{id:int}/add-photo")]
     public async Task<IActionResult> AddPhoto([FromRoute] int id, [FromForm] [Image] IFormFile photo)
     {
-        var response = await _mediator.Send(new AddPhotoRequest(id, photo));
+        var response = await _mediator.Send(new AddPhoto(id, photo));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { uri = response.Value });

@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.GetMyApartments;
 
-public class GetMyApartmentsRequest : IRequest<Response<IEnumerable<Apartment>>>
+public class GetMyApartments : IRequest<Response<IEnumerable<Apartment>>>
 {
-    public GetMyApartmentsRequest(string ownerId)
+    public GetMyApartments(string ownerId)
     {
         OwnerId = ownerId;
     }

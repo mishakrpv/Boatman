@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.UpdateApartment;
 
-public class UpdateApartmentRequest : IRequest<Response>
+public class UpdateApartment : IRequest<Response>
 {
-    public UpdateApartmentRequest(UpdateApartmentDto dto)
+    public UpdateApartment(UpdateApartmentDto dto)
     {
         Dto = dto;
     }

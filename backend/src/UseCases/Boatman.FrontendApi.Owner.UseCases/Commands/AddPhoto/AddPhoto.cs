@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.AddPhoto;
 
-public class AddPhotoRequest : IRequest<Response<string>>
+public class AddPhoto : IRequest<Response<string>>
 {
-    public AddPhotoRequest(int apartmentId, IFormFile photo)
+    public AddPhoto(int apartmentId, IFormFile photo)
     {
         ApartmentId = apartmentId;
         Photo = photo;

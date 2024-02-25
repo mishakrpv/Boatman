@@ -6,19 +6,19 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.AddPhoto;
 
-public class AddPhotoRequestHandler : IRequestHandler<AddPhotoRequest, Response<string>>
+public class AddPhotoHandler : IRequestHandler<AddPhoto, Response<string>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
     private readonly IBlobStorage _blobStorage;
 
-    public AddPhotoRequestHandler(IRepository<Apartment> apartmentRepo,
+    public AddPhotoHandler(IRepository<Apartment> apartmentRepo,
         IBlobStorage blobStorage)
     {
         _apartmentRepo = apartmentRepo;
         _blobStorage = blobStorage;
     }
 
-    public async Task<Response<string>> Handle(AddPhotoRequest request, CancellationToken cancellationToken)
+    public async Task<Response<string>> Handle(AddPhoto request, CancellationToken cancellationToken)
     {
         var apartment = await _apartmentRepo.GetByIdAsync(request.ApartmentId, cancellationToken);
 

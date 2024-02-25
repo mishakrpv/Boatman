@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.AddApartment;
 
-public class AddApartmentRequestHandler : IRequestHandler<AddApartmentRequest, Response<int>>
+public class AddApartmentHandler : IRequestHandler<AddApartment, Response<int>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
-    public AddApartmentRequestHandler(IRepository<Apartment> apartmentRepo)
+    public AddApartmentHandler(IRepository<Apartment> apartmentRepo)
     {
         _apartmentRepo = apartmentRepo;
     }
 
-    public async Task<Response<int>> Handle(AddApartmentRequest request, CancellationToken cancellationToken)
+    public async Task<Response<int>> Handle(AddApartment request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
         var entity = new Apartment(dto.OwnerId, dto.Rent, dto.Description, dto.DownPaymentInMonths);

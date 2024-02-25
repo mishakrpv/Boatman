@@ -7,19 +7,19 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Customer.UseCases.Commands.AddToFavorites;
 
-public class AddToFavoritesRequestHandler : IRequestHandler<AddToFavoritesRequest, Response>
+public class AddToFavoritesHandler : IRequestHandler<AddToFavorites, Response>
 {
     private readonly IRepository<Favorites> _favoritesRepo;
     private readonly IRepository<Apartment> _apartmentRepo;
 
-    public AddToFavoritesRequestHandler(IRepository<Favorites> favoritesRepo,
+    public AddToFavoritesHandler(IRepository<Favorites> favoritesRepo,
         IRepository<Apartment> apartmentRepo)
     {
         _favoritesRepo = favoritesRepo;
         _apartmentRepo = apartmentRepo;
     }
 
-    public async Task<Response> Handle(AddToFavoritesRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(AddToFavorites request, CancellationToken cancellationToken)
     {
         var spec = new CustomersFavoritesSpecification(request.CustomerId);
         var favorites = await _favoritesRepo.FirstOrDefaultAsync(spec, cancellationToken)

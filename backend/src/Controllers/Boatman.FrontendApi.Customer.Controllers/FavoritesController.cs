@@ -23,7 +23,7 @@ public class FavoritesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Add([FromQuery] int apartmentId, [FromQuery] string customerId)
     {
-        var response = await _mediator.Send(new AddToFavoritesRequest(apartmentId, customerId));
+        var response = await _mediator.Send(new AddToFavorites(apartmentId, customerId));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });
@@ -34,7 +34,7 @@ public class FavoritesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Remove([FromQuery] int apartmentId, [FromQuery] string customerId)
     {
-        var response = await _mediator.Send(new RemoveFromFavoritesRequest(apartmentId, customerId));
+        var response = await _mediator.Send(new RemoveFromFavorites(apartmentId, customerId));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });

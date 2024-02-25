@@ -6,16 +6,16 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Customer.UseCases.Commands.RemoveFromFavorites;
 
-public class RemoveFromFavoritesRequestHandler : IRequestHandler<RemoveFromFavoritesRequest, Response>
+public class RemoveFromFavoritesHandler : IRequestHandler<RemoveFromFavorites, Response>
 {
     private readonly IRepository<Favorites> _favoritesRepo;
 
-    public RemoveFromFavoritesRequestHandler(IRepository<Favorites> favoritesRepo)
+    public RemoveFromFavoritesHandler(IRepository<Favorites> favoritesRepo)
     {
         _favoritesRepo = favoritesRepo;
     }
 
-    public async Task<Response> Handle(RemoveFromFavoritesRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(RemoveFromFavorites request, CancellationToken cancellationToken)
     {
         var spec = new CustomersFavoritesSpecification(request.CustomerId);
         var favorites = await _favoritesRepo.FirstOrDefaultAsync(spec, cancellationToken);

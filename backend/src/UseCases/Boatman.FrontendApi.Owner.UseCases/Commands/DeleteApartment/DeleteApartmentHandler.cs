@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.DeleteApartment;
 
-public class DeleteApartmentRequestHandler : IRequestHandler<DeleteApartmentRequest, Response>
+public class DeleteApartmentHandler : IRequestHandler<DeleteApartment, Response>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
-    public DeleteApartmentRequestHandler(IRepository<Apartment> apartmentRepo)
+    public DeleteApartmentHandler(IRepository<Apartment> apartmentRepo)
     {
         _apartmentRepo = apartmentRepo;
     }
     
-    public async Task<Response> Handle(DeleteApartmentRequest request, CancellationToken cancellationToken)
+    public async Task<Response> Handle(DeleteApartment request, CancellationToken cancellationToken)
     {
         var apartment = await _apartmentRepo.GetByIdAsync(request.ApartmentId, cancellationToken);
 

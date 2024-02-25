@@ -53,7 +53,7 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
     {
         // Act
         var postResponse = await Client.PostAsync(
-            "favorites/add?apartmentId=0&customerId=notExisting", null);
+            "favorites/add?apartmentId=0&customerId=notExisting1", null);
         
         // Assert
         postResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -96,7 +96,7 @@ public class FavoritesControllerTests : IClassFixture<TestWebApplicationFactory>
     {
         // Act
         var postResponse = await Client.PostAsync(
-            "favorites/remove?apartmentId=0&customerId=notExisting", null);
+            "favorites/remove?apartmentId=0&customerId=absolutelyNotExisting", null);
         
         // Assert
         postResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);

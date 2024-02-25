@@ -6,16 +6,16 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Owner.UseCases.Commands.GetMyApartments;
 
-public class GetMyApartmentsRequestHandler : IRequestHandler<GetMyApartmentsRequest, Response<IEnumerable<Apartment>>>
+public class GetMyApartmentsHandler : IRequestHandler<GetMyApartments, Response<IEnumerable<Apartment>>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
 
-    public GetMyApartmentsRequestHandler(IRepository<Apartment> apartmentRepo)
+    public GetMyApartmentsHandler(IRepository<Apartment> apartmentRepo)
     {
         _apartmentRepo = apartmentRepo;
     }
 
-    public async Task<Response<IEnumerable<Apartment>>> Handle(GetMyApartmentsRequest request, CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<Apartment>>> Handle(GetMyApartments request, CancellationToken cancellationToken)
     {
         var spec = new OwnersApartmentSpecification(request.OwnerId);
         var apartments = await _apartmentRepo.ListAsync(spec, cancellationToken);

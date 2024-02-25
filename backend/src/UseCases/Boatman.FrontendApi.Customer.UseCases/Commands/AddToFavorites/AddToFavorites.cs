@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Boatman.FrontendApi.Customer.UseCases.Commands.AddToFavorites;
 
-public class AddToFavoritesRequest : IRequest<Response>
+public class AddToFavorites : IRequest<Response>
 {
-    public AddToFavoritesRequest(int apartmentId, string customerId)
+    public AddToFavorites(int apartmentId, string customerId)
     {
         ApartmentId = apartmentId;
         CustomerId = customerId;
