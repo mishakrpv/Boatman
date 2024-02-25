@@ -140,6 +140,7 @@ public class ApartmentControllerTests : IClassFixture<TestWebApplicationFactory>
         getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
+    // Commented out before fixing the problem with running tests requiring secrets in GitHub workflow
     // [Fact]
     // public async Task AddPhoto_AddsPhoto_WhenImageIsValid()
     // {
