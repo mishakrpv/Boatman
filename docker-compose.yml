@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  boatmanapi:
+    image: ${DOCKER_REGISTRY-}boatmanapi
+    build:
+      context: ./backend
+      dockerfile: src/Boatman.WebHost/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Docker
+     - ConnectionStrings:ApplicationConnection=Host=postgresql;Port=5432;Database=Boatman.ApplicationDb;User Id=postgres;Password=@Super(!)StrongPwd
+     - JwtSettings:Issuer=http://localhost:5180
+     - JwtSettings:Audience=http://localhost:5180
+     - JwtSettings:Key=YourSecret{Key}AndYourFavoriteNumberMineIs17!
+     - JwtSettings:ExpiresInDays=0
+     - JwtSettings:ExpiresInMinutes=5
+     - SendGridKey=YourSendGridKey
+     - UseInMemoryDb=false
+     - AdminEmail=admin@example.com
+     - AdminPwd=123456
+     - AwsCredentials:AwsKey=YourAwsKey
+     - AwsCredentials:AwsSecretKey=YourSecretAwsKey
+    ports:
+    - "5120:8080"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=Boatman.ApplicationDb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=@Super(!)StrongPwd
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
