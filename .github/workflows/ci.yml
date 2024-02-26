@@ -11,6 +11,10 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      AwsCredentials:AwsSecretKey = ${{ secrets.AWS_CREDENTIALS__AWS_SECRET_KEY }}
+      AwsCredentials:AwsKey = ${{ secrets.AWS_CREDENTIALS__AWS_KEY }}
     
     steps:
     - uses: actions/checkout@v4
