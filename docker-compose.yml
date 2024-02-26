@@ -15,6 +15,7 @@ services:
      - JwtSettings:ExpiresInDays=0
      - JwtSettings:ExpiresInMinutes=5
      - SendGridKey=YourSendGridKey
+     - SendGridSender=YourSendGridSenderEmail
      - UseInMemoryDb=false
      - AdminEmail=admin@example.com
      - AdminPwd=123456
