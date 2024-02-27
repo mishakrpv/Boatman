@@ -1,4 +1,4 @@
-﻿using Boatman.AuthService.Implementations;
+﻿using Boatman.AuthService.Implementations.Jwt.Identity;
 using Boatman.AuthService.Interfaces;
 using Boatman.BlobStorage.Implementations.AmazonS3;
 using Boatman.BlobStorage.Interfaces;
@@ -19,7 +19,7 @@ public static class ConfigureInterfaceAdapters
         services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
-        services.AddScoped<IAuthService, AuthService.Implementations.AuthService>();
+        services.AddScoped<IAuthService, AuthService.Implementations.Jwt.Identity.AuthService>();
         services.AddScoped<IBlobStorage, AmazonS3BlobStorage>();
         services.AddTransient<IEmailSender, SendGridEmailSender>();
 

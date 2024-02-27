@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.DataAccess.Interfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthService.Interfaces", "src\Interfaces\Boatman.AuthService.Interfaces\Boatman.AuthService.Interfaces.csproj", "{80416D2B-1A3C-42F6-9F5F-00BC74A9001D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthService.Implementations", "src\Implementations\Boatman.AuthService.Implementations\Boatman.AuthService.Implementations.csproj", "{CE80FBB8-5C12-4B83-B983-E19CAD4D5D1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthService.Implementations.Jwt.Identity", "src\Implementations\Boatman.AuthService.Implementations.Jwt.Identity\Boatman.AuthService.Implementations.Jwt.Identity.csproj", "{CE80FBB8-5C12-4B83-B983-E19CAD4D5D1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AdminApi.Controllers", "src\Controllers\Boatman.AdminApi.Controllers\Boatman.AdminApi.Controllers.csproj", "{E6A1CE3A-2472-409F-BB9C-A944CAD18726}"
 EndProject

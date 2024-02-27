@@ -1,7 +1,7 @@
 using System.Text;
 using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.Register;
-using Boatman.AuthService.Implementations;
+using Boatman.AuthService.Implementations.Jwt.Identity;
 using Boatman.BlobStorage.Implementations.AmazonS3;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.FrontendApi.Catalog.Controllers;

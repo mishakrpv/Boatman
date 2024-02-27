@@ -27,7 +27,7 @@
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Catalog.Controllers\Boatman.FrontendApi.Catalog.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Customer.Controllers\Boatman.FrontendApi.Customer.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Owner.Controllers\Boatman.FrontendApi.Owner.Controllers.csproj" />
-        <ProjectReference Include="..\Implementations\Boatman.AuthService.Implementations\Boatman.AuthService.Implementations.csproj" />
+        <ProjectReference Include="..\Implementations\Boatman.AuthService.Implementations.Jwt.Identity\Boatman.AuthService.Implementations.Jwt.Identity.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.BlobStorage.Implementations.AmazonS3\Boatman.BlobStorage.Implementations.AmazonS3.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.DataAccess.Implementations.EntityFramework.Identity\Boatman.DataAccess.Implementations.EntityFramework.Identity.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.Emailing.Implementations.SendGrid\Boatman.Emailing.Implementations.SendGrid.csproj" />

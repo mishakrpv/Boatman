@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Boatman.AuthService.Implementations;
+namespace Boatman.AuthService.Implementations.Jwt.Identity;
 
 public class AuthService : IAuthService
 {
