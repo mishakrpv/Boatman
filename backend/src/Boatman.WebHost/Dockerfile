@@ -6,30 +6,12 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["src/Boatman.WebHost/Boatman.WebHost.csproj", "src/Boatman.WebHost/"]
-COPY ["src/Controllers/Boatman.AuthApi.Controllers/Boatman.AuthApi.Controllers.csproj", "src/Controllers/Boatman.AuthApi.Controllers/"]
-COPY ["src/UseCases/Boatman.AuthApi.UseCases/Boatman.AuthApi.UseCases.csproj", "src/UseCases/Boatman.AuthApi.UseCases/"]
-COPY ["src/Interfaces/Boatman.AuthService.Interfaces/Boatman.AuthService.Interfaces.csproj", "src/Interfaces/Boatman.AuthService.Interfaces/"]
-COPY ["src/Utils/Boatman.Utils/Boatman.Utils.csproj", "src/Utils/Boatman.Utils/"]
-COPY ["src/Controllers/Boatman.FrontendApi.Catalog.Controllers/Boatman.FrontendApi.Catalog.Controllers.csproj", "src/Controllers/Boatman.FrontendApi.Catalog.Controllers/"]
-COPY ["src/Controllers/Boatman.FrontendApi.Customer.Controllers/Boatman.FrontendApi.Customer.Controllers.csproj", "src/Controllers/Boatman.FrontendApi.Customer.Controllers/"]
-COPY ["src/UseCases/Boatman.FrontendApi.Customer.UseCases/Boatman.FrontendApi.Customer.UseCases.csproj", "src/UseCases/Boatman.FrontendApi.Customer.UseCases/"]
-COPY ["src/Interfaces/Boatman.DataAccess.Interfaces/Boatman.DataAccess.Interfaces.csproj", "src/Interfaces/Boatman.DataAccess.Interfaces/"]
-COPY ["src/Entities/Boatman.Entities/Boatman.Entities.csproj", "src/Entities/Boatman.Entities/"]
-COPY ["src/Controllers/Boatman.FrontendApi.Owner.Controllers/Boatman.FrontendApi.Owner.Controllers.csproj", "src/Controllers/Boatman.FrontendApi.Owner.Controllers/"]
-COPY ["src/UseCases/Boatman.FrontendApi.Owner.UseCases/Boatman.FrontendApi.Owner.UseCases.csproj", "src/UseCases/Boatman.FrontendApi.Owner.UseCases/"]
-COPY ["src/Interfaces/Boatman.BlobStorage.Interfaces/Boatman.BlobStorage.Interfaces.csproj", "src/Interfaces/Boatman.BlobStorage.Interfaces/"]
-COPY ["src/Implementations/Boatman.AuthService.Implementations/Boatman.AuthService.Implementations.csproj", "src/Implementations/Boatman.AuthService.Implementations/"]
-COPY ["src/Interfaces/Boatman.Emailing.Interfaces/Boatman.Emailing.Interfaces.csproj", "src/Interfaces/Boatman.Emailing.Interfaces/"]
-COPY ["src/Implementations/Boatman.DataAccess.Implementations.EntityFramework.Identity/Boatman.DataAccess.Implementations.EntityFramework.Identity.csproj", "src/Implementations/Boatman.DataAccess.Implementations.EntityFramework.Identity/"]
-COPY ["src/Implementations/Boatman.BlobStorage.Implementations.AmazonS3/Boatman.BlobStorage.Implementations.AmazonS3.csproj", "src/Implementations/Boatman.BlobStorage.Implementations.AmazonS3/"]
-COPY ["src/Interfaces/Boatman.Logging.Interfaces/Boatman.Logging.Interfaces.csproj", "src/Interfaces/Boatman.Logging.Interfaces/"]
-COPY ["src/Implementations/Boatman.Emailing.Implementations.SendGrid/Boatman.Emailing.Implementations.SendGrid.csproj", "src/Implementations/Boatman.Emailing.Implementations.SendGrid/"]
-COPY ["src/Implementations/Boatman.Logging.Implementations/Boatman.Logging.Implementations.csproj", "src/Implementations/Boatman.Logging.Implementations/"]
-RUN dotnet restore "src/Boatman.WebHost/Boatman.WebHost.csproj"
+WORKDIR /app
+
 COPY . .
-WORKDIR "/src/src/Boatman.WebHost"
+WORKDIR /app/src/Boatman.WebHost
+RUN dotnet restore
+
 RUN dotnet build "Boatman.WebHost.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
