@@ -87,6 +87,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Owner.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Customer.IntegrationTests", "tests\IntegrationTests\Boatman.FrontendApi.Customer.IntegrationTests\Boatman.FrontendApi.Customer.IntegrationTests.csproj", "{D8A8A39C-6700-4515-B8DF-BC0E61A41C70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ProfileService.Interfaces", "src\Interfaces\Boatman.ProfileService.Interfaces\Boatman.ProfileService.Interfaces.csproj", "{E8658803-7C1D-46B0-8AB5-39B70250D7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ProfileService.Implementations.Identity", "src\Implementations\Boatman.ProfileService.Implementations.Identity\Boatman.ProfileService.Implementations.Identity.csproj", "{0B55552B-22C4-4100-AE94-97424EF6A95A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -221,6 +225,14 @@ Global
 		{D8A8A39C-6700-4515-B8DF-BC0E61A41C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8A8A39C-6700-4515-B8DF-BC0E61A41C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8A8A39C-6700-4515-B8DF-BC0E61A41C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8658803-7C1D-46B0-8AB5-39B70250D7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8658803-7C1D-46B0-8AB5-39B70250D7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8658803-7C1D-46B0-8AB5-39B70250D7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8658803-7C1D-46B0-8AB5-39B70250D7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -266,5 +278,7 @@ Global
 		{1B4E1A47-1971-42B7-84C4-74A2383BE46D} = {2DFB1C02-13F3-4479-A87E-C16D70D52B5F}
 		{3CD7314F-3E32-48FF-B0AB-6E8165D2A89D} = {2DFB1C02-13F3-4479-A87E-C16D70D52B5F}
 		{D8A8A39C-6700-4515-B8DF-BC0E61A41C70} = {2DFB1C02-13F3-4479-A87E-C16D70D52B5F}
+		{E8658803-7C1D-46B0-8AB5-39B70250D7A9} = {89ECFAA6-34E1-4D70-B6CD-A8F5C6321C17}
+		{0B55552B-22C4-4100-AE94-97424EF6A95A} = {53D04F98-5ADB-4692-AA9C-7DAE60DD66D1}
 	EndGlobalSection
 EndGlobal
