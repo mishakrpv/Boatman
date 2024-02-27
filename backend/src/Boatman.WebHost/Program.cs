@@ -4,7 +4,8 @@ using Boatman.AuthApi.UseCases.Commands.Register;
 using Boatman.AuthService.Implementations.Jwt.Identity;
 using Boatman.BlobStorage.Implementations.AmazonS3;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
-using Boatman.FrontendApi.Catalog.Controllers;
+using Boatman.FrontendApi.Common.Controllers;
+using Boatman.FrontendApi.Common.UseCases.Commands.EditProfile;
 using Boatman.FrontendApi.Customer.Controllers;
 using Boatman.FrontendApi.Customer.UseCases.Commands.AddToFavorites;
 using Boatman.FrontendApi.Owner.Controllers;
@@ -114,6 +115,7 @@ builder.Services.AddMediatR(configuration =>
     configuration.RegisterServicesFromAssemblies(
         typeof(AddApartmentHandler).Assembly,
         typeof(AddToFavoritesHandler).Assembly,
+        typeof(EditProfileHandler).Assembly,
         typeof(RegisterHandler).Assembly);
 });
 

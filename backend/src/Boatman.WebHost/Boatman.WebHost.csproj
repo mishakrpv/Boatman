@@ -24,7 +24,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Controllers\Boatman.AuthApi.Controllers\Boatman.AuthApi.Controllers.csproj"/>
-        <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Catalog.Controllers\Boatman.FrontendApi.Catalog.Controllers.csproj" />
+        <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Common.Controllers\Boatman.FrontendApi.Common.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Customer.Controllers\Boatman.FrontendApi.Customer.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Owner.Controllers\Boatman.FrontendApi.Owner.Controllers.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.AuthService.Implementations.Jwt.Identity\Boatman.AuthService.Implementations.Jwt.Identity.csproj" />

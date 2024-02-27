@@ -69,9 +69,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.MobileApi.UseCases"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.AuthApi.IntegrationTests", "tests\IntegrationTests\Boatman.AuthApi.IntegrationTests\Boatman.AuthApi.IntegrationTests.csproj", "{7571EC8B-5AF0-4FE5-9780-251A224C8974}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Catalog.Controllers", "src\Controllers\Boatman.FrontendApi.Catalog.Controllers\Boatman.FrontendApi.Catalog.Controllers.csproj", "{28BD239C-8B2C-48AE-84DC-ACED81B2D039}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Common.Controllers", "src\Controllers\Boatman.FrontendApi.Common.Controllers\Boatman.FrontendApi.Common.Controllers.csproj", "{28BD239C-8B2C-48AE-84DC-ACED81B2D039}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Catalog.UseCases", "src\UseCases\Boatman.FrontendApi.Catalog.UseCases\Boatman.FrontendApi.Catalog.UseCases.csproj", "{D0749E30-D231-47C7-883C-22D46A0102A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Common.UseCases", "src\UseCases\Boatman.FrontendApi.Common.UseCases\Boatman.FrontendApi.Common.UseCases.csproj", "{D0749E30-D231-47C7-883C-22D46A0102A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.FrontendApi.Owner.UseCases", "src\UseCases\Boatman.FrontendApi.Owner.UseCases\Boatman.FrontendApi.Owner.UseCases.csproj", "{B8D061E2-1822-4AEF-81FA-2E65A1761061}"
 EndProject
