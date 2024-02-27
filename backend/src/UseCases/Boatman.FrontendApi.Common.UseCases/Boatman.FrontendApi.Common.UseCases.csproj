@@ -12,6 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Entities\Boatman.Entities\Boatman.Entities.csproj" />
+      <ProjectReference Include="..\..\Interfaces\Boatman.AuthService.Interfaces\Boatman.AuthService.Interfaces.csproj" />
+      <ProjectReference Include="..\..\Interfaces\Boatman.BlobStorage.Interfaces\Boatman.BlobStorage.Interfaces.csproj" />
+      <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Interfaces\Boatman.DataAccess.Interfaces.csproj" />
       <ProjectReference Include="..\..\Interfaces\Boatman.ProfileService.Interfaces\Boatman.ProfileService.Interfaces.csproj" />
       <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
     </ItemGroup>

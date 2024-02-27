@@ -224,4 +224,18 @@ public class AuthService : IAuthService
             Errors = result.Errors.Select(e => e.Description)
         };
     }
+
+    public Response<string> GetUserIdByPrincipal(ClaimsPrincipal principal)
+    {
+        var userId = _userManager.GetUserId(principal);
+
+        if (userId == null)
+            return new Response<string>
+            {
+                StatusCode = 404,
+                Message = "User not found."
+            };
+
+        return new Response<string>(userId);
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Boatman.AuthService.Interfaces.Dtos;
+﻿using System.Security.Claims;
+using Boatman.AuthService.Interfaces.Dtos;
 using Boatman.Utils.Models.Response;
 
 namespace Boatman.AuthService.Interfaces;
@@ -14,4 +15,6 @@ public interface IAuthService
     Task<Response> ForgetPasswordAsync(string email);
 
     Task<Response> ResetPasswordAsync(ResetPasswordDto dto);
+
+    Response<string> GetUserIdByPrincipal(ClaimsPrincipal principal);
 }
