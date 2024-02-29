@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Boatman.FrontendApi.Common.UseCases.Commands.ChangeEmail;
 using Boatman.FrontendApi.Common.UseCases.Commands.EditProfile;
 using Boatman.FrontendApi.Common.UseCases.Commands.EditProfilePhoto;
 using Boatman.ProfileService.Interfaces.Dtos;
@@ -40,6 +41,18 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> EditProfilePhoto([FromForm] [Image] IFormFile photo)
     {
         var response = await _mediator.Send(new EditProfilePhoto(photo, User));
+        
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+
+    [HttpPost]
+    [Route("change-email")]
+    public async Task<IActionResult> ChangeEmail([FromQuery] string email)
+    {
+        var response = await _mediator.Send(new ChangeEmail(User, email));
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { message = response.Message });

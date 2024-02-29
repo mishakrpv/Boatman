@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Security.Claims;
+using System.Xml;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.ProfileService.Interfaces;
 using Boatman.ProfileService.Interfaces.Dtos;
@@ -38,6 +39,28 @@ public class ProfileService : IProfileService
             response.Message = "Profile has been edited.";
         }
 
+        return response;
+    }
+
+    public async Task<Response> ChangeEmail(ClaimsPrincipal principal, string email)
+    {
+        var response = new Response();
+        var user = await _userManager.GetUserAsync(principal);
+        
+        if (user == null)
+        {
+            response.StatusCode = 404;
+            response.Message = "User not found.";
+        }
+        else
+        {
+            var token = await _userManager.GenerateChangeEmailTokenAsync(user, email);
+            await _userManager.ChangeEmailAsync(user, email, token);
+
+            response.Message = "Email has been changed.";
+        }
+        
+        
         return response;
     }
 }
