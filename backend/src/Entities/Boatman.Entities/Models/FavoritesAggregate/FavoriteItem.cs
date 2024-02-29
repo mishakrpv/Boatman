@@ -4,6 +4,7 @@ public class FavoriteItem : BaseEntity<int>
 {
     public FavoriteItem(int favoritesId, int apartmentId)
     {
+        FavoritesId = favoritesId;
         ApartmentId = apartmentId;
     }
 

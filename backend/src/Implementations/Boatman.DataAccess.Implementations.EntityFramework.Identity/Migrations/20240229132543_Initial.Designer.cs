@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240229130148_Initial")]
+    [Migration("20240229132543_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
