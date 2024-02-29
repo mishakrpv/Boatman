@@ -9,12 +9,14 @@ services:
     environment:
      - ASPNETCORE_ENVIRONMENT=Docker
      - ConnectionStrings:ApplicationConnection=Host=postgresql;Port=5432;Database=Boatman.ApplicationDb;User Id=postgres;Password=@Super(!)StrongPwd
+     - ConnectionStrings:RedisConnection=redisinstance:6379
      - JwtSettings:Issuer=http://localhost:5180
      - JwtSettings:Audience=http://localhost:5180
      - JwtSettings:Key=YourSecret{Key}AndYourFavoriteNumberMineIs17!
      - JwtSettings:ExpiresInDays=0
      - JwtSettings:ExpiresInMinutes=5
      - SendGridKey=YourSendGridKey
+     - SendGridSender=YourSendGridSenderEmail
      - UseInMemoryDb=false
      - AdminEmail=admin@example.com
      - AdminPwd=123456
@@ -25,6 +27,9 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
+      redisinstance:
+        condition: service_healthy
+
   postgresql:
     image: postgres
     restart: always
@@ -33,9 +38,18 @@ services:
     environment:
       - POSTGRES_DB=Boatman.ApplicationDb
       - POSTGRES_USER=postgres
+      - PGUSER=postgres
       - POSTGRES_PASSWORD=@Super(!)StrongPwd
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  redisinstance:
+    image: redis
+    restart: always
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]

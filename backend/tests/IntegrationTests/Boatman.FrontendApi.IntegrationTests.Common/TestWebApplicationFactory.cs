@@ -1,4 +1,5 @@
-﻿using Boatman.DataAccess.Implementations.EntityFramework.Identity;
+﻿using Boatman.Caching.Interfaces;
+using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Moq;
 
 namespace Boatman.FrontendApi.IntegrationTests.Common;
 
@@ -32,6 +34,9 @@ public class TestWebApplicationFactory : WebApplicationFactory<WebHost.EntryPoin
                     policy.RequireAuthenticatedUser();
                     policy.AuthenticationSchemes.Add(TestDefaults.AuthenticationScheme);
                 });
+            
+            services.RemoveAll(typeof(ICache));
+            services.AddSingleton<ICache>(new Mock<ICache>().Object);
         });
     }
 }

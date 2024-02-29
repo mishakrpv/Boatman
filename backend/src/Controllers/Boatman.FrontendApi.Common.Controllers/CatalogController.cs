@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Boatman.FrontendApi.Catalog.Controllers;
+namespace Boatman.FrontendApi.Common.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class CatalogController : ControllerBase

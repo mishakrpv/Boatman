@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Boatman.AuthService.Implementations;
+namespace Boatman.AuthService.Implementations.Jwt.Identity;
 
 public class AuthService : IAuthService
 {
@@ -106,6 +106,7 @@ public class AuthService : IAuthService
 
         var claims = new List<Claim>
         {
+            new (ClaimTypes.NameIdentifier, user.Id),
             new(ClaimTypes.Email, dto.Email)
         };
 
@@ -223,5 +224,19 @@ public class AuthService : IAuthService
             Message = "Password wasn't reset.",
             Errors = result.Errors.Select(e => e.Description)
         };
+    }
+
+    public Response<string> GetUserIdByPrincipal(ClaimsPrincipal principal)
+    {
+        var userId = _userManager.GetUserId(principal);
+
+        if (userId == null)
+            return new Response<string>
+            {
+                StatusCode = 404,
+                Message = "User not found."
+            };
+
+        return new Response<string>(userId);
     }
 }

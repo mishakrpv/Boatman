@@ -2,10 +2,13 @@
 
 public class Photo : BaseEntity<int>
 {
-    public Photo(string uri)
+    public Photo(int apartmentId, string @uri)
     {
+        ApartmentId = apartmentId;
         Uri = uri;
     }
+
+    public int ApartmentId { get; private set; }
 
     public string @Uri { get; private set; }
 }

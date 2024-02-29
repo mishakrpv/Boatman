@@ -1,10 +1,11 @@
 using System.Text;
 using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.Register;
-using Boatman.AuthService.Implementations;
+using Boatman.AuthService.Implementations.Jwt.Identity;
 using Boatman.BlobStorage.Implementations.AmazonS3;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
-using Boatman.FrontendApi.Catalog.Controllers;
+using Boatman.FrontendApi.Common.Controllers;
+using Boatman.FrontendApi.Common.UseCases.Commands.EditProfile;
 using Boatman.FrontendApi.Customer.Controllers;
 using Boatman.FrontendApi.Customer.UseCases.Commands.AddToFavorites;
 using Boatman.FrontendApi.Owner.Controllers;
@@ -41,8 +42,8 @@ else
 }
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(config.GetConnectionString("ApplicationConnection") ?? "", name: "DbCheck");
-//.AddRedis(config["RedisCS"] ?? "");
+    .AddNpgSql(config.GetConnectionString("ApplicationConnection") ?? "", name: "DbCheck")
+    .AddRedis(config.GetConnectionString("RedisConnection") ?? "");
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(ApartmentController).Assembly)
@@ -114,6 +115,7 @@ builder.Services.AddMediatR(configuration =>
     configuration.RegisterServicesFromAssemblies(
         typeof(AddApartmentHandler).Assembly,
         typeof(AddToFavoritesHandler).Assembly,
+        typeof(EditProfileHandler).Assembly,
         typeof(RegisterHandler).Assembly);
 });
 
@@ -130,6 +132,11 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://opensource.org/license/mit/")
         }
     });
+});
+
+builder.Services.AddStackExchangeRedisCache(options => {
+    options.Configuration = config.GetConnectionString("RedisConnection");
+    options.InstanceName = "Boatman_";
 });
 
 builder.Services.AddInterfaceAdapters();

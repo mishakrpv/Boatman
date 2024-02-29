@@ -17,7 +17,7 @@ public class Favorites : BaseEntity<int>, IAggregateRoot
     {
         if (Items.All(i => i.ApartmentId != apartmentId))
         {
-            _items.Add(new FavoriteItem(apartmentId));
+            _items.Add(new FavoriteItem(Id, apartmentId));
         }
     }
 

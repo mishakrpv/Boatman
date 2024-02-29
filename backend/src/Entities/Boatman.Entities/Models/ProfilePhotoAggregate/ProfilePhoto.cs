@@ -4,7 +4,7 @@ namespace Boatman.Entities.Models.ProfilePhotoAggregate;
 
 public class ProfilePhoto : IAggregateRoot
 {
-    public ProfilePhoto(string userId, string uri)
+    public ProfilePhoto(string userId, string @uri)
     {
         UserId = userId;
         Uri = uri;
@@ -14,4 +14,9 @@ public class ProfilePhoto : IAggregateRoot
     
     [Key]
     public string @Uri { get; private set; }
+
+    public void UpdateUri(string @uri)
+    {
+        Uri = uri;
+    }
 }

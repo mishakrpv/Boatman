@@ -1,4 +1,4 @@
-﻿namespace Boatman.AuthService.Implementations;
+﻿namespace Boatman.AuthService.Implementations.Jwt.Identity;
 
 public class JwtSettings
 {

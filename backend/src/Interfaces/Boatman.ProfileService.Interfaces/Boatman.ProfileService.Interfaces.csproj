@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
+    </ItemGroup>
+
 </Project>

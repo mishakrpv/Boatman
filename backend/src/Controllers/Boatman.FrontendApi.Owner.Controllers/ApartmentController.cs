@@ -2,6 +2,7 @@
 using Boatman.FrontendApi.Owner.UseCases.Commands.AddApartment;
 using Boatman.FrontendApi.Owner.UseCases.Commands.AddPhoto;
 using Boatman.FrontendApi.Owner.UseCases.Commands.DeleteApartment;
+using Boatman.FrontendApi.Owner.UseCases.Commands.DeletePhoto;
 using Boatman.FrontendApi.Owner.UseCases.Commands.GetMyApartment;
 using Boatman.FrontendApi.Owner.UseCases.Commands.UpdateApartment;
 using Boatman.FrontendApi.Owner.UseCases.Dtos;
@@ -62,7 +63,7 @@ public class ApartmentController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{id:int}")]
+    [Route("{id:int}/[action]")]
     public async Task<IActionResult> Delete(int id)
     {
         var response = await _mediator.Send(new DeleteApartment(id));
@@ -81,6 +82,18 @@ public class ApartmentController : ControllerBase
         
         if (response.StatusCode == (int)HttpStatusCode.OK)
             return Ok(new { uri = response.Value });
+
+        return StatusCode(response.StatusCode, new { problem = response.Message });
+    }
+    
+    [HttpDelete]
+    [Route("delete-photo")]
+    public async Task<IActionResult> DeletePhoto([FromQuery] int apartmentId, [FromQuery] int photoId)
+    {
+        var response = await _mediator.Send(new DeletePhoto(apartmentId, photoId));
+        
+        if (response.StatusCode == (int)HttpStatusCode.OK)
+            return Ok(new { message = response.Message });
 
         return StatusCode(response.StatusCode, new { problem = response.Message });
     }
