@@ -42,8 +42,8 @@ else
 }
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(config.GetConnectionString("ApplicationConnection") ?? "", name: "DbCheck");
-//.AddRedis(config["RedisCS"] ?? "");
+    .AddNpgSql(config.GetConnectionString("ApplicationConnection") ?? "", name: "DbCheck")
+    .AddRedis(config.GetConnectionString("RedisConnection") ?? "");
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(ApartmentController).Assembly)
@@ -132,6 +132,11 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://opensource.org/license/mit/")
         }
     });
+});
+
+builder.Services.AddStackExchangeRedisCache(options => {
+    options.Configuration = config.GetConnectionString("RedisConnection");
+    options.InstanceName = "Boatman_";
 });
 
 builder.Services.AddInterfaceAdapters();
