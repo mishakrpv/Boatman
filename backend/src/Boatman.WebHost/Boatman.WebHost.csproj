@@ -32,10 +32,12 @@
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Owner.Controllers\Boatman.FrontendApi.Owner.Controllers.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.AuthService.Implementations.Jwt.Identity\Boatman.AuthService.Implementations.Jwt.Identity.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.BlobStorage.Implementations.AmazonS3\Boatman.BlobStorage.Implementations.AmazonS3.csproj" />
+        <ProjectReference Include="..\Implementations\Boatman.Caching.Implementations.Redis\Boatman.Caching.Implementations.Redis.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.DataAccess.Implementations.EntityFramework.Identity\Boatman.DataAccess.Implementations.EntityFramework.Identity.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.Emailing.Implementations.SendGrid\Boatman.Emailing.Implementations.SendGrid.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.Logging.Implementations\Boatman.Logging.Implementations.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.ProfileService.Implementations.Identity\Boatman.ProfileService.Implementations.Identity.csproj" />
+        <ProjectReference Include="..\Interfaces\Boatman.Caching.Interfaces\Boatman.Caching.Interfaces.csproj" />
         <ProjectReference Include="..\UseCases\Boatman.AuthApi.UseCases\Boatman.AuthApi.UseCases.csproj"/>
     </ItemGroup>
 
