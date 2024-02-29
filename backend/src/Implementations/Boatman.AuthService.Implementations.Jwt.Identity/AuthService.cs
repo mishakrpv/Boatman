@@ -106,6 +106,7 @@ public class AuthService : IAuthService
 
         var claims = new List<Claim>
         {
+            new (ClaimTypes.NameIdentifier, user.Id),
             new(ClaimTypes.Email, dto.Email)
         };
 
