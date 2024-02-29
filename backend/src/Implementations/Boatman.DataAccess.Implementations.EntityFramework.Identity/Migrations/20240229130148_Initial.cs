@@ -106,8 +106,8 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Uri = table.Column<string>(type: "text", nullable: false),
-                    ApartmentId = table.Column<int>(type: "integer", nullable: true)
+                    ApartmentId = table.Column<int>(type: "integer", nullable: false),
+                    Uri = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,7 +116,8 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                         name: "FK_Photos_Apartments_ApartmentId",
                         column: x => x.ApartmentId,
                         principalTable: "Apartments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -231,8 +232,8 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ApartmentId = table.Column<int>(type: "integer", nullable: false),
-                    FavoritesId = table.Column<int>(type: "integer", nullable: true)
+                    FavoritesId = table.Column<int>(type: "integer", nullable: false),
+                    ApartmentId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,7 +242,8 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                         name: "FK_FavoriteItems_Favorites_FavoritesId",
                         column: x => x.FavoritesId,
                         principalTable: "Favorites",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

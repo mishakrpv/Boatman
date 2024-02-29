@@ -14,7 +14,7 @@ public class Apartment : BaseApartment, IAggregateRoot
 
     public IEnumerable<Photo> Photos => _photos.AsReadOnly();
     public bool IsVisible { get; private set; } = true;
-    public DateTime PublicationDate { get; private set; } = DateTime.Now;
+    public DateTime PublicationDate { get; private set; } = DateTime.UtcNow;
 
     public void SetStatus(bool isVisible)
     {
@@ -23,7 +23,7 @@ public class Apartment : BaseApartment, IAggregateRoot
     
     public void AddPhoto(string uri)
     {
-        _photos.Add(new Photo(uri));
+        _photos.Add(new Photo(Id, uri));
     }
 
     public void DeletePhoto(string uri)

@@ -63,7 +63,7 @@ public class ApartmentController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{id:int}")]
+    [Route("{id:int}/[action]")]
     public async Task<IActionResult> Delete(int id)
     {
         var response = await _mediator.Send(new DeleteApartment(id));
