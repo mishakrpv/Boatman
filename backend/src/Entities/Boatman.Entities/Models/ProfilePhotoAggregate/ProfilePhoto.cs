@@ -10,9 +10,9 @@ public class ProfilePhoto : IAggregateRoot
         Uri = uri;
     }
 
+    [Key]
     public string UserId { get; private set; }
     
-    [Key]
     public string @Uri { get; private set; }
 
     public void UpdateUri(string @uri)

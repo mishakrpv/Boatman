@@ -205,14 +205,14 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
 
             modelBuilder.Entity("Boatman.Entities.Models.ProfilePhotoAggregate.ProfilePhoto", b =>
                 {
-                    b.Property<string>("Uri")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("Uri")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Uri");
+                    b.HasKey("UserId");
 
                     b.ToTable("ProfilePhotos");
                 });

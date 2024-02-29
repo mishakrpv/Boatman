@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240229132543_Initial")]
+    [Migration("20240229165326_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -208,14 +208,14 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
 
             modelBuilder.Entity("Boatman.Entities.Models.ProfilePhotoAggregate.ProfilePhoto", b =>
                 {
-                    b.Property<string>("Uri")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("Uri")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Uri");
+                    b.HasKey("UserId");
 
                     b.ToTable("ProfilePhotos");
                 });

@@ -30,8 +30,7 @@ public class EditProfilePhotoHandler : IRequestHandler<EditProfilePhoto, Respons
         if (response.StatusCode != 200)
             return response;
 
-        var spec = new UsersProfilePhotoSpecification(response.Value!);
-        var profilePhoto = await _profilePhotoRepo.FirstOrDefaultAsync(spec);
+        var profilePhoto = await _profilePhotoRepo.GetByIdAsync(response.Value!);
         
         var blobResponse = await _blob.UploadAsync(request.Photo);
 

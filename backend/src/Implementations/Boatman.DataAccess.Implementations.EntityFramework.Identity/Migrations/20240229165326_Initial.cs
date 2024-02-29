@@ -92,12 +92,12 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 name: "ProfilePhotos",
                 columns: table => new
                 {
-                    Uri = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    Uri = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProfilePhotos", x => x.Uri);
+                    table.PrimaryKey("PK_ProfilePhotos", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
