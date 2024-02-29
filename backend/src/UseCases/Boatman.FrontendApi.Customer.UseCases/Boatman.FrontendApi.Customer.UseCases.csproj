@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Interfaces\Boatman.Caching.Interfaces\Boatman.Caching.Interfaces.csproj" />
       <ProjectReference Include="..\..\Interfaces\Boatman.DataAccess.Interfaces\Boatman.DataAccess.Interfaces.csproj" />
       <ProjectReference Include="..\..\Utils\Boatman.Utils\Boatman.Utils.csproj" />
     </ItemGroup>

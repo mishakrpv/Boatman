@@ -1,6 +1,8 @@
 ﻿using Boatman.BlobStorage.Interfaces;
+using Boatman.Caching.Interfaces;
 using Boatman.DataAccess.Interfaces;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Utils.Extensions;
 using Boatman.Utils.Models.Response;
 using MediatR;
 
@@ -10,12 +12,15 @@ public class AddPhotoHandler : IRequestHandler<AddPhoto, Response<string>>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
     private readonly IBlobStorage _blobStorage;
+    private readonly ICache _cache;
 
     public AddPhotoHandler(IRepository<Apartment> apartmentRepo,
-        IBlobStorage blobStorage)
+        IBlobStorage blobStorage,
+        ICache cache)
     {
         _apartmentRepo = apartmentRepo;
         _blobStorage = blobStorage;
+        _cache = cache;
     }
 
     public async Task<Response<string>> Handle(AddPhoto request, CancellationToken cancellationToken)
@@ -37,6 +42,8 @@ public class AddPhotoHandler : IRequestHandler<AddPhoto, Response<string>>
         apartment.AddPhoto(response.Value!);
 
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
+
+        await _cache.SetAsync<Apartment>(CacheHelpers.GenerateApartmentCacheKey(apartment.Id), apartment);
 
         return response;
     }

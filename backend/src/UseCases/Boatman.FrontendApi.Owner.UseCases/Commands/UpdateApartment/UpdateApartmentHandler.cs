@@ -1,5 +1,8 @@
-﻿using Boatman.DataAccess.Interfaces;
+﻿using Boatman.Caching.Interfaces;
+using Boatman.DataAccess.Interfaces;
+using Boatman.DataAccess.Interfaces.Specifications;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Utils.Extensions;
 using Boatman.Utils.Models.Response;
 using MediatR;
 
@@ -8,16 +11,20 @@ namespace Boatman.FrontendApi.Owner.UseCases.Commands.UpdateApartment;
 public class UpdateApartmentHandler : IRequestHandler<UpdateApartment, Response>
 {
     private readonly IRepository<Apartment> _apartmentRepo;
+    private readonly ICache _cache;
 
-    public UpdateApartmentHandler(IRepository<Apartment> apartmentRepo)
+    public UpdateApartmentHandler(IRepository<Apartment> apartmentRepo,
+        ICache cache)
     {
         _apartmentRepo = apartmentRepo;
+        _cache = cache;
     }
     
     public async Task<Response> Handle(UpdateApartment request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
-        var apartment = await _apartmentRepo.GetByIdAsync(dto.ApartmentId, cancellationToken);
+        var spec = new ApartmentWithPhotosSpecification(dto.ApartmentId);
+        var apartment = await _apartmentRepo.FirstOrDefaultAsync(spec, cancellationToken);
 
         if (apartment == null)
             return new Response
@@ -30,6 +37,8 @@ public class UpdateApartmentHandler : IRequestHandler<UpdateApartment, Response>
         apartment.SetCoordinates(dto.Latitude, dto.Longitude);
 
         await _apartmentRepo.UpdateAsync(apartment, cancellationToken);
+        
+        await _cache.SetAsync<Apartment>(CacheHelpers.GenerateApartmentCacheKey(apartment.Id), apartment);
 
         return new Response
         {
