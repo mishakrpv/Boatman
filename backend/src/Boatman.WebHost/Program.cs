@@ -123,7 +123,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Version = "0.9.1",
+        Version = "0.9.2",
         Title = "Boatman",
         Description = "Platform for publishing apartments for rent from owners",
         License = new OpenApiLicense
