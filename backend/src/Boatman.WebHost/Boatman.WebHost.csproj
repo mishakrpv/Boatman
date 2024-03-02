@@ -26,10 +26,13 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Controllers\Boatman.AdminApi.Controllers\Boatman.AdminApi.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.AuthApi.Controllers\Boatman.AuthApi.Controllers.csproj"/>
+        <ProjectReference Include="..\Controllers\Boatman.ChatApi.Hubs\Boatman.ChatApi.Hubs.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Common.Controllers\Boatman.FrontendApi.Common.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Customer.Controllers\Boatman.FrontendApi.Customer.Controllers.csproj" />
         <ProjectReference Include="..\Controllers\Boatman.FrontendApi.Owner.Controllers\Boatman.FrontendApi.Owner.Controllers.csproj" />
+        <ProjectReference Include="..\Controllers\Boatman.MobileApi.Controllers\Boatman.MobileApi.Controllers.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.AuthService.Implementations.Jwt.Identity\Boatman.AuthService.Implementations.Jwt.Identity.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.BlobStorage.Implementations.AmazonS3\Boatman.BlobStorage.Implementations.AmazonS3.csproj" />
         <ProjectReference Include="..\Implementations\Boatman.Caching.Implementations.Redis\Boatman.Caching.Implementations.Redis.csproj" />

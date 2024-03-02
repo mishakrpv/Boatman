@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Boatman.Entities.Models.ApartmentAggregate;
+using Boatman.Entities.Models.ChatAggregate;
 using Boatman.Entities.Models.FavoritesAggregate;
 using Boatman.Entities.Models.ProfilePhotoAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,6 +19,9 @@ public class ApplicationContext  : IdentityDbContext<ApplicationUser>
     public DbSet<Favorites> Favorites { get; set; }
     public DbSet<FavoriteItem> FavoriteItems { get; set; }
     public DbSet<ProfilePhoto> ProfilePhotos { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<AttachedFile> AttachedFiles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

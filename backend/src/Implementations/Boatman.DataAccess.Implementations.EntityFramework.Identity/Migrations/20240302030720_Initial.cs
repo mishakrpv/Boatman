@@ -76,6 +76,19 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Chats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Favorites",
                 columns: table => new
                 {
@@ -227,6 +240,28 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    ChatId = table.Column<int>(type: "integer", nullable: false),
+                    FromUserId = table.Column<string>(type: "text", nullable: false),
+                    FromUserName = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false),
+                    Content = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
+                    WasSentAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Chats_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FavoriteItems",
                 columns: table => new
                 {
@@ -242,6 +277,26 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                         name: "FK_FavoriteItems_Favorites_FavoritesId",
                         column: x => x.FavoritesId,
                         principalTable: "Favorites",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AttachedFiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MessageId = table.Column<string>(type: "text", nullable: false),
+                    Uri = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AttachedFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AttachedFiles_Messages_MessageId",
+                        column: x => x.MessageId,
+                        principalTable: "Messages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -284,9 +339,19 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_AttachedFiles_MessageId",
+                table: "AttachedFiles",
+                column: "MessageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FavoriteItems_FavoritesId",
                 table: "FavoriteItems",
                 column: "FavoritesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_ChatId",
+                table: "Messages",
+                column: "ChatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_ApartmentId",
@@ -313,6 +378,9 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "AttachedFiles");
+
+            migrationBuilder.DropTable(
                 name: "FavoriteItems");
 
             migrationBuilder.DropTable(
@@ -328,10 +396,16 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
                 name: "Favorites");
 
             migrationBuilder.DropTable(
                 name: "Apartments");
+
+            migrationBuilder.DropTable(
+                name: "Chats");
         }
     }
 }

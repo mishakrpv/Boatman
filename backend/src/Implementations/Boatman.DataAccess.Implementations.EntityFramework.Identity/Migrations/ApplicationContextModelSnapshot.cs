@@ -165,6 +165,77 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.AttachedFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("MessageId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Uri")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MessageId");
+
+                    b.ToTable("AttachedFiles");
+                });
+
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Chat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Message", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ChatId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<string>("FromUserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FromUserName")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("character varying(70)");
+
+                    b.Property<DateTime>("WasSentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Boatman.Entities.Models.FavoritesAggregate.FavoriteItem", b =>
                 {
                     b.Property<int>("Id")
@@ -358,6 +429,24 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.AttachedFile", b =>
+                {
+                    b.HasOne("Boatman.Entities.Models.ChatAggregate.Message", null)
+                        .WithMany("Files")
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Message", b =>
+                {
+                    b.HasOne("Boatman.Entities.Models.ChatAggregate.Chat", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Boatman.Entities.Models.FavoritesAggregate.FavoriteItem", b =>
                 {
                     b.HasOne("Boatman.Entities.Models.FavoritesAggregate.Favorites", null)
@@ -421,6 +510,16 @@ namespace Boatman.DataAccess.Implementations.EntityFramework.Identity.Migrations
             modelBuilder.Entity("Boatman.Entities.Models.ApartmentAggregate.Apartment", b =>
                 {
                     b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Chat", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("Boatman.Entities.Models.ChatAggregate.Message", b =>
+                {
+                    b.Navigation("Files");
                 });
 
             modelBuilder.Entity("Boatman.Entities.Models.FavoritesAggregate.Favorites", b =>

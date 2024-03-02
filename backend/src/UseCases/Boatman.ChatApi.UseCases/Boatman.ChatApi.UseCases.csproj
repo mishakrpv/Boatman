@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands\AttachFilesToMessage\" />
+      <Folder Include="Commands\EditMessage\" />
+      <Folder Include="Commands\SendMessage\" />
+      <Folder Include="Commands\StartChat\" />
+    </ItemGroup>
+
+</Project>

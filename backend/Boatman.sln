@@ -91,6 +91,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ProfileService.Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ProfileService.Implementations.Identity", "src\Implementations\Boatman.ProfileService.Implementations.Identity\Boatman.ProfileService.Implementations.Identity.csproj", "{0B55552B-22C4-4100-AE94-97424EF6A95A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ChatApi.Controllers", "src\Controllers\Boatman.ChatApi.Controllers\Boatman.ChatApi.Controllers.csproj", "{39EB029D-437D-406B-83E7-7FC5FC2F1493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ChatApi.Hubs", "src\Controllers\Boatman.ChatApi.Hubs\Boatman.ChatApi.Hubs.csproj", "{BF31D018-5D74-49B3-85E8-5FE643AFE837}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatman.ChatApi.UseCases", "src\UseCases\Boatman.ChatApi.UseCases\Boatman.ChatApi.UseCases.csproj", "{260CB9EB-3071-4A0C-8860-AB4F51D35811}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -233,6 +239,18 @@ Global
 		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B55552B-22C4-4100-AE94-97424EF6A95A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EB029D-437D-406B-83E7-7FC5FC2F1493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EB029D-437D-406B-83E7-7FC5FC2F1493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EB029D-437D-406B-83E7-7FC5FC2F1493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EB029D-437D-406B-83E7-7FC5FC2F1493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF31D018-5D74-49B3-85E8-5FE643AFE837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF31D018-5D74-49B3-85E8-5FE643AFE837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF31D018-5D74-49B3-85E8-5FE643AFE837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF31D018-5D74-49B3-85E8-5FE643AFE837}.Release|Any CPU.Build.0 = Release|Any CPU
+		{260CB9EB-3071-4A0C-8860-AB4F51D35811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{260CB9EB-3071-4A0C-8860-AB4F51D35811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{260CB9EB-3071-4A0C-8860-AB4F51D35811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{260CB9EB-3071-4A0C-8860-AB4F51D35811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -280,5 +298,8 @@ Global
 		{D8A8A39C-6700-4515-B8DF-BC0E61A41C70} = {2DFB1C02-13F3-4479-A87E-C16D70D52B5F}
 		{E8658803-7C1D-46B0-8AB5-39B70250D7A9} = {89ECFAA6-34E1-4D70-B6CD-A8F5C6321C17}
 		{0B55552B-22C4-4100-AE94-97424EF6A95A} = {53D04F98-5ADB-4692-AA9C-7DAE60DD66D1}
+		{39EB029D-437D-406B-83E7-7FC5FC2F1493} = {8D6CDAD4-80E8-47C0-AFBC-8878E0442D8A}
+		{BF31D018-5D74-49B3-85E8-5FE643AFE837} = {8D6CDAD4-80E8-47C0-AFBC-8878E0442D8A}
+		{260CB9EB-3071-4A0C-8860-AB4F51D35811} = {B082BB2A-AAF6-4983-B09C-22FA947B4262}
 	EndGlobalSection
 EndGlobal

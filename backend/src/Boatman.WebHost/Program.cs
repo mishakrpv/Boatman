@@ -3,6 +3,7 @@ using Boatman.AuthApi.Controllers;
 using Boatman.AuthApi.UseCases.Commands.Register;
 using Boatman.AuthService.Implementations.Jwt.Identity;
 using Boatman.BlobStorage.Implementations.AmazonS3;
+using Boatman.ChatApi.Hubs;
 using Boatman.DataAccess.Implementations.EntityFramework.Identity;
 using Boatman.FrontendApi.Common.Controllers;
 using Boatman.FrontendApi.Common.UseCases.Commands.EditProfile;
@@ -139,6 +140,8 @@ builder.Services.AddStackExchangeRedisCache(options => {
     options.InstanceName = "Boatman_";
 });
 
+builder.Services.AddSignalR();
+
 builder.Services.AddInterfaceAdapters();
 builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
 builder.Services.Configure<AwsCredentials>(config.GetSection("AwsCredentials"));
@@ -182,5 +185,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chat-hub");
 
 app.Run();
